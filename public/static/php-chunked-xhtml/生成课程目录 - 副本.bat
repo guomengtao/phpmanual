@@ -1,0 +1,1 @@
+for /f "delims=" %%a in ('dir /b /s *.txt') do echo;%%~na  >>¿־³ִּ¿ֲ¼.txt

@@ -1,52 +1,43 @@
-ThinkPHP 6.0
+
+PHP Manual Analysis 一份PHP手册的分析
 ===============
+作为一名phper，你是否没有通读过php官方手册？
+你是否觉得手册初看上去内容不多，但总是也没有浏览完？
+你可能不知道php手册有1万5千多页,函数几千个...
+本项目将帮助你分析php手册各级目录的内容多少，占比多少。以及将尝试统计函数总数量、类总数量等
+希望为你的php学习带来一点帮助。
 
-> 运行环境要求PHP7.1+。
+> 采用ThinkPHP 6.0，运行环境要求PHP7.1+。
 
-## 主要新特性
+## 统计分析
 
-* 采用`PHP7`强类型（严格模式）
-* 支持更多的`PSR`规范
-* 原生多应用支持
-* 更强大和易用的查询
-* 全新的事件系统
-* 模型事件和数据库事件统一纳入事件系统
-* 模板引擎分离出核心
-* 内部功能中间件化
-* SESSION/Cookie机制改进
-* 对Swoole以及协程支持改进
-* 对IDE更加友好
-* 统一和精简大量用法
+* 采用`ThinkPHP 6.0`框架分析
+* 采用`PHP.net`官方提供的7.4 html2020-01-16版本手册
+* 采用`querylist`采集统计
+* 统计手册共计15037页
+* 通过ql获取了所有15037页面的上级目录
+* 统计出了基本的树形分类
+* 统计发现一级栏目`Function Reference` 函数参考页面1万+以上，占总数2/3以上
 
-## 安装
+
+## 安装本统计源码
 
 ~~~
-composer create-project topthink/think tp 6.0.*-dev
+composer create-project guomengtao/phpmanual
 ~~~
 
-如果需要更新框架使用
+如果需要更新本php统计源码
 ~~~
-composer update topthink/framework
+composer update guomengtao/phpmanual
 ~~~
 
-## 文档
+ 
 
-[完全开发手册](https://www.kancloud.cn/manual/thinkphp6_0/content)
+## 功能需求和参与开发
 
-## 参与开发
-
-请参阅 [ThinkPHP 核心框架包](https://github.com/top-think/framework)。
+添加我的QQ25028636 或 微信 18210787405 交流学习
 
 ## 版权信息
 
-ThinkPHP遵循Apache2开源协议发布，并提供免费使用。
-
-本项目包含的第三方源码和二进制文件之版权信息另行标注。
-
-版权所有Copyright © 2006-2019 by ThinkPHP (http://thinkphp.cn)
-
-All rights reserved。
-
-ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
-
-更多细节参阅 [LICENSE.txt](LICENSE.txt)
+任意免费使用。
+ 

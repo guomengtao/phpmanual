@@ -11,6 +11,8 @@ class Catalog extends BaseController
     
 	public function one(){
 
+		echo 333;die();
+
 		ini_set('max_execution_time','10000');
 
 		$one = "security";

@@ -5,9 +5,104 @@ use app\BaseController;
 use QL\QueryList;
 use think\facade\Request;
 use app\model\Manual;
-
+// use app\controller\Catalog;
 class Index extends BaseController
 {
+    public function index()
+    {
+        $this->one();
+    	// echo 123;
+
+    	// $a = new Catalog();
+    	// echo $a->one();
+
+    	// for ($i=0; $i < 1 ; $i++) { 
+    	// 	# code...
+    	// 	echo "". $i . "\n";
+    	// 	sleep(2);
+    	// }
+
+    	die();
+    }
+    public function one(){
+
+		// echo 333;die();
+
+		// ini_set('max_execution_time','10000');
+
+		$one = "security";
+
+		// $one = "funcref";
+
+		 echo "一级目录：" . $one  ."<br/>";
+
+		 $i = 0;
+
+		 // 根据主键获取多个数据
+		// $list = Manual::where('catalog',$first)->select();
+
+		 $one = $this->getcatalog($one);
+
+		  
+		// 对数据集进行遍历操作
+		foreach($one as $key=>$cata){
+			$i++;echo "[".$i."]";
+		    echo "+".$key."-id:".$cata->id."----文件名".$cata->file."目录" ."<br/><br/>";
+
+               		 $two = $this->getcatalog(trim($cata->file));
+
+		  				// dump($two);die;
+					// 对数据集进行遍历操作
+					foreach($two as $key=>$cata){
+						$i++;echo "[".$i."]";
+
+					    echo "· · ".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+			               
+					    $three = $this->getcatalog(trim($cata->file));
+ 					   	foreach($three as $key=>$cata){
+ 					   		$i++;echo "[".$i."]";
+						    echo "###".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+						    $four = $this->getcatalog(trim($cata->file));
+	 					   	foreach($four as $key=>$cata){
+	 					   		$i++;echo "[".$i."]";
+							    echo "》》》》".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+							    $five = $this->getcatalog(trim($cata->file));
+							    // dump($five);
+		 					   	foreach($five as $key=>$cata){
+								    echo "<<<<<".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+								    $six = $this->getcatalog(trim($cata->file));
+								    // dump($five);
+			 					   	foreach($six as $key=>$cata){
+									    echo "<><><><><><>".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+									}
+								}
+							}
+						}
+
+					}
+		     
+
+		}
+
+
+
+	}
+	public function getcatalog($cata){
+		// 根据主键获取多个数据
+		$cata = Manual::where('catalog',$cata)->order('id', 'file')->select();
+
+		
+		
+		// 对数据集进行遍历操作
+		// foreach($cata as $key=>$cata){
+		// 	$cata->path = $this->getcatalog($cata->file);
+
+		     
+
+		// }
+
+		return $cata;
+	}
     public function add(){
     	
 		for ($i=0; $i <0 ; $i++) { 
@@ -214,10 +309,24 @@ class Index extends BaseController
 		 
 		 	
     }
-    public function index()
+    public function cli(){
+    	echo 228;
+    }
+    public function indexold()
     {
         
+    	echo 123;
 
+    	$a = new Catalog();
+    	echo $a->one();
+
+    	for ($i=0; $i < 1 ; $i++) { 
+    		# code...
+    		echo "". $i . "\n";
+    		sleep(2);
+    	}
+
+    	die();
 
         // 根据主键获取多个数据
 		$list = Manual::select(["598","597","599"]);

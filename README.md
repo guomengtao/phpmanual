@@ -9,7 +9,6 @@ PHP Manual Analysis 一份PHP手册的分析
 * 希望为你的php学习带来一点帮助。
 
 > 已同步发布此项目实战开发视频教程
-> 源文件16M左右
 
 ## 统计分析
 
@@ -31,16 +30,15 @@ composer create-project guomengtao/phpmanual
 然后导入public/static/think_manual.sql数据库
 配置根目录.env的数据库账号密码，开始浏览
 
-如果需要更新本php统计源码
 ~~~
-composer update guomengtao/phpmanual
+源文件116M左右
 ~~~
 
  然后导入public/static/think_manual.sql数据库
 
 ## 功能需求和参与开发
 
-添加我的QQ25028636 或 微信 18210787405 交流学习
+添加我的QQ250285636 或 微信 18210787405 交流学习
 
 ## 版权信息
 

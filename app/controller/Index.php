@@ -10,19 +10,48 @@ class Index extends BaseController
 {
     public function index()
     {
-        $this->one();
-    	// echo 123;
+        $this->levelone();
+    }
+    
+    public function levelone(){
 
-    	// $a = new Catalog();
-    	// echo $a->one();
+//     	for ($i=1; $i <15048 ; $i++) { 
+//     		# code...
+//     		$cata = Manual::where('id',$i)->value('file');
+//     		 $cata = trim($cata);
+    		
+//     		Manual::update(['file' =>  $cata], ['id' => $i]);
+//     		echo $i;
+    		
+//     	}
+// die();
+		$levelone =[
+			1  => ["sort" =>1,  "level"=>"1","file"=>"copyright","title"=>"版权信息"],
+			2  => ["sort" =>2,  "level"=>"1","file"=>"manual",   "title"=>"PHP 手册"],
+			3  => ["sort" =>3,  "level"=>"1","file"=>"getting-started","title"=>"入门指引"],
+			4  => ["sort" =>4,  "level"=>"1","file"=>"install","title"=>"安装与配置"],
+			5  => ["sort" =>5,  "level"=>"1","file"=>"langref","title"=>"语言参考"],
+			6  => ["sort" =>6,  "level"=>"1","file"=>"security","title"=>"安全"],
+			7  => ["sort" =>7,  "level"=>"1","file"=>"features","title"=>"特点"],
+			8  => ["sort" =>8,  "level"=>"1","file"=>"funcref.","title"=>"函数参考"],
+			9  => ["sort" =>9,  "level"=>"1","file"=>"internals2","title"=>"PHP 核心：骇客指南"],
+			10 => ["sort" =>10, "level"=>"1","file"=>"faq","title"=>"FAQ"],
+			11 => ["sort" =>11, "level"=>"1","file"=>"appendices","title"=>"附录"],
+		];
 
-    	// for ($i=0; $i < 1 ; $i++) { 
-    	// 	# code...
-    	// 	echo "". $i . "\n";
-    	// 	sleep(2);
-    	// }
+		foreach ($levelone as $key => $value) {
+			 	# code...
+				$file  = $value["file"];
+				$sort  = $value["sort"];
+				$title = $value["title"];
+				// 根据主键获取多个数据
 
-    	die();
+				$cata = Manual::where('file',$file)->select();
+			 dump($cata->toArray());
+Manual::update(['level' =>  '1','sort' =>  $sort , 'title' => $title ], ['file' => $file]);
+		}	 
+
+		// var_dump($levelone);
     }
     public function one(){
 

@@ -10,7 +10,22 @@ class Index extends BaseController
 {
     public function index()
     {
-        $this->levelone();
+        
+
+        $this->runqlfast();
+    }
+    public function runqlfast(){
+    	
+    	// 根据主键获取多个数据
+		$cata = Manual::where('catalog',"about666")->order('id', 'file')->select();
+
+		// 对数据集进行遍历操作
+
+		echo "采集目标就绪"."\n";
+		 
+			$this->qlfast($cata);
+
+		 
     }
     
     public function levelone(){
@@ -48,7 +63,7 @@ class Index extends BaseController
 				 $this->one($file);
 		// 		$cata = Manual::where('file',$file)->select();
 		// 	 dump($cata->toArray());
-		// 		Manual::update(['level' =>  '1','sort' =>  $sort , 'title' => $title ], ['file' => $file]);
+				// Manual::update(['level' =>  '1','sort' =>  $sort , 'title' => $title ], ['file' => $file]);
 		}	 
 
 		// var_dump($levelone);
@@ -206,10 +221,10 @@ class Index extends BaseController
 
 	}
 
-    public function qlfast(){
+    public function qlfast($files){
 
     	 
- 	ini_set('max_execution_time','10000');
+ 	// ini_set('max_execution_time','10000');
 
  
 
@@ -220,53 +235,27 @@ class Index extends BaseController
 
     	$urls = [];
 
-    	$files = Manual::column('file');
-     
+    	
+     	// 组合地址和数组
 		foreach ($files as $key => $value) {
 
 			
-			
-
-		    // 待采集的链接集合
-		    // 排除某些含有.php的字符串导致当做php页面打不开
-		    if(strpos($value,'.php.') !==false){
-
-			   $urls[$key] = Request::root(true) . "/static/php-chunked-xhtml/"."about666".".html";
-
-			}else{
-
-
-				 
-
-
-				
-
-
-				//变量：
-				$str = trim($value);
-				$str2 = ".php";
-
-
-				//php判断字符串结尾：过滤掉.php结尾的
-
-				if (strrchr($str,$str2)==$str2) {
-					$urls[$key] = Request::root(true) . "/static/php-chunked-xhtml/"."about666".".html";
-					// return "字符串结尾.php".$url;
-				}else{
-
-					// 判断某些页面不可以访问，返回检查！
+					 // 判断某些页面不可以访问，返回检查！
 					// 进一步进行可访问性验证
-				    $url = Request::root(true) . "/static/php-chunked-xhtml/".trim($value).".html";
+				    $url =  "http://www.php.com/static/php-chunked-xhtml/".trim($value->file).".html";
+
 					if($this->httpcode($url)<>"200") {
-									# code...
-								return "不可访问".$url;
+
+						echo "不可访问页面，注意排查，已跳过".$url."\n";
+						sleep(6);
+						 
+					}else{
+						// echo "组合到采集地址".trim($value->file);
+					$urls[$key] = "http://www.php.com/static/php-chunked-xhtml/".trim($value->file).".html";
 					}
+					
 
-					$urls[$key] = Request::root(true) . "/static/php-chunked-xhtml/".trim($value).".html";
-				}
-			    
-
-			}
+		  
 			
 
 		}
@@ -278,34 +267,48 @@ class Index extends BaseController
 		//采集规则
 		$rules = array(
 		   'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
+		   'title' => array('title','text'),
 		);
+
 		$ql = QueryList::rules($rules);
  
 
 		foreach($urls as $key=>$url){
 
-			// dump($key);
+			echo "开始采集".$url."\n";
  
 		    // 每条链接都会应用上面设置好的采集规则
 		    $data = $ql->get($url)->query()->getData();
 		    
-		  if(!empty($data[0]['catalog'])){
+		  	if(!empty($data[0]['catalog'])){
+
+
 			     // 过滤掉末尾的.html后缀
 				 $catalog  =  substr($data[0]['catalog'],0,-5);
+				 $title    =  $data[0]['title'];
 				 // dump($data);
-			} 
-		    	
-		    	// 通过模型修改的入库操作
-			$id = $key +1;
-		 Manual::update(['catalog' =>  $catalog], ['id' => $id]);
+			
+		    	echo "采集成功 开始入库".$url ;
+		    	echo $catalog . $title."\n";
+		    	// 重新通过url获取文件名
+		    	$file = substr($url,0,-5);
+		    	$file = strrchr($file,"/");
+		    	$file = substr($file,1);
 
-		 
-		   // 释放Document内存占用
-		    $ql->destruct();
-		    // ...
+		    	echo "入库文件为".$file."\n";
+			 // 通过模型修改的入库操作
+			 Manual::update(['catalog' =>  $catalog,'title' => $title], ['file' => $file]);
+
+			 } 
+
+			   // 释放Document内存占用
+			    $ql->destruct();
+
+			    die();
+
 		}
 
-		echo "ok";
+		echo "执行完成"."\n";
 
     }
     public function bigdata(){
@@ -326,10 +329,10 @@ class Index extends BaseController
     }
 
     //封装一个querylist采集php文件的核心的功能
-    public function qldate($file){
+    public function qlworking($file){
 
     	
-		 
+		 sleep(3);
 		
 		$filepath = "/static/php-chunked-xhtml/".trim($file).".html";
 
@@ -343,7 +346,19 @@ class Index extends BaseController
 		$rt  =  substr($rt,0,-5);
 		$ql->destruct();
 
-
+		 $rt = [];
+		// 采集文章标题
+		$rt['title'] = $ql->find('title')->text();
+		// 第二个li里面的a链接的href属性值
+		$rt['content'] = $ql->find('.breadcrumbs-container>li:nth-child(2)>a')->attr("href");
+		 // 过滤掉末尾的.html后缀
+		$rt['content'] =  substr($rt['content'],0,-5);
+		 
+		 echo "采集完成".$rt['title'].$rt['content'];
+		 sleep(3);
+		// 通过模型修改的入库操作
+		Manual::update(['catalog' =>  $rt['content'],'title' =>  $rt['title']], ['file' => $file]);
+		print_r($rt);
 		return $rt;
 		 
 		 	

@@ -13,18 +13,18 @@ PHP Manual Analysis 一份PHP手册的分析
 # 主要统计分析结果： 
 
 一级目录：
-  
-1.  [版权信息](https://www.php.net/manual/zh/copyright.php)
-2.  [PHP 手册](https://www.php.net/manual/zh/manual.php)
-3.  [入门指引](https://www.php.net/manual/zh/getting-started.php)
-4.  [安装与配置](https://www.php.net/manual/zh/install.php)
-5.  [语言参考](https://www.php.net/manual/zh/langref.php)
-6.  [安全](https://www.php.net/manual/zh/security.php)
-7.  [特点](https://www.php.net/manual/zh/features.php)
-8.  [函数参考](https://www.php.net/manual/zh/funcref.php)
-9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php)
-10.  [FAQ](https://www.php.net/manual/zh/faq.php) — FAQ：常见问题
-11.  [附录](https://www.php.net/manual/zh/appendices.php)
+ 
+1.  [版权信息](https://www.php.net/manual/zh/copyright.php) 0
+2.  [PHP 手册](https://www.php.net/manual/zh/manual.php) 1
+3.  [入门指引](https://www.php.net/manual/zh/getting-started.php) 10
+4.  [安装与配置](https://www.php.net/manual/zh/install.php) 45
+5.  [语言参考](https://www.php.net/manual/zh/langref.php) 203
+6.  [安全](https://www.php.net/manual/zh/security.php) 27
+7.  [特点](https://www.php.net/manual/zh/features.php) 27
+8.  [函数参考](https://www.php.net/manual/zh/funcref.php) 15296
+9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php) 2210
+10.  [FAQ](https://www.php.net/manual/zh/faq.php) 11 — FAQ：常见问题
+11.  [附录](https://www.php.net/manual/zh/appendices.php) 187
 
 
 二级目录：

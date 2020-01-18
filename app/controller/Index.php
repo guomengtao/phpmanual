@@ -33,7 +33,7 @@ class Index extends BaseController
 			5  => ["sort" =>5,  "level"=>"1","file"=>"langref","title"=>"语言参考"],
 			6  => ["sort" =>6,  "level"=>"1","file"=>"security","title"=>"安全"],
 			7  => ["sort" =>7,  "level"=>"1","file"=>"features","title"=>"特点"],
-			8  => ["sort" =>8,  "level"=>"1","file"=>"funcref.","title"=>"函数参考"],
+			8  => ["sort" =>8,  "level"=>"1","file"=>"funcref","title"=>"函数参考"],
 			9  => ["sort" =>9,  "level"=>"1","file"=>"internals2","title"=>"PHP 核心：骇客指南"],
 			10 => ["sort" =>10, "level"=>"1","file"=>"faq","title"=>"FAQ"],
 			11 => ["sort" =>11, "level"=>"1","file"=>"appendices","title"=>"附录"],
@@ -44,76 +44,86 @@ class Index extends BaseController
 				$file  = $value["file"];
 				$sort  = $value["sort"];
 				$title = $value["title"];
-				// 根据主键获取多个数据
-
-				$cata = Manual::where('file',$file)->select();
-			 dump($cata->toArray());
-Manual::update(['level' =>  '1','sort' =>  $sort , 'title' => $title ], ['file' => $file]);
+				// 根据主键获取;多个数据
+				 $this->one($file);
+		// 		$cata = Manual::where('file',$file)->select();
+		// 	 dump($cata->toArray());
+		// 		Manual::update(['level' =>  '1','sort' =>  $sort , 'title' => $title ], ['file' => $file]);
 		}	 
 
 		// var_dump($levelone);
     }
-    public function one(){
+    public function one($file){
 
 		// echo 333;die();
 
 		// ini_set('max_execution_time','10000');
 
-		$one = "security";
+		// $one = "security";
 
-		$one = "funcref";
+		// $one = "funcref";
 
-		 echo "一级目录：" . $one  ."<br/>";
+		 // echo "目录：" . $file  ."<br/>";
 
 		 $i = 0;
 
 		 // 根据主键获取多个数据
 		// $list = Manual::where('catalog',$first)->select();
 
-		 $one = $this->getcatalog($one);
+		 $catalog = $this->getcatalog($file);
 
-		  
+
 		// 对数据集进行遍历操作
-		foreach($one as $key=>$cata){
-			$i++;echo "[".$i."]";
-		    echo "+".$key."-id:".$cata->id."----文件名".$cata->file."目录" ."<br/><br/>";
+		foreach($catalog as $key=>$cata){
+			$i++;
+			// echo "[".$i."]";
+		    // echo "+".$key."-id:".$cata->id."----文件名".$cata->file."目录" ."<br/><br/>";
 
                		 $two = $this->getcatalog(trim($cata->file));
 
 		  				// dump($two);die;
 					// 对数据集进行遍历操作
 					foreach($two as $key=>$cata){
-						$i++;echo "[".$i."]";
+						$i++;
+						
+						// echo "[".$i."]";
 
-					    echo "· · ".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+					    // echo "· · ".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 			               
 					    $three = $this->getcatalog(trim($cata->file));
  					   	foreach($three as $key=>$cata){
- 					   		$i++;echo "[".$i."]";
-						    echo "###".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+ 					   		$i++;
+ 					   		// echo "[".$i."]";
+						    // echo "###".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 						    $four = $this->getcatalog(trim($cata->file));
 	 					   	foreach($four as $key=>$cata){
-	 					   		$i++;echo "[".$i."]";
-							    echo "》》》》".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+	 					   		$i++;
+	 					   		// echo "[".$i."]";
+							    // echo "》》》》".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 							    $five = $this->getcatalog(trim($cata->file));
 							    // dump($five);
 		 					   	foreach($five as $key=>$cata){
-								    echo "<<<<<".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+		 					   		$i++;
+								    // echo "<<<<<".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 								    $six = $this->getcatalog(trim($cata->file));
+
 								    // dump($five);
 			 					   	foreach($six as $key=>$cata){
-									    echo "<><><><><><>".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+			 					   	   $i++;
+									    // echo "<><><><><><>".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 									}
 								}
 							}
 						}
 
 					}
-		     
+			
 
 		}
 
-
+// 统计包含的子页面总数，保存入库
+			echo  $i."+";
+		    Manual::update([ 'child' => $i ], ['file' => $file]);
 
 	}
 	public function getcatalog($cata){

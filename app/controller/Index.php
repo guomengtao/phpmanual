@@ -32,7 +32,7 @@ class Index extends BaseController
 
 		$one = "security";
 
-		// $one = "funcref";
+		$one = "funcref";
 
 		 echo "一级目录：" . $one  ."<br/>";
 

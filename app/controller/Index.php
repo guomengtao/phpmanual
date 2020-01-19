@@ -12,12 +12,14 @@ class Index extends BaseController
     {
         
 
-        $this->runqlfast();
+        $this->levelone();
     }
+
+    // 采集功能入口
     public function runqlfast(){
     	
     	// 根据主键获取多个数据
-		$cata = Manual::where('catalog',"about666")->order('id', 'file')->select();
+		$cata = Manual::order('id', 'file')->select();
 
 		// 对数据集进行遍历操作
 
@@ -28,6 +30,7 @@ class Index extends BaseController
 		 
     }
     
+    // 页面数量统计入口
     public function levelone(){
 
 //     	for ($i=1; $i <15048 ; $i++) { 
@@ -80,8 +83,8 @@ class Index extends BaseController
 
 		 // echo "目录：" . $file  ."<br/>";
 
-		 $i = 0;
-
+		 $i   = 0;
+		
 		 // 根据主键获取多个数据
 		// $list = Manual::where('catalog',$first)->select();
 
@@ -90,16 +93,19 @@ class Index extends BaseController
 
 		// 对数据集进行遍历操作
 		foreach($catalog as $key=>$cata){
+			
 			$i++;
-			// echo "[".$i."]";
-		    // echo "+".$key."-id:".$cata->id."----文件名".$cata->file."目录" ."<br/><br/>";
-
-               		 $two = $this->getcatalog(trim($cata->file));
+ 			$ii  = 0;
+            
+            $two = $this->getcatalog(trim($cata->file));
 
 		  				// dump($two);die;
 					// 对数据集进行遍历操作
 					foreach($two as $key=>$cata){
 						$i++;
+						$ii++;
+						$iii  = 0;
+
 						
 						// echo "[".$i."]";
 
@@ -108,17 +114,21 @@ class Index extends BaseController
 					    $three = $this->getcatalog(trim($cata->file));
  					   	foreach($three as $key=>$cata){
  					   		$i++;
+ 					   		$ii++;
+ 					   		$iii++;
  					   		// echo "[".$i."]";
 						    // echo "###".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 						    $four = $this->getcatalog(trim($cata->file));
 	 					   	foreach($four as $key=>$cata){
 	 					   		$i++;
+	 					   		$ii++;
 	 					   		// echo "[".$i."]";
 							    // echo "》》》》".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 							    $five = $this->getcatalog(trim($cata->file));
 							    // dump($five);
 		 					   	foreach($five as $key=>$cata){
 		 					   		$i++;
+		 					   		$ii++;
 								    // echo "<<<<<".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 								    $six = $this->getcatalog(trim($cata->file));
 
@@ -130,14 +140,17 @@ class Index extends BaseController
 								}
 							}
 						}
+						echo  "   +++三级目录".$cata->file."有".$iii."页已经记录\n";
+		    			Manual::update([ 'child' => $iii ,'level' => 3], ['file' => $cata->file]);
 
 					}
-			
+			echo  "  ++二级目录".$cata->file."有".$ii."页已经记录\n";
+		    			Manual::update([ 'child' => $ii ,'level' => 2], ['file' => $cata->file]);
 
 		}
 
 // 统计包含的子页面总数，保存入库
-			echo  $i."+";
+			echo  "一级目录".$file."有".$i."页已经记录\n";
 		    Manual::update([ 'child' => $i ], ['file' => $file]);
 
 	}
@@ -304,7 +317,7 @@ class Index extends BaseController
 			   // 释放Document内存占用
 			    $ql->destruct();
 
-			    die();
+			    
 
 		}
 

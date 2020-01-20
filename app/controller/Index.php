@@ -10,7 +10,8 @@ class Index extends BaseController
 {
     public function index()
     {
-        
+        $status = Manual::where('level',6)->where('son','>',0)->select();
+        dump($status->toArray());die();
 
         $this->levelone();
     }
@@ -33,16 +34,7 @@ class Index extends BaseController
     // 页面数量统计入口
     public function levelone(){
 
-//     	for ($i=1; $i <15048 ; $i++) { 
-//     		# code...
-//     		$cata = Manual::where('id',$i)->value('file');
-//     		 $cata = trim($cata);
-    		
-//     		Manual::update(['file' =>  $cata], ['id' => $i]);
-//     		echo $i;
-    		
-//     	}
-// die();
+ 
 		$levelone =[
 			1  => ["sort" =>1,  "level"=>"1","file"=>"copyright","title"=>"版权信息"],
 			2  => ["sort" =>2,  "level"=>"1","file"=>"manual",   "title"=>"PHP 手册"],
@@ -56,6 +48,14 @@ class Index extends BaseController
 			10 => ["sort" =>10, "level"=>"1","file"=>"faq","title"=>"FAQ"],
 			11 => ["sort" =>11, "level"=>"1","file"=>"appendices","title"=>"附录"],
 		];
+
+		// 		$levelone =[
+
+		// 	3  => ["sort" =>3,  "level"=>"1","file"=>"funcref","title"=>"入门指引"],
+
+		// ];
+
+
 
 		foreach ($levelone as $key => $value) {
 			 	# code...
@@ -84,6 +84,9 @@ class Index extends BaseController
 		 // echo "目录：" . $file  ."<br/>";
 
 		 $i   = 0;
+
+		 // 设置访问锁密码，等于该值表示已锁
+		 $lock = 5;
 		
 		 // 根据主键获取多个数据
 		// $list = Manual::where('catalog',$first)->select();
@@ -91,67 +94,198 @@ class Index extends BaseController
 		 $catalog = $this->getcatalog($file);
 
 
+		 //获取直接子页面/栏目数量
+		 $son  = count($catalog);
+
+
+		 //获取当期目录层级
+		 $path = $file;
+		 
+		 Manual::update(['son' =>  $son,'path' =>  $path  ], ['file' => $file]);
+
+		  //判断是否已锁，只允许访问一次！若锁了，汇报
+		 $status = Manual::where('file',$file)->value('status');
+
+
+		 if ($lock == $status) {
+		 	// echo "此文件已经统计,当前新统计路径". $path;
+		 }
+		//增加访问锁 ,避免比重复采集
+		 Manual::update(['status' =>  $lock ], ['file' => $file]);
+
+
+
+
+		  
+		 $firstfile = $file;
 		// 对数据集进行遍历操作
 		foreach($catalog as $key=>$cata){
+
+
 			
 			$i++;
  			$ii  = 0;
-            
-            $two = $this->getcatalog(trim($cata->file));
+ 			$level = 2;
+ 			$two = $this->getcatalog(trim($cata->file));
 
-		  				// dump($two);die;
+ 			 
+ 			//获取直接子页面/栏目数量
+			$son  = count($two);
+			//获取当期目录层级
+			$file = $cata->file;
+			$path = $firstfile."/".$file;
+			
+
+			Manual::update(['son' =>  $son,'path' =>  $path ,'level' =>  $level  ], ['file' => $file]);
+
+			//判断是否已锁，只允许访问一次！若锁了，汇报
+			$status = Manual::where('file',$file)->value('status');
+
+
+			if ($lock == $status) {
+			 	// echo "此文件已经统计,当前新统计路径". $path."<br>";
+			 }
+			//增加访问锁 ,避免比重复采集
+			Manual::update(['status' =>  $lock ], ['file' => $file]);
+
+		 
+            
+            
+
+		  			 $twofile = $file;
 					// 对数据集进行遍历操作
 					foreach($two as $key=>$cata){
+
 						$i++;
 						$ii++;
 						$iii  = 0;
-
-						
-						// echo "[".$i."]";
-
-					    // echo "· · ".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
-			               
+					    $level = 3;
 					    $three = $this->getcatalog(trim($cata->file));
+
+					    //获取直接子页面/栏目数量
+						$son  = count($three);
+						//获取当期目录层级
+						$file = $cata->file;
+						$path = $firstfile."/".$twofile."/".$file;
+						
+
+						Manual::update(['son' =>  $son,'path' =>  $path ,'level' =>  $level  ], ['file' => $file]);
+
+						//判断是否已锁，只允许访问一次！若锁了，汇报
+						$status = Manual::where('file',$file)->value('status');
+
+
+						if ($lock == $status) {
+						 	echo "此文件已经统计,当前新统计路径". $path."<br>";
+						 }
+						//增加访问锁 ,避免比重复采集
+						Manual::update(['status' =>  $lock ], ['file' => $file]);
+
+						$threefile = $file;
  					   	foreach($three as $key=>$cata){
  					   		$i++;
  					   		$ii++;
  					   		$iii++;
- 					   		// echo "[".$i."]";
-						    // echo "###".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+ 					   		$level = 4;
+ 
 						    $four = $this->getcatalog(trim($cata->file));
+
+						    //获取直接子页面/栏目数量
+							$son  = count($four);
+							//获取当期目录层级
+							$file = $cata->file;
+							$path = $firstfile."/".$twofile."/".$threefile."/".$file;
+							
+
+							Manual::update(['son' =>  $son,'path' =>  $path ,'level' =>  $level  ], ['file' => $file]);
+
+							//判断是否已锁，只允许访问一次！若锁了，汇报
+							$status = Manual::where('file',$file)->value('status');
+
+
+							if ($lock == $status) {
+							 	echo "此文件已经统计,当前新统计路径". $path."<br>";
+							 }
+							//增加访问锁 ,避免比重复采集
+							Manual::update(['status' =>  $lock ], ['file' => $file]);
+
+
+							$fourfile = $file;
 	 					   	foreach($four as $key=>$cata){
+
 	 					   		$i++;
 	 					   		$ii++;
-	 					   		// echo "[".$i."]";
-							    // echo "》》》》".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+	 					   		$level = 5;
 							    $five = $this->getcatalog(trim($cata->file));
-							    // dump($five);
+							     
+								//获取直接子页面/栏目数量
+								$son  = count($five);
+								//获取当期目录层级
+								$file = $cata->file;
+								$path = $firstfile."/".$twofile."/".$threefile."/".$fourfile ."/". $file;
+								
+
+								Manual::update(['son' =>  $son,'path' =>  $path ,'level' =>  $level  ], ['file' => $file]);
+
+								//判断是否已锁，只允许访问一次！若锁了，汇报
+								$status = Manual::where('file',$file)->value('status');
+
+
+								if ($lock == $status) {
+								 	echo "此文件已经统计,当前新统计路径". $path."<br>";
+								 }
+								//增加访问锁 ,避免比重复采集
+								Manual::update(['status' =>  $lock ], ['file' => $file]); 
+
+
+								$fivefile = $file;
 		 					   	foreach($five as $key=>$cata){
 		 					   		$i++;
 		 					   		$ii++;
-								    // echo "<<<<<".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
+		 					   		$level = 6;
+								     
 								    $six = $this->getcatalog(trim($cata->file));
 
-								    // dump($five);
+								    
+									//获取直接子页面/栏目数量
+									$son  = count($six);
+									//获取当期目录层级
+									$file = $cata->file;
+									$path = $firstfile."/".$twofile."/".$threefile."/".$fourfile ."/". $fivefile ."/". $file;
+									
+
+									Manual::update(['son' =>  $son,'path' =>  $path ,'level' =>  $level  ], ['file' => $file]);
+
+									//判断是否已锁，只允许访问一次！若锁了，汇报
+									$status = Manual::where('file',$file)->value('status');
+
+
+									if ($lock == $status) {
+									 	echo "此文件已经统计,当前新统计路径". $path."<br>";
+									 }
+
+									 echo "一个6的". $path."<br>";
+									//增加访问锁 ,避免比重复采集
+									Manual::update(['status' =>  $lock ], ['file' => $file]); 
+
+									
+
+
 			 					   	foreach($six as $key=>$cata){
 			 					   	   $i++;
 									    // echo "<><><><><><>".$key."-id:".$cata->id."----".$cata->file."目录" ."<br/><br/>";
 									}
 								}
 							}
+								 
 						}
-						echo  "   +++三级目录".$cata->file."有".$iii."页已经记录\n";
-		    			Manual::update([ 'child' => $iii ,'level' => 3], ['file' => $cata->file]);
-
+						  
 					}
-			echo  "  ++二级目录".$cata->file."有".$ii."页已经记录\n";
-		    			Manual::update([ 'child' => $ii ,'level' => 2], ['file' => $cata->file]);
+
 
 		}
 
-// 统计包含的子页面总数，保存入库
-			echo  "一级目录".$file."有".$i."页已经记录\n";
-		    Manual::update([ 'child' => $i ], ['file' => $file]);
+ 
 
 	}
 	public function getcatalog($cata){

@@ -8,12 +8,120 @@ use app\model\Manual;
 // use app\controller\Catalog;
 class Index extends BaseController
 {
+    // 全局变量 用于递归传值
+    public $catalog = '';
+    public $i = 0;
+
     public function index()
     {
-        $status = Manual::where('level',6)->where('son','>',0)->select();
-        dump($status->toArray());die();
+        // $status = Manual::where('level',6)->where('son','>',0)->select();
+        // $s= Manual::where('status',8)->where('level','>',1)->select();
+        // $s= Manual::where('path','')->select();
+        // dump($s->toArray());
+        // die();
+   //      for ($i=1; $i < 7; $i++) { 
+        	
 
-        $this->levelone();
+   //      	$list = [];
+
+   //      	$status = Manual::where('level','=',$i)->field('id,file')->select();
+
+   //      	echo count($status)."+";
+   //      	foreach ($status as $key => $value) {
+   //      		# code...
+   //      		// echo $value->id;
+   //      		$id = $value->id;
+   //      		$p = ['id'=>$id, 'status'=>8];
+   //      		array_push($list,$p);
+        		
+   //      	}
+
+   //      	$user = new Manual;
+			// $user->saveAll($list);
+        	
+
+   //      	// $status = Manual::where('catalog','=',"faq")->select();
+   //      	// dump($status->toArray());
+   //      }
+       //  echo $this->checkchild("faq");
+       // die();
+
+    	
+
+        $this->getfilecata(15031);
+
+        echo $this->catalog;
+        echo "ok";
+    }
+
+    public function getfilecata($id){
+    	// 查询的上级目录
+    	$cata = Manual::field('catalog')->find($id);
+
+    	// dump($cata->catalog);
+    	$cata = $cata->catalog;
+     
+    	 
+    	$this->catalog = $cata."/". $this->catalog   ;
+
+    	// echo $catalog."<br>";
+    	// 查询上级是不是顶级
+    	$upnext = Manual::where("file",$cata)->field('id','catalog')->find();
+
+    	// dump($upnext->id);
+    	// dump($upnext->catalog);
+    	
+    	// $upnextid = $upnext->id;
+
+    	if ($upnext and $upnext->id<> '') {
+    		//不为空继续查询。
+    		echo "开始递归";
+    		$this->getfilecata($upnext->id);
+
+    	}
+    	return $this->catalog;
+    	
+ 
+		die();
+
+    	$i = 9;
+    	$i++;
+
+    	if ($i>=10) {
+    		echo $id ."大于10级了".$catalog ;
+    		die();
+    	}
+    }
+
+    public function checkchild($file){
+    	// 思路：
+    	// 遍历每一个文件的path字段
+    	// 查询字段中是否含有此文件名
+    	// 文件名前后增加斜杠/
+    	$file = $file ."/";
+
+
+    	$list = [];
+
+    	$status = Manual::where('path','like',$file.'%')->field('id,file')->select();
+
+
+    	echo count($status)."+";
+    	foreach ($status as $key => $value) {
+    		# code...
+    		// echo $value->id;
+    		$id = $value->id;
+    		$p = ['id'=>$id, 'status'=>9];
+    		array_push($list,$p);
+    		
+    	}
+
+    	$user = new Manual;
+		$user->saveAll($list);
+
+
+    	$status = Manual::where('path','like',$file.'%')->count();
+    	return $status;
     }
 
     // 采集功能入口
@@ -49,12 +157,7 @@ class Index extends BaseController
 			11 => ["sort" =>11, "level"=>"1","file"=>"appendices","title"=>"附录"],
 		];
 
-		// 		$levelone =[
-
-		// 	3  => ["sort" =>3,  "level"=>"1","file"=>"funcref","title"=>"入门指引"],
-
-		// ];
-
+		
 
 
 		foreach ($levelone as $key => $value) {
@@ -62,28 +165,30 @@ class Index extends BaseController
 				$file  = $value["file"];
 				$sort  = $value["sort"];
 				$title = $value["title"];
-				// 根据主键获取;多个数据
-				 $this->one($file);
-		// 		$cata = Manual::where('file',$file)->select();
-		// 	 dump($cata->toArray());
+
+				// 查询所有的子目录总数
+				$child = $this->checkchild($file);
+				echo "+" . $child;
+
+				// 从一级目录循环遍历
+				// $this->one($file);
+
+				// 直接执行
+				// $cata = Manual::where('file',$file)->select();
+			    //  dump($cata->toArray());
 				// Manual::update(['level' =>  '1','sort' =>  $sort , 'title' => $title ], ['file' => $file]);
+
+
 		}	 
 
 		// var_dump($levelone);
     }
     public function one($file){
 
-		// echo 333;die();
 
-		// ini_set('max_execution_time','10000');
-
-		// $one = "security";
-
-		// $one = "funcref";
-
-		 // echo "目录：" . $file  ."<br/>";
 
 		 $i   = 0;
+		 $level = 1;
 
 		 // 设置访问锁密码，等于该值表示已锁
 		 $lock = 5;
@@ -97,11 +202,13 @@ class Index extends BaseController
 		 //获取直接子页面/栏目数量
 		 $son  = count($catalog);
 
-
+		 	echo $file . "-" .$son . "\n"; 
 		 //获取当期目录层级
 		 $path = $file;
+
+		  
 		 
-		 Manual::update(['son' =>  $son,'path' =>  $path  ], ['file' => $file]);
+		 // Manual::update(['son' =>  $son,'path' =>  $path,'level' =>  $level  ], ['file' => $file]);
 
 		  //判断是否已锁，只允许访问一次！若锁了，汇报
 		 $status = Manual::where('file',$file)->value('status');
@@ -114,6 +221,8 @@ class Index extends BaseController
 		 Manual::update(['status' =>  $lock ], ['file' => $file]);
 
 
+
+		  
 
 
 		  
@@ -137,6 +246,7 @@ class Index extends BaseController
 			
 
 			Manual::update(['son' =>  $son,'path' =>  $path ,'level' =>  $level  ], ['file' => $file]);
+
 
 			//判断是否已锁，只允许访问一次！若锁了，汇报
 			$status = Manual::where('file',$file)->value('status');

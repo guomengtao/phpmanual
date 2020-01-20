@@ -12,23 +12,37 @@ PHP Manual Analysis 一份PHP手册的分析
 
 # 主要统计分析结果： 
 
-目录结构一共6层：
+
+文件总数：15037
+
+目录总数：12034 + 纯页面：3003
+
+目录一共6层:
+    一级目录：11
+    二级目录：111
+    三级目录：613
+    四级目录：1534
+    五级目录：9310
+    六级目录：455
+
+11+111+613+1534+9310+455 = 12034
 
 一级目录：
  
 1.  [版权信息](https://www.php.net/manual/zh/copyright.php) 0
 2.  [PHP 手册](https://www.php.net/manual/zh/manual.php) 1
 3.  [入门指引](https://www.php.net/manual/zh/getting-started.php) 10
-4.  [安装与配置](https://www.php.net/manual/zh/install.php) 45
-5.  [语言参考](https://www.php.net/manual/zh/langref.php) 203
+4.  [安装与配置](https://www.php.net/manual/zh/install.php) 47
+5.  [语言参考](https://www.php.net/manual/zh/langref.php) 207
 6.  [安全](https://www.php.net/manual/zh/security.php) 27
 7.  [特点](https://www.php.net/manual/zh/features.php) 27
-8.  [函数参考](https://www.php.net/manual/zh/funcref.php) 15296
-9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php) 2210
+8.  [函数参考](https://www.php.net/manual/zh/funcref.php) 11278
+9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php) 194
 10.  [FAQ](https://www.php.net/manual/zh/faq.php) 11 — FAQ：常见问题
-11.  [附录](https://www.php.net/manual/zh/appendices.php) 187
+11.  [附录](https://www.php.net/manual/zh/appendices.php) 219
 
-
+0+1+10+47+207+27+27+11278+194+11+219 = 12021
+0+1+10+47+207+27+27+11278+194+11+219
 二级目录：
 
 * [版权信息](https://www.php.net/manual/zh/copyright.php)

@@ -42,7 +42,7 @@ PHP Manual Analysis 一份PHP手册的分析
 11.  [附录](https://www.php.net/manual/zh/appendices.php) 219
 
 0+1+10+47+207+27+27+11278+194+11+219 = 12021
-0+1+10+47+207+27+27+11278+194+11+219
+
 二级目录：
 
 * [版权信息](https://www.php.net/manual/zh/copyright.php)

@@ -16,7 +16,9 @@ class Index extends BaseController
     {
         // $status = Manual::where('level',6)->where('son','>',0)->select();
         // $s= Manual::where('status',8)->where('level','>',1)->select();
-        // $s= Manual::where('path','')->select();
+        
+        // Manual::update(['catalog' =>  "funcref" ], ['file' => "refs.basic.php"]);
+        // $s= Manual::where('catalog','about666')->select();
         // dump($s->toArray());
         // die();
    //      for ($i=1; $i < 7; $i++) { 
@@ -46,30 +48,74 @@ class Index extends BaseController
        //  echo $this->checkchild("faq");
        // die();
 
-    	
+  //   	$path  = $this->getfilecata(7);
+  //   	dump($path);
+		// // Manual::update(['path' =>  $path ], ['id' => $value->id]);
 
-        $this->getfilecata(15031);
+		// die();
+		$s= Manual::where('level','>='.'0')->field('id')->select();
 
-        echo $this->catalog;
+		// dump(count($s));
+
+		// die();
+
+		foreach ($s as $key => $value) {
+			# code...
+			// echo $value->id;
+			// echo $this->getfilecata($value->id);
+			$this->catalog = "";
+			$this->i = 0;
+			 
+			$path  = $this->getfilecata($value->id);
+
+			// dump($path);
+			echo $value->id . "\n";
+			Manual::update(['path' =>  $path[0] ,'level' =>  $path[1]], ['id' => $value->id]);
+			
+			// die();
+		}
+
+        // $this->getfilecata(57);
+
+        // echo $this->catalog;
         echo "ok";
     }
 
     public function getfilecata($id){
-    	// 查询的上级目录
-    	$cata = Manual::field('catalog')->find($id);
-
-    	// dump($cata->catalog);
-    	$cata = $cata->catalog;
-     
     	 
-    	$this->catalog = $cata."/". $this->catalog   ;
+    	// 查询上级目录
+    	$getcata = Manual::find($id);
 
-    	// echo $catalog."<br>";
+    	// dump($getcata->catalog);
+    	$cata = $getcata->catalog;
+    	$file = $getcata->file;
+     
+    	// $this->catalog = $getcata->file;
+    	
+    	$this->i = $this->i + 1;
+
+    	if ($this->catalog) {
+    		$this->catalog = $file."/". $this->catalog   ;
+    	} else {
+    		$this->catalog = $file  ;
+    		$son = Manual::where("catalog",$file)->count();
+    		Manual::update([ 'son' =>  $son   ], ['file' => $file]);
+    		if ($son and $this->i >5) {
+    			# code...
+    			echo $file ."bu不是0";
+    			die;
+    		}
+    		echo "son" . $son . "\n";
+    	}
+    	
+    	 
+    	// die();
+    	// echo $cata."<br>";
     	// 查询上级是不是顶级
     	$upnext = Manual::where("file",$cata)->field('id','catalog')->find();
 
-    	// dump($upnext->id);
-    	// dump($upnext->catalog);
+    	dump($upnext->id);
+    	dump($upnext->catalog);
     	
     	// $upnextid = $upnext->id;
 
@@ -77,9 +123,11 @@ class Index extends BaseController
     		//不为空继续查询。
     		echo "开始递归";
     		$this->getfilecata($upnext->id);
+    		die();
 
     	}
-    	return $this->catalog;
+    	$getfilecata = [$this->catalog,$this->i];
+    	return $getfilecata ;
     	
  
 		die();

@@ -53,92 +53,101 @@ class Index extends BaseController
 		// // Manual::update(['path' =>  $path ], ['id' => $value->id]);
 
 		// die();
-		$s= Manual::where('level','>='.'0')->field('id')->select();
+		$s = Manual::where('level','>'.'7')->field('id')->select();
 
-		// dump(count($s));
+		dump(count($s));
 
-		// die();
+		die();
 
-		foreach ($s as $key => $value) {
-			# code...
-			// echo $value->id;
-			// echo $this->getfilecata($value->id);
-			$this->catalog = "";
-			$this->i = 0;
+		// foreach ($s as $key => $value) {
+		// 	# code...
+		// 	// echo $value->id;
+		// 	// echo $this->getfilecata($value->id);
+		// 	$this->catalog = "";
+		// 	$this->i = 0;
 			 
-			$path  = $this->getfilecata($value->id);
+		// 	$path  = $this->getfilecata($value->id);
 
-			// dump($path);
-			echo $value->id . "\n";
-			Manual::update(['path' =>  $path[0] ,'level' =>  $path[1]], ['id' => $value->id]);
+		// 	// dump($path);
+		// 	echo $value->id . "\n";
+		// 	Manual::update(['path' =>  $path[0] ,'level' =>  $path[1]], ['id' => $value->id]);
 			
-			// die();
-		}
+		// 	// die();
+		// }
 
-        // $this->getfilecata(57);
+		// 提柜单个排除测试程序
+		// 递归前先初始化默认值
+		$this->catalog = "";
+		$this->i = 0;
+        $this->getfilecata(1466);
 
         // echo $this->catalog;
         echo "ok";
     }
 
     public function getfilecata($id){
+
+		// $getfilecata = [$this->catalog,$this->i];
+		// dump($getfilecata);
     	 
     	// 查询上级目录
     	$getcata = Manual::find($id);
 
-    	// dump($getcata->catalog);
+    	// dump($getcata->toArray());
     	$cata = $getcata->catalog;
     	$file = $getcata->file;
      
-    	// $this->catalog = $getcata->file;
+    	// dump($cata);die();
     	
     	$this->i = $this->i + 1;
 
+    	// 判断路径是否为空，不为空则是第二次循环
+    	// 递归调用前需要先重置路径为空
     	if ($this->catalog) {
-    		$this->catalog = $file."/". $this->catalog   ;
+    		$this->catalog = $file."/". $this->catalog;
+    		echo "第二次".$this->catalog."\n";
     	} else {
+
+    		// 如果第一次循环进入此程序
     		$this->catalog = $file  ;
-    		$son = Manual::where("catalog",$file)->count();
-    		Manual::update([ 'son' =>  $son   ], ['file' => $file]);
-    		if ($son and $this->i >5) {
-    			# code...
-    			echo $file ."bu不是0";
-    			die;
-    		}
-    		echo "son" . $son . "\n";
+    		// 附带，查询直属下级子目录总数
+    		// $son = Manual::where("catalog",$file)->count();
+    		// // 保存直属下级子目录总数
+    		// Manual::update([ 'son' =>  $son   ], ['file' => $file]);
+			echo "第一次" .$this->catalog."\n";
+    		 
     	}
     	
-    	 
-    	// die();
-    	// echo $cata."<br>";
-    	// 查询上级是不是顶级
+ 		// 判断目录级别控制死循环
+		if ($this->i >6) {
+			echo $file ."循环大于6级了";
+   //  		$getfilecata = [$this->catalog,$this->i];
+			// dump($getfilecata);
+			die;
+		}
+
+    	// 查询上级目录
     	$upnext = Manual::where("file",$cata)->field('id','catalog')->find();
 
-    	dump($upnext->id);
-    	dump($upnext->catalog);
+    	// dump($upnext->toArray());
+    	// dump($upnext->catalog);
     	
-    	// $upnextid = $upnext->id;
+ 
 
-    	if ($upnext and $upnext->id<> '') {
+    	if ($upnext and $upnext->id > 1) {
     		//不为空继续查询。
     		echo "开始递归";
+    		// die();
     		$this->getfilecata($upnext->id);
-    		die();
+    		
 
     	}
+ 
     	$getfilecata = [$this->catalog,$this->i];
     	return $getfilecata ;
     	
  
-		die();
-
-    	$i = 9;
-    	$i++;
-
-    	if ($i>=10) {
-    		echo $id ."大于10级了".$catalog ;
-    		die();
-    	}
+ 
     }
 
     public function checkchild($file){

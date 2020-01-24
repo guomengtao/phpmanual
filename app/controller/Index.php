@@ -14,77 +14,159 @@ class Index extends BaseController
 
     public function index()
     {
-        // $status = Manual::where('level',6)->where('son','>',0)->select();
+ 
+		
+     	// $this->getchildcata('internals2');
+     	// die();
+     	
+        	// $status = Manual::find(1);
+			// dump($status->toArray());
+			// dump($status->path);
+			// die();
+        // $s = Manual::where('level',0)->count();
         // $s= Manual::where('status',8)->where('level','>',1)->select();
         
         // Manual::update(['catalog' =>  "funcref" ], ['file' => "refs.basic.php"]);
-        // $s= Manual::where('catalog','about666')->select();
+        // $s= Manual::where('path','like','/%')->select();
         // dump($s->toArray());
         // die();
-   //      for ($i=1; $i < 7; $i++) { 
+        for ($i=0; $i < 8; $i++) { 
         	
 
-   //      	$list = [];
+        	$list = [];
 
-   //      	$status = Manual::where('level','=',$i)->field('id,file')->select();
+        	$status = Manual::where('level','=',$i)->field('id,file')->select();
 
-   //      	echo count($status)."+";
-   //      	foreach ($status as $key => $value) {
-   //      		# code...
-   //      		// echo $value->id;
-   //      		$id = $value->id;
-   //      		$p = ['id'=>$id, 'status'=>8];
-   //      		array_push($list,$p);
+        	echo count($status)."+";
+        }
+        	// foreach ($status as $key => $value) {
+        	// 	# code...
+        	// 	// echo $value->id;
+        	// 	$id = $value->id;
+        	// 	$p = ['id'=>$id, 'status'=>8];
+        	// 	array_push($list,$p);
         		
-   //      	}
+        	// }
 
    //      	$user = new Manual;
 			// $user->saveAll($list);
         	
 
-   //      	// $status = Manual::where('catalog','=',"faq")->select();
-   //      	// dump($status->toArray());
-   //      }
+        	// $status = Manual::where('catalog','=',"faq")->select();
+        	// dump($status->toArray());
+        
        //  echo $this->checkchild("faq");
-       // die();
+       die();
 
   //   	$path  = $this->getfilecata(7);
   //   	dump($path);
 		// // Manual::update(['path' =>  $path ], ['id' => $value->id]);
 
 		// die();
-		$s = Manual::where('level','>'.'7')->field('id')->select();
+		// echo 123;
+		$s = Manual::where('id','>=','8699')->select();
 
-		dump(count($s));
+		// dump($s->toArray());
+		// dump(count($s));
 
-		die();
+		// die();
 
-		// foreach ($s as $key => $value) {
-		// 	# code...
-		// 	// echo $value->id;
-		// 	// echo $this->getfilecata($value->id);
-		// 	$this->catalog = "";
-		// 	$this->i = 0;
+		foreach ($s as $key => $value) {
+			# code...
+			// echo $value->id;
+			// echo $this->getfilecata($value->id);
+			$this->catalog = "";
+			$this->i = 0;
 			 
-		// 	$path  = $this->getfilecata($value->id);
+			$getfilecata = $this->getfilecata($value->id);
 
-		// 	// dump($path);
-		// 	echo $value->id . "\n";
-		// 	Manual::update(['path' =>  $path[0] ,'level' =>  $path[1]], ['id' => $value->id]);
+			// dump($path);
+			// echo $value->id . "\n";
+
+			$status = Manual::find($value->id);
+			$path = $status->path;
+			$level = $status->level;
+
+			if ($path == $getfilecata[0] and $level == $getfilecata[1]) {
+				echo $value->id ."\n";
+			} else {
+				echo "发现一个问题";
+				dump($status->toArray());
+				dump($getfilecata);
+				Manual::update(['path' =>  $getfilecata[0] ,'level' =>  $getfilecata[1]], ['id' => $value->id]);
+				// die();
+				sleep(9);
+			}
 			
-		// 	// die();
-		// }
+			
+			// die();
+		}
 
 		// 提柜单个排除测试程序
 		// 递归前先初始化默认值
-		$this->catalog = "";
-		$this->i = 0;
-        $this->getfilecata(1466);
+		// $this->catalog = "";
+		// $this->i = 0;
+  //       $this->getfilecata(1466);
 
         // echo $this->catalog;
-        echo "ok";
+        // echo "ok";
     }
+    public function getchildcata($file,$level = 1,$mark = ''){
+    	// 获取一个目录的直属子目录
+    	$getchildcata = Manual::where('catalog',$file)->select();
+    	$this->i = $this->i++;
+    	if ($this->i > 4) {
+    		echo ">6 stop ";
+    		die();
+    	}
+    	// 遍历直属子目录
 
+    	// 查询属于几级目录
+    	$mark = "-";
+ 
+    	switch ($level) {
+    		case '1':
+    			# code...
+    		$mark = "+";
+    			break;
+    		case '2':
+    			# code...
+    		$mark = "&nbsp;&nbsp;--";
+    			break;
+    		case '3':
+    			# code...
+    		$mark = "&nbsp;&nbsp;&nbsp;&nbsp;===";
+    			break;
+    		case '4':
+    			# code...
+    		$mark = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]";
+    			break;
+    		default:
+    			# code...
+    		$mark = "&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>";
+    			break;
+    	}
+    	foreach ($getchildcata as $key => $value) {
+    		//输出或存储结果
+    		echo $mark ;
+    		echo $value->title.$value->file . "&nbsp;&nbsp;";
+    		// 	如果子目录里有目录 递归获取其子目录
+    		$checkchild = Manual::where('catalog',$value->file)->select();
+    		 
+    		if (count($checkchild)) {
+    			echo count($checkchild) ;
+    		}
+    		echo "<br>\n";
+    		if (count($checkchild) > 0 ){
+    			
+    			// dump($checkchild ->toArray());
+
+    			$this->getchildcata($value->file,$value->level);
+    		}
+
+    	}
+    	
+    }
     public function getfilecata($id){
 
 		// $getfilecata = [$this->catalog,$this->i];
@@ -105,24 +187,24 @@ class Index extends BaseController
     	// 递归调用前需要先重置路径为空
     	if ($this->catalog) {
     		$this->catalog = $file."/". $this->catalog;
-    		echo "第二次".$this->catalog."\n";
+    		// echo "第二次".$this->catalog."\n";
     	} else {
 
     		// 如果第一次循环进入此程序
     		$this->catalog = $file  ;
     		// 附带，查询直属下级子目录总数
-    		// $son = Manual::where("catalog",$file)->count();
+    		$son = Manual::where("catalog",$file)->count();
     		// // 保存直属下级子目录总数
-    		// Manual::update([ 'son' =>  $son   ], ['file' => $file]);
-			echo "第一次" .$this->catalog."\n";
+    		Manual::update([ 'son' =>  $son   ], ['file' => $file]);
+			// echo "第一次" .$this->catalog."\n";
     		 
     	}
     	
  		// 判断目录级别控制死循环
-		if ($this->i >6) {
+		if ($this->i >7) {
 			echo $file ."循环大于6级了";
-   //  		$getfilecata = [$this->catalog,$this->i];
-			// dump($getfilecata);
+    		$getfilecata = [$this->catalog,$this->i];
+			dump($getfilecata);
 			die;
 		}
 
@@ -136,7 +218,7 @@ class Index extends BaseController
 
     	if ($upnext and $upnext->id > 1) {
     		//不为空继续查询。
-    		echo "开始递归";
+    		// echo "开始递归";
     		// die();
     		$this->getfilecata($upnext->id);
     		

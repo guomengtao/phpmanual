@@ -1,0 +1,210 @@
++Zend Engine 2 API 参考internals2.apiref&nbsp;&nbsp;<br>
++PHP 5 构建系统internals2.buildsys&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>与 UNIX 构建系统交互: config.m4internals2.buildsys.configunix&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>使用 Windows 构建系统：config.w32internals2.buildsys.configwin&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>PHP 扩展开发构建internals2.buildsys.environment&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>ext_skel 脚本internals2.buildsys.skeleton&nbsp;&nbsp;<br>
++"counter" 扩展 - 一个连续的实例internals2.counter&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>简单接口internals2.counter.basic-interface&nbsp;&nbsp;3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===修改简单计数器的当前值。internals2.counter.function.counter-bump&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===获取简单计数器的当前值。internals2.counter.function.counter-get&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===重置简单计数器的当前值。internals2.counter.function.counter-reset&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>预定义常量internals2.counter.constants&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Counter 类internals2.counter.counter-class&nbsp;&nbsp;7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===修改计数器的当前值。internals2.counter.counter-class.bumpValue&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===创建一个包含单一数值的计数器实例。internals2.counter.counter-class.construct&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===返回计数器的部分元信息。internals2.counter.counter-class.getMeta&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===取回一个名称已存在的计数器。internals2.counter.counter-class.getNamed&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===获取计数器的当前值。internals2.counter.counter-class.getValue&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===重置计数器的当前值。internals2.counter.counter-class.resetValue&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===设置由 Counter::getNamed 返回的计数器类。internals2.counter.counter-class.setCounterClass&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>范例internals2.counter.examples&nbsp;&nbsp;3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===简单接口internals2.counter.examples.basic&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===扩展接口internals2.counter.examples.extended&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===对象化接口internals2.counter.examples.objective&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>扩展接口internals2.counter.extended-interface&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===更新计数器资源的当前值。internals2.counter.function.counter-bump-value&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===创建一个包含单个数值的计数器。internals2.counter.function.counter-create&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===返回计数器资源的部分元信息。internals2.counter.function.counter-get-meta&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===按名称查询一个已存在的计数器，并作为资源返回。internals2.counter.function.counter-get-named&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===获取计数器资源的当前值。internals2.counter.function.counter-get-value&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===重置计数器资源的当前值。internals2.counter.function.counter-reset-value&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>安装／配置internals2.counter.setup&nbsp;&nbsp;3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===运行时配置internals2.counter.ini&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===简介internals2.counter.intro&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===资源类型internals2.counter.resources&nbsp;&nbsp;<br>
++扩展相关 FAQinternals2.faq&nbsp;&nbsp;<br>
++函数的编写internals2.funcs&nbsp;&nbsp;<br>
++INI 设置的使用internals2.ini&nbsp;&nbsp;<br>
++内存管理internals2.memory&nbsp;&nbsp;3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>内存管理基础internals2.memory.management&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>数据持久化internals2.memory.persistence&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>线程安全的资源管理器internals2.memory.TSRM&nbsp;&nbsp;<br>
++类和对象的使用internals2.objects&nbsp;&nbsp;<br>
++Zend Engine 2 操作码列表internals2.opcodes&nbsp;&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Opcode Descriptions and Examplesinternals2.opcodes.list&nbsp;&nbsp;136<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ADD_ARRAY_ELEMENTinternals2.opcodes.add-array-element&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ADD_CHARinternals2.opcodes.add-char&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ADD_INTERFACEinternals2.opcodes.add-interface&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ADD_STRINGinternals2.opcodes.add-string&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ADD_VARinternals2.opcodes.add-var&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ADDinternals2.opcodes.add&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_ADDinternals2.opcodes.assign-add&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_BW_ANDinternals2.opcodes.assign-bw-and&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_BW_ORinternals2.opcodes.assign-bw-or&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_BW_XORinternals2.opcodes.assign-bw-xor&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_CONCATinternals2.opcodes.assign-concat&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_DIMinternals2.opcodes.assign-dim&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_DIVinternals2.opcodes.assign-div&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_MODinternals2.opcodes.assign-mod&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_MULinternals2.opcodes.assign-mul&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_OBJinternals2.opcodes.assign-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_REFinternals2.opcodes.assign-ref&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_SLinternals2.opcodes.assign-sl&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_SRinternals2.opcodes.assign-sr&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_SUBinternals2.opcodes.assign-sub&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGNinternals2.opcodes.assign&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BEGIN_SILENCEinternals2.opcodes.begin-silence&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BOOL_NOTinternals2.opcodes.bool-not&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BOOL_XORinternals2.opcodes.bool-xor&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BOOLinternals2.opcodes.bool&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BRKinternals2.opcodes.brk&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BW_ANDinternals2.opcodes.bw-and&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BW_NOTinternals2.opcodes.bw-not&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BW_ORinternals2.opcodes.bw-or&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===BW_XORinternals2.opcodes.bw-xor&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===CASEinternals2.opcodes.case&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===CASTinternals2.opcodes.cast&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===CATCHinternals2.opcodes.catch&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===CLONEinternals2.opcodes.clone&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===CONCATinternals2.opcodes.concat&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===CONTinternals2.opcodes.cont&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_CLASSinternals2.opcodes.declare-class&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_CONSTinternals2.opcodes.declare-const&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_FUNCTIONinternals2.opcodes.declare-function&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_INHERITED_CLASS_DELAYEDinternals2.opcodes.declare-inherited-class-delayed&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_INHERITED_CLASSinternals2.opcodes.declare-inherited-class&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DIVinternals2.opcodes.div&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DO_FCALL_BY_NAMEinternals2.opcodes.do-fcall-by-name&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===DO_FCALLinternals2.opcodes.do-fcall&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ECHOinternals2.opcodes.echo&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===END_SILENCEinternals2.opcodes.end-silence&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===EXITinternals2.opcodes.exit&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===EXT_FCALL_BEGINinternals2.opcodes.ext-fcall-begin&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===EXT_FCALL_ENDinternals2.opcodes.ext-fcall-end&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===EXT_NOPinternals2.opcodes.ext-nop&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===EXT_STMTinternals2.opcodes.ext-stmt&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FE_FETCHinternals2.opcodes.fe-fetch&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FE_RESETinternals2.opcodes.fe-reset&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_CLASSinternals2.opcodes.fetch-class&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_CONSTANTinternals2.opcodes.fetch-constant&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_FUNC_ARGinternals2.opcodes.fetch-dim-func-arg&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_ISinternals2.opcodes.fetch-dim-is&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_Rinternals2.opcodes.fetch-dim-r&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_RWinternals2.opcodes.fetch-dim-rw&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_TMP_VARinternals2.opcodes.fetch-dim-tmp-var&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_UNSETinternals2.opcodes.fetch-dim-unset&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_Winternals2.opcodes.fetch-dim-w&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_FUNC_ARGinternals2.opcodes.fetch-func-arg&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_ISinternals2.opcodes.fetch-is&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_FUNC_ARGinternals2.opcodes.fetch-obj-func-arg&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_ISinternals2.opcodes.fetch-obj-is&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_Rinternals2.opcodes.fetch-obj-r&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_RWinternals2.opcodes.fetch-obj-rw&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_UNSETinternals2.opcodes.fetch-obj-unset&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_Winternals2.opcodes.fetch-obj-w&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_Rinternals2.opcodes.fetch-r&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_RWinternals2.opcodes.fetch-rw&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_UNSETinternals2.opcodes.fetch-unset&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_Winternals2.opcodes.fetch-w&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===FREEinternals2.opcodes.free&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===GOTOinternals2.opcodes.goto&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===HANDLE_EXCEPTIONinternals2.opcodes.handle-exception&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INCLUDE_OR_EVALinternals2.opcodes.include-or-eval&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INIT_ARRAYinternals2.opcodes.init-array&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INIT_FCALL_BY_NAMEinternals2.opcodes.init-fcall-by-name&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INIT_METHOD_CALLinternals2.opcodes.init-method-call&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INIT_NS_FCALL_BY_NAMEinternals2.opcodes.init-ns-fcall-by-name&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INIT_STATIC_METHOD_CALLinternals2.opcodes.init-static-method-call&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INIT_STRINGinternals2.opcodes.init-string&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===INSTANCEOFinternals2.opcodes.instanceof&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===IS_EQUALinternals2.opcodes.is-equal&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===IS_IDENTICALinternals2.opcodes.is-identical&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===IS_NOT_EQUALinternals2.opcodes.is-not-equal&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===IS_NOT_IDENTICALinternals2.opcodes.is-not-identical&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===IS_SMALLER_OR_EQUALinternals2.opcodes.is-smaller-or-equal&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===IS_SMALLERinternals2.opcodes.is-smaller&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ISSET_ISEMPTY_DIM_OBJinternals2.opcodes.isset-isempty-dim-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ISSET_ISEMPTY_PROP_OBJinternals2.opcodes.isset-isempty-prop-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ISSET_ISEMPTY_VARinternals2.opcodes.isset-isempty-var&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===JMPinternals2.opcodes.jmp&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===JMPNZ_EXinternals2.opcodes.jmpnz-ex&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===JMPNZinternals2.opcodes.jmpnz&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===JMPZ_EXinternals2.opcodes.jmpz-ex&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===JMPZinternals2.opcodes.jmpz&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===JMPZNZinternals2.opcodes.jmpznz&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===MODinternals2.opcodes.mod&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===MULinternals2.opcodes.mul&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===NEWinternals2.opcodes.new&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===NOPinternals2.opcodes.nop&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===POST_DEC_OBJinternals2.opcodes.post-dec-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===POST_DECinternals2.opcodes.post-dec&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===POST_INC_OBJinternals2.opcodes.post-inc-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===POST_INCinternals2.opcodes.post-inc&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===PRE_DEC_OBJinternals2.opcodes.pre-dec-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===PRE_DECinternals2.opcodes.pre-dec&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===PRE_INC_OBJinternals2.opcodes.pre-inc-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===PRE_INCinternals2.opcodes.pre-inc&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===PRINTinternals2.opcodes.print&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===QM_ASSIGNinternals2.opcodes.qm-assign&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===RAISE_ABSTRACT_ERRORinternals2.opcodes.raise-abstract-error&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===RECV_INITinternals2.opcodes.recv-init&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===RECVinternals2.opcodes.recv&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===RETURN_BY_REFinternals2.opcodes.return-by-ref&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===RETURNinternals2.opcodes.return&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SEND_REFinternals2.opcodes.send-ref&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SEND_VALinternals2.opcodes.send-val&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SEND_VAR_NO_REFinternals2.opcodes.send-var-no-ref&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SEND_VARinternals2.opcodes.send-var&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SLinternals2.opcodes.sl&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SRinternals2.opcodes.sr&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SUBinternals2.opcodes.sub&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===SWITCH_FREEinternals2.opcodes.switch-free&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===THROWinternals2.opcodes.throw&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===TICKSinternals2.opcodes.ticks&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===UNSET_DIMinternals2.opcodes.unset-dim&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===UNSET_OBJinternals2.opcodes.unset-obj&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===UNSET_VARinternals2.opcodes.unset-var&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===USER_OPCODEinternals2.opcodes.user-opcode&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===VERIFY_ABSTRACT_CLASSinternals2.opcodes.verify-abstract-class&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ZEND_DECLARE_LAMBDA_FUNCTIONinternals2.opcodes.zend-declare-lambda-function&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ZEND_JMP_SETinternals2.opcodes.zend-jmp-set&nbsp;&nbsp;<br>
++PDO 驱动internals2.pdo&nbsp;&nbsp;10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Buildinginternals2.pdo.building&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Constantsinternals2.pdo.constants&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Error handlinginternals2.pdo.error-handling&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Fleshing out your skeletoninternals2.pdo.implementing&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Packaging and distributioninternals2.pdo.packaging&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>pdo_dbh_t definitioninternals2.pdo.pdo-dbh-t&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>pdo_stmt_t definitioninternals2.pdo.pdo-stmt-t&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>配置与管理internals2.pdo.preparation&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>前提条件internals2.pdo.prerequisites&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Testinginternals2.pdo.testing&nbsp;&nbsp;<br>
++序言internals2.preface&nbsp;&nbsp;<br>
++资源的使用internals2.resources&nbsp;&nbsp;<br>
++流的使用internals2.streams&nbsp;&nbsp;<br>
++扩展的结构internals2.structure&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Basic constructsinternals2.structure.basics&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>组成扩展的文件internals2.structure.files&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Extension globalsinternals2.structure.globals&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Life cycle of an extensioninternals2.structure.lifecycle&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>The zend_module structureinternals2.structure.modstruct&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Testing an extensioninternals2.structure.tests&nbsp;&nbsp;<br>
++变量的使用internals2.variables&nbsp;&nbsp;2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>创建变量并设置值internals2.variables.creating&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>介绍internals2.variables.intro&nbsp;&nbsp;<br>
++Zend Engine 1internals2.ze1&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>旧的介绍internals2.ze1.intro&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Streams API for PHP Extension Authorsinternals2.ze1.streams&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>TSRM APIinternals2.ze1.tsrm&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>Zend API：深入 PHP 内核internals2.ze1.zendapi&nbsp;&nbsp;<br>

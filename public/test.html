@@ -1,47 +1,210 @@
-+运行时配置configuration&nbsp;&nbsp;4<br>
-&nbsp;&nbsp;--怎样修改配置设定configuration.changes&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--配置可被设定范围configuration.changes.modes&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--配置文件configuration.file&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--.user.ini 文件configuration.file.per-user&nbsp;&nbsp;<br>
-+云计算平台上的安装install.cloud&nbsp;&nbsp;2<br>
-&nbsp;&nbsp;--Azure App Servicesinstall.cloud.azure&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Amazon EC2install.cloud.ec2&nbsp;&nbsp;<br>
-+FastCGI 进程管理器（FPM）install.fpm&nbsp;&nbsp;2<br>
-&nbsp;&nbsp;--配置install.fpm.configuration&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--安装install.fpm.install&nbsp;&nbsp;<br>
-+安装前需要考虑的事项install.general&nbsp;&nbsp;<br>
-+Mac OS X 系统下的安装install.macosx&nbsp;&nbsp;3<br>
-&nbsp;&nbsp;--使用内置的 PHPinstall.macosx.bundled&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--在 Mac OS X 下编译 PHPinstall.macosx.compile&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--使用软件包install.macosx.packages&nbsp;&nbsp;<br>
-+PECL 扩展库安装install.pecl&nbsp;&nbsp;7<br>
-&nbsp;&nbsp;--下载 PECL 扩展库install.pecl.downloads&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--PECL 安装介绍install.pecl.intro&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--用 PEAR 编译共享 PECL 扩展库install.pecl.pear&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--php-configinstall.pecl.php-config&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--用 phpize 编译共享 PECL 扩展库install.pecl.phpize&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--将 PECL 扩展库静态编译入 PHPinstall.pecl.static&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--在 Windows 上安装 PHP 扩展install.pecl.windows&nbsp;&nbsp;<br>
-+还有问题？install.problems&nbsp;&nbsp;3<br>
-&nbsp;&nbsp;--错误报告install.problems.bugs&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--阅读 FAQinstall.problems.faq&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--其它问题install.problems.support&nbsp;&nbsp;<br>
-+Unix 系统下的安装install.unix&nbsp;&nbsp;10<br>
-&nbsp;&nbsp;--Unix 系统下的 Apache 1.3.xinstall.unix.apache&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Unix 系统下的 Apache 2.xinstall.unix.apache2&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--CGI 和命令行设置install.unix.commandline&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Debian GNU/Linux 安装说明install.unix.debian&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--针对 HP-UX 平台的安装提示install.unix.hpux&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Unix 平台的 Lighttpd 1.4install.unix.lighttpd-14&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Unix 系统下的 Nginx 1.4.xinstall.unix.nginx&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--在 OpenBSD 系统下的安装install.unix.openbsd&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--针对 Solaris 的安装提示install.unix.solaris&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Sun Solaris 上的 Sun、iPlanet 和 Netscape 服务器install.unix.sun&nbsp;&nbsp;<br>
-+Windows 系统下的安装install.windows&nbsp;&nbsp;7<br>
-&nbsp;&nbsp;--Installation on old Windows systemsinstall.windows.legacy.index&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Manual PHP Installation on Windowsinstall.windows.manual&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--PECLinstall.windows.pecl&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Recommended Configuration on Windows systemsinstall.windows.recommended&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Install Requirementsinstall.windows.requirements&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Windows 下的 PHP 安装程序工具install.windows.tools&nbsp;&nbsp;<br>
-&nbsp;&nbsp;--Windows 下 PHP 故障排除install.windows.troubleshooting&nbsp;&nbsp;<br>
+&nbsp;&nbsp;--Zend Engine 2 API 参考internals2.apiref -level:2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>PHP 5 构建系统internals2.buildsys -level:54<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===与 UNIX 构建系统交互: config.m4internals2.buildsys.configunix -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===使用 Windows 构建系统：config.w32internals2.buildsys.configwin -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===PHP 扩展开发构建internals2.buildsys.environment -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===ext_skel 脚本internals2.buildsys.skeleton -level:3<br>
+&nbsp;&nbsp;--"counter" 扩展 - 一个连续的实例internals2.counter -level:26<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===简单接口internals2.counter.basic-interface -level:33<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]修改简单计数器的当前值。internals2.counter.function.counter-bump -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]获取简单计数器的当前值。internals2.counter.function.counter-get -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]重置简单计数器的当前值。internals2.counter.function.counter-reset -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===预定义常量internals2.counter.constants -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Counter 类internals2.counter.counter-class -level:37<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]修改计数器的当前值。internals2.counter.counter-class.bumpValue -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]创建一个包含单一数值的计数器实例。internals2.counter.counter-class.construct -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]返回计数器的部分元信息。internals2.counter.counter-class.getMeta -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]取回一个名称已存在的计数器。internals2.counter.counter-class.getNamed -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]获取计数器的当前值。internals2.counter.counter-class.getValue -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]重置计数器的当前值。internals2.counter.counter-class.resetValue -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]设置由 Counter::getNamed 返回的计数器类。internals2.counter.counter-class.setCounterClass -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===范例internals2.counter.examples -level:33<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]简单接口internals2.counter.examples.basic -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]扩展接口internals2.counter.examples.extended -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]对象化接口internals2.counter.examples.objective -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===扩展接口internals2.counter.extended-interface -level:36<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]更新计数器资源的当前值。internals2.counter.function.counter-bump-value -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]创建一个包含单个数值的计数器。internals2.counter.function.counter-create -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]返回计数器资源的部分元信息。internals2.counter.function.counter-get-meta -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]按名称查询一个已存在的计数器，并作为资源返回。internals2.counter.function.counter-get-named -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]获取计数器资源的当前值。internals2.counter.function.counter-get-value -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]重置计数器资源的当前值。internals2.counter.function.counter-reset-value -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===安装／配置internals2.counter.setup -level:33<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]运行时配置internals2.counter.ini -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]简介internals2.counter.intro -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]资源类型internals2.counter.resources -level:4<br>
+&nbsp;&nbsp;--扩展相关 FAQinternals2.faq -level:2<br>
+&nbsp;&nbsp;--函数的编写internals2.funcs -level:2<br>
+&nbsp;&nbsp;--INI 设置的使用internals2.ini -level:2<br>
+&nbsp;&nbsp;--内存管理internals2.memory -level:23<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===内存管理基础internals2.memory.management -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===数据持久化internals2.memory.persistence -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===线程安全的资源管理器internals2.memory.TSRM -level:3<br>
+&nbsp;&nbsp;--类和对象的使用internals2.objects -level:2<br>
+&nbsp;&nbsp;--Zend Engine 2 操作码列表internals2.opcodes -level:21<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Opcode Descriptions and Examplesinternals2.opcodes.list -level:3136<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ADD_ARRAY_ELEMENTinternals2.opcodes.add-array-element -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ADD_CHARinternals2.opcodes.add-char -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ADD_INTERFACEinternals2.opcodes.add-interface -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ADD_STRINGinternals2.opcodes.add-string -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ADD_VARinternals2.opcodes.add-var -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ADDinternals2.opcodes.add -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_ADDinternals2.opcodes.assign-add -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_BW_ANDinternals2.opcodes.assign-bw-and -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_BW_ORinternals2.opcodes.assign-bw-or -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_BW_XORinternals2.opcodes.assign-bw-xor -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_CONCATinternals2.opcodes.assign-concat -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_DIMinternals2.opcodes.assign-dim -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_DIVinternals2.opcodes.assign-div -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_MODinternals2.opcodes.assign-mod -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_MULinternals2.opcodes.assign-mul -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_OBJinternals2.opcodes.assign-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_REFinternals2.opcodes.assign-ref -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_SLinternals2.opcodes.assign-sl -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_SRinternals2.opcodes.assign-sr -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGN_SUBinternals2.opcodes.assign-sub -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ASSIGNinternals2.opcodes.assign -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BEGIN_SILENCEinternals2.opcodes.begin-silence -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BOOL_NOTinternals2.opcodes.bool-not -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BOOL_XORinternals2.opcodes.bool-xor -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BOOLinternals2.opcodes.bool -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BRKinternals2.opcodes.brk -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BW_ANDinternals2.opcodes.bw-and -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BW_NOTinternals2.opcodes.bw-not -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BW_ORinternals2.opcodes.bw-or -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]BW_XORinternals2.opcodes.bw-xor -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]CASEinternals2.opcodes.case -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]CASTinternals2.opcodes.cast -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]CATCHinternals2.opcodes.catch -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]CLONEinternals2.opcodes.clone -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]CONCATinternals2.opcodes.concat -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]CONTinternals2.opcodes.cont -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DECLARE_CLASSinternals2.opcodes.declare-class -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DECLARE_CONSTinternals2.opcodes.declare-const -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DECLARE_FUNCTIONinternals2.opcodes.declare-function -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DECLARE_INHERITED_CLASS_DELAYEDinternals2.opcodes.declare-inherited-class-delayed -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DECLARE_INHERITED_CLASSinternals2.opcodes.declare-inherited-class -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DIVinternals2.opcodes.div -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DO_FCALL_BY_NAMEinternals2.opcodes.do-fcall-by-name -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]DO_FCALLinternals2.opcodes.do-fcall -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ECHOinternals2.opcodes.echo -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]END_SILENCEinternals2.opcodes.end-silence -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]EXITinternals2.opcodes.exit -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]EXT_FCALL_BEGINinternals2.opcodes.ext-fcall-begin -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]EXT_FCALL_ENDinternals2.opcodes.ext-fcall-end -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]EXT_NOPinternals2.opcodes.ext-nop -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]EXT_STMTinternals2.opcodes.ext-stmt -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FE_FETCHinternals2.opcodes.fe-fetch -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FE_RESETinternals2.opcodes.fe-reset -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_CLASSinternals2.opcodes.fetch-class -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_CONSTANTinternals2.opcodes.fetch-constant -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_DIM_FUNC_ARGinternals2.opcodes.fetch-dim-func-arg -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_DIM_ISinternals2.opcodes.fetch-dim-is -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_DIM_Rinternals2.opcodes.fetch-dim-r -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_DIM_RWinternals2.opcodes.fetch-dim-rw -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_DIM_TMP_VARinternals2.opcodes.fetch-dim-tmp-var -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_DIM_UNSETinternals2.opcodes.fetch-dim-unset -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_DIM_Winternals2.opcodes.fetch-dim-w -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_FUNC_ARGinternals2.opcodes.fetch-func-arg -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_ISinternals2.opcodes.fetch-is -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_OBJ_FUNC_ARGinternals2.opcodes.fetch-obj-func-arg -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_OBJ_ISinternals2.opcodes.fetch-obj-is -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_OBJ_Rinternals2.opcodes.fetch-obj-r -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_OBJ_RWinternals2.opcodes.fetch-obj-rw -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_OBJ_UNSETinternals2.opcodes.fetch-obj-unset -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_OBJ_Winternals2.opcodes.fetch-obj-w -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_Rinternals2.opcodes.fetch-r -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_RWinternals2.opcodes.fetch-rw -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_UNSETinternals2.opcodes.fetch-unset -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FETCH_Winternals2.opcodes.fetch-w -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]FREEinternals2.opcodes.free -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]GOTOinternals2.opcodes.goto -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]HANDLE_EXCEPTIONinternals2.opcodes.handle-exception -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INCLUDE_OR_EVALinternals2.opcodes.include-or-eval -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INIT_ARRAYinternals2.opcodes.init-array -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INIT_FCALL_BY_NAMEinternals2.opcodes.init-fcall-by-name -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INIT_METHOD_CALLinternals2.opcodes.init-method-call -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INIT_NS_FCALL_BY_NAMEinternals2.opcodes.init-ns-fcall-by-name -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INIT_STATIC_METHOD_CALLinternals2.opcodes.init-static-method-call -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INIT_STRINGinternals2.opcodes.init-string -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]INSTANCEOFinternals2.opcodes.instanceof -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]IS_EQUALinternals2.opcodes.is-equal -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]IS_IDENTICALinternals2.opcodes.is-identical -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]IS_NOT_EQUALinternals2.opcodes.is-not-equal -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]IS_NOT_IDENTICALinternals2.opcodes.is-not-identical -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]IS_SMALLER_OR_EQUALinternals2.opcodes.is-smaller-or-equal -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]IS_SMALLERinternals2.opcodes.is-smaller -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ISSET_ISEMPTY_DIM_OBJinternals2.opcodes.isset-isempty-dim-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ISSET_ISEMPTY_PROP_OBJinternals2.opcodes.isset-isempty-prop-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ISSET_ISEMPTY_VARinternals2.opcodes.isset-isempty-var -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]JMPinternals2.opcodes.jmp -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]JMPNZ_EXinternals2.opcodes.jmpnz-ex -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]JMPNZinternals2.opcodes.jmpnz -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]JMPZ_EXinternals2.opcodes.jmpz-ex -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]JMPZinternals2.opcodes.jmpz -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]JMPZNZinternals2.opcodes.jmpznz -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]MODinternals2.opcodes.mod -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]MULinternals2.opcodes.mul -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]NEWinternals2.opcodes.new -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]NOPinternals2.opcodes.nop -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]POST_DEC_OBJinternals2.opcodes.post-dec-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]POST_DECinternals2.opcodes.post-dec -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]POST_INC_OBJinternals2.opcodes.post-inc-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]POST_INCinternals2.opcodes.post-inc -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]PRE_DEC_OBJinternals2.opcodes.pre-dec-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]PRE_DECinternals2.opcodes.pre-dec -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]PRE_INC_OBJinternals2.opcodes.pre-inc-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]PRE_INCinternals2.opcodes.pre-inc -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]PRINTinternals2.opcodes.print -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]QM_ASSIGNinternals2.opcodes.qm-assign -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]RAISE_ABSTRACT_ERRORinternals2.opcodes.raise-abstract-error -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]RECV_INITinternals2.opcodes.recv-init -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]RECVinternals2.opcodes.recv -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]RETURN_BY_REFinternals2.opcodes.return-by-ref -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]RETURNinternals2.opcodes.return -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SEND_REFinternals2.opcodes.send-ref -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SEND_VALinternals2.opcodes.send-val -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SEND_VAR_NO_REFinternals2.opcodes.send-var-no-ref -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SEND_VARinternals2.opcodes.send-var -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SLinternals2.opcodes.sl -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SRinternals2.opcodes.sr -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SUBinternals2.opcodes.sub -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]SWITCH_FREEinternals2.opcodes.switch-free -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]THROWinternals2.opcodes.throw -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]TICKSinternals2.opcodes.ticks -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]UNSET_DIMinternals2.opcodes.unset-dim -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]UNSET_OBJinternals2.opcodes.unset-obj -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]UNSET_VARinternals2.opcodes.unset-var -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]USER_OPCODEinternals2.opcodes.user-opcode -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]VERIFY_ABSTRACT_CLASSinternals2.opcodes.verify-abstract-class -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ZEND_DECLARE_LAMBDA_FUNCTIONinternals2.opcodes.zend-declare-lambda-function -level:4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]ZEND_JMP_SETinternals2.opcodes.zend-jmp-set -level:4<br>
+&nbsp;&nbsp;--PDO 驱动internals2.pdo -level:210<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Buildinginternals2.pdo.building -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Constantsinternals2.pdo.constants -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Error handlinginternals2.pdo.error-handling -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Fleshing out your skeletoninternals2.pdo.implementing -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Packaging and distributioninternals2.pdo.packaging -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===pdo_dbh_t definitioninternals2.pdo.pdo-dbh-t -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===pdo_stmt_t definitioninternals2.pdo.pdo-stmt-t -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===配置与管理internals2.pdo.preparation -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===前提条件internals2.pdo.prerequisites -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Testinginternals2.pdo.testing -level:3<br>
+&nbsp;&nbsp;--序言internals2.preface -level:2<br>
+&nbsp;&nbsp;--资源的使用internals2.resources -level:2<br>
+&nbsp;&nbsp;--流的使用internals2.streams -level:2<br>
+&nbsp;&nbsp;--扩展的结构internals2.structure -level:26<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Basic constructsinternals2.structure.basics -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===组成扩展的文件internals2.structure.files -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Extension globalsinternals2.structure.globals -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Life cycle of an extensioninternals2.structure.lifecycle -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===The zend_module structureinternals2.structure.modstruct -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Testing an extensioninternals2.structure.tests -level:3<br>
+&nbsp;&nbsp;--变量的使用internals2.variables -level:22<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===创建变量并设置值internals2.variables.creating -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===介绍internals2.variables.intro -level:3<br>
+&nbsp;&nbsp;--Zend Engine 1internals2.ze1 -level:24<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===旧的介绍internals2.ze1.intro -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Streams API for PHP Extension Authorsinternals2.ze1.streams -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===TSRM APIinternals2.ze1.tsrm -level:3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;===Zend API：深入 PHP 内核internals2.ze1.zendapi -level:3<br>

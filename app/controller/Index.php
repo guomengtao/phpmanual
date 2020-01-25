@@ -16,7 +16,7 @@ class Index extends BaseController
     {
  
 		
-     	$this->getchildcata('internals2');
+     	$this->getchildcata('funcref');
      	die();
      	
         	// $status = Manual::find(1);
@@ -25,6 +25,7 @@ class Index extends BaseController
 			// die();
         // $s = Manual::where('level',0)->count();
         // $s= Manual::where('file','internals2.buildsys.configunix')->select();
+        // $s= Manual::where('file','internals2.buildsys')->select();
         
         // Manual::update(['catalog' =>  "funcref" ], ['file' => "refs.basic.php"]);
         // // $s= Manual::where('path','like','/%')->select();
@@ -58,13 +59,15 @@ class Index extends BaseController
        //  echo $this->checkchild("faq");
        // die();
 
-  //   	$path  = $this->getfilecata(7);
-  //   	dump($path);
+    	$getfilecata  = $this->getfilecata(8673);
+    	Manual::update(['path' =>  $getfilecata[0] ,'level' =>  $getfilecata[1]], ['id' => 8673]);
+    	dump($getfilecata);
+    	die();
 		// // Manual::update(['path' =>  $path ], ['id' => $value->id]);
 
 		// die();
 		// echo 123;
-		$s = Manual::where('id','>=','8699')->select();
+		// $s = Manual::where('id','>=','8673')->select();
 
 		// dump($s->toArray());
 		// dump(count($s));
@@ -112,58 +115,88 @@ class Index extends BaseController
         // echo "ok";
     }
     public function getchildcata($file,$level = 1){
+    	// 指定的文件
+    	// 仅仅列出文件的子目录
+
     	// 获取一个目录的直属子目录
     	$getchildcata = Manual::where('catalog',$file)->select();
-    	$this->i = $this->i++;
-    	if ($this->i > 4) {
+    	$this->i = $this->i + 1;
+    	if ($this->i > 300) {
     		echo ">6 stop ";
+    		$this->i = 0;
     		die();
     	}
     	// 遍历直属子目录
-
+    	// level字段是记录自己属于第几级目录
     	// 查询属于几级目录
-    	$mark = "-";
- 
-
+    	$mark = "";
+ 		
+    	$getchildcatacount = count($getchildcata);
     	foreach ($getchildcata as $key => $value) {
+
+    		// 	如果子目录里有目录 递归获取其子目录
+    		$checkchild = Manual::where('catalog',$value->file)->select();
+    		$checkchildcount = count($checkchild);
     		//输出或存储结果
 	    	switch ($value->level) {
 	    		case '1':
 	    			# code...
-	    		$mark = "+";
+	    		$mark = "<h1>+";
 	    			break;
 	    		case '2':
 	    			# code...
-	    		$mark = "&nbsp;&nbsp;--";
+	    		$mark = "<h2>&nbsp;&nbsp;--&nbsp;";
 	    			break;
 	    		case '3':
 	    			# code...
-	    		$mark = "&nbsp;&nbsp;&nbsp;&nbsp;===";
+	    		$mark = "<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;";
 	    			break;
 	    		case '4':
 	    			# code...
-	    		$mark = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[[[]]]]";
+	    		$mark = "<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;####&nbsp;";
 	    			break;
 	    		default:
 	    			# code...
 	    		$mark = "&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>";
 	    			break;
 	    	}
-    		echo $mark ;
+	    	$key = $key +1;
+    		echo $mark . $key;
     		echo $value->title.$value->file . " -level:".$value->level;
-    		if ($value->level>6) {
-    			echo "error >6";
-    			die();
-    			# code...
-    		}
-    		// 	如果子目录里有目录 递归获取其子目录
-    		$checkchild = Manual::where('catalog',$value->file)->select();
+
+
     		 
-    		if (count($checkchild)) {
-    			echo count($checkchild) ;
+    		if ($checkchildcount) {
+    			echo "，子目录：".$checkchildcount ;
     		}
+
+	   		//输出或存储结果
+	    	switch ($value->level) {
+	    		case '1':
+	    			# code...
+	    		$mark = "</h1>";
+	    			break;
+	    		case '2':
+	    			# code...
+	    		$mark = "</h2>";
+	    			break;
+	    		case '3':
+	    			# code...
+	    		$mark = "</h3>;";
+	    			break;
+	    		case '4':
+	    			# code...
+	    		$mark = "</h4>";
+	    			break;
+	    		default:
+	    			# code...
+	    		$mark = "&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>";
+	    			break;
+	    	}
     		echo "<br>\n";
-    		if (count($checkchild) > 0 ){
+
+    		// 如果有子目录继续递归
+    		if ($checkchildcount){
     			
     			// dump($checkchild ->toArray());
 

@@ -1,210 +1,193 @@
-+Zend Engine 2 API 参考internals2.apiref -level:internals2.apiref<br>
-+PHP 5 构建系统internals2.buildsys -level:internals2.buildsys4<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>与 UNIX 构建系统交互: config.m4internals2.buildsys.configunix -level:internals2.buildsys.configunix<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>使用 Windows 构建系统：config.w32internals2.buildsys.configwin -level:internals2.buildsys.configwin<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>PHP 扩展开发构建internals2.buildsys.environment -level:internals2.buildsys.environment<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<><><><><><>ext_skel 脚本internals2.buildsys.skeleton -level:internals2.buildsys.skeleton<br>
-+"counter" 扩展 - 一个连续的实例internals2.counter -level:internals2.counter6<br>
-&nbsp;&nbsp;--简单接口internals2.counter.basic-interface -level:internals2.counter.basic-interface3<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===修改简单计数器的当前值。internals2.counter.function.counter-bump -level:internals2.counter.function.counter-bump<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===获取简单计数器的当前值。internals2.counter.function.counter-get -level:internals2.counter.function.counter-get<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===重置简单计数器的当前值。internals2.counter.function.counter-reset -level:internals2.counter.function.counter-reset<br>
-&nbsp;&nbsp;--预定义常量internals2.counter.constants -level:internals2.counter.constants<br>
-&nbsp;&nbsp;--Counter 类internals2.counter.counter-class -level:internals2.counter.counter-class7<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===修改计数器的当前值。internals2.counter.counter-class.bumpValue -level:internals2.counter.counter-class.bumpValue<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===创建一个包含单一数值的计数器实例。internals2.counter.counter-class.construct -level:internals2.counter.counter-class.construct<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===返回计数器的部分元信息。internals2.counter.counter-class.getMeta -level:internals2.counter.counter-class.getMeta<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===取回一个名称已存在的计数器。internals2.counter.counter-class.getNamed -level:internals2.counter.counter-class.getNamed<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===获取计数器的当前值。internals2.counter.counter-class.getValue -level:internals2.counter.counter-class.getValue<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===重置计数器的当前值。internals2.counter.counter-class.resetValue -level:internals2.counter.counter-class.resetValue<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===设置由 Counter::getNamed 返回的计数器类。internals2.counter.counter-class.setCounterClass -level:internals2.counter.counter-class.setCounterClass<br>
-&nbsp;&nbsp;--范例internals2.counter.examples -level:internals2.counter.examples3<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===简单接口internals2.counter.examples.basic -level:internals2.counter.examples.basic<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===扩展接口internals2.counter.examples.extended -level:internals2.counter.examples.extended<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===对象化接口internals2.counter.examples.objective -level:internals2.counter.examples.objective<br>
-&nbsp;&nbsp;--扩展接口internals2.counter.extended-interface -level:internals2.counter.extended-interface6<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===更新计数器资源的当前值。internals2.counter.function.counter-bump-value -level:internals2.counter.function.counter-bump-value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===创建一个包含单个数值的计数器。internals2.counter.function.counter-create -level:internals2.counter.function.counter-create<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===返回计数器资源的部分元信息。internals2.counter.function.counter-get-meta -level:internals2.counter.function.counter-get-meta<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===按名称查询一个已存在的计数器，并作为资源返回。internals2.counter.function.counter-get-named -level:internals2.counter.function.counter-get-named<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===获取计数器资源的当前值。internals2.counter.function.counter-get-value -level:internals2.counter.function.counter-get-value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===重置计数器资源的当前值。internals2.counter.function.counter-reset-value -level:internals2.counter.function.counter-reset-value<br>
-&nbsp;&nbsp;--安装／配置internals2.counter.setup -level:internals2.counter.setup3<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===运行时配置internals2.counter.ini -level:internals2.counter.ini<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===简介internals2.counter.intro -level:internals2.counter.intro<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===资源类型internals2.counter.resources -level:internals2.counter.resources<br>
-+扩展相关 FAQinternals2.faq -level:internals2.faq<br>
-+函数的编写internals2.funcs -level:internals2.funcs<br>
-+INI 设置的使用internals2.ini -level:internals2.ini<br>
-+内存管理internals2.memory -level:internals2.memory3<br>
-&nbsp;&nbsp;--内存管理基础internals2.memory.management -level:internals2.memory.management<br>
-&nbsp;&nbsp;--数据持久化internals2.memory.persistence -level:internals2.memory.persistence<br>
-&nbsp;&nbsp;--线程安全的资源管理器internals2.memory.TSRM -level:internals2.memory.TSRM<br>
-+类和对象的使用internals2.objects -level:internals2.objects<br>
-+Zend Engine 2 操作码列表internals2.opcodes -level:internals2.opcodes1<br>
-&nbsp;&nbsp;--Opcode Descriptions and Examplesinternals2.opcodes.list -level:internals2.opcodes.list136<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ADD_ARRAY_ELEMENTinternals2.opcodes.add-array-element -level:internals2.opcodes.add-array-element<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ADD_CHARinternals2.opcodes.add-char -level:internals2.opcodes.add-char<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ADD_INTERFACEinternals2.opcodes.add-interface -level:internals2.opcodes.add-interface<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ADD_STRINGinternals2.opcodes.add-string -level:internals2.opcodes.add-string<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ADD_VARinternals2.opcodes.add-var -level:internals2.opcodes.add-var<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ADDinternals2.opcodes.add -level:internals2.opcodes.add<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_ADDinternals2.opcodes.assign-add -level:internals2.opcodes.assign-add<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_BW_ANDinternals2.opcodes.assign-bw-and -level:internals2.opcodes.assign-bw-and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_BW_ORinternals2.opcodes.assign-bw-or -level:internals2.opcodes.assign-bw-or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_BW_XORinternals2.opcodes.assign-bw-xor -level:internals2.opcodes.assign-bw-xor<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_CONCATinternals2.opcodes.assign-concat -level:internals2.opcodes.assign-concat<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_DIMinternals2.opcodes.assign-dim -level:internals2.opcodes.assign-dim<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_DIVinternals2.opcodes.assign-div -level:internals2.opcodes.assign-div<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_MODinternals2.opcodes.assign-mod -level:internals2.opcodes.assign-mod<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_MULinternals2.opcodes.assign-mul -level:internals2.opcodes.assign-mul<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_OBJinternals2.opcodes.assign-obj -level:internals2.opcodes.assign-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_REFinternals2.opcodes.assign-ref -level:internals2.opcodes.assign-ref<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_SLinternals2.opcodes.assign-sl -level:internals2.opcodes.assign-sl<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_SRinternals2.opcodes.assign-sr -level:internals2.opcodes.assign-sr<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGN_SUBinternals2.opcodes.assign-sub -level:internals2.opcodes.assign-sub<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ASSIGNinternals2.opcodes.assign -level:internals2.opcodes.assign<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BEGIN_SILENCEinternals2.opcodes.begin-silence -level:internals2.opcodes.begin-silence<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BOOL_NOTinternals2.opcodes.bool-not -level:internals2.opcodes.bool-not<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BOOL_XORinternals2.opcodes.bool-xor -level:internals2.opcodes.bool-xor<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BOOLinternals2.opcodes.bool -level:internals2.opcodes.bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BRKinternals2.opcodes.brk -level:internals2.opcodes.brk<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BW_ANDinternals2.opcodes.bw-and -level:internals2.opcodes.bw-and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BW_NOTinternals2.opcodes.bw-not -level:internals2.opcodes.bw-not<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BW_ORinternals2.opcodes.bw-or -level:internals2.opcodes.bw-or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===BW_XORinternals2.opcodes.bw-xor -level:internals2.opcodes.bw-xor<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===CASEinternals2.opcodes.case -level:internals2.opcodes.case<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===CASTinternals2.opcodes.cast -level:internals2.opcodes.cast<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===CATCHinternals2.opcodes.catch -level:internals2.opcodes.catch<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===CLONEinternals2.opcodes.clone -level:internals2.opcodes.clone<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===CONCATinternals2.opcodes.concat -level:internals2.opcodes.concat<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===CONTinternals2.opcodes.cont -level:internals2.opcodes.cont<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_CLASSinternals2.opcodes.declare-class -level:internals2.opcodes.declare-class<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_CONSTinternals2.opcodes.declare-const -level:internals2.opcodes.declare-const<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_FUNCTIONinternals2.opcodes.declare-function -level:internals2.opcodes.declare-function<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_INHERITED_CLASS_DELAYEDinternals2.opcodes.declare-inherited-class-delayed -level:internals2.opcodes.declare-inherited-class-delayed<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DECLARE_INHERITED_CLASSinternals2.opcodes.declare-inherited-class -level:internals2.opcodes.declare-inherited-class<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DIVinternals2.opcodes.div -level:internals2.opcodes.div<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DO_FCALL_BY_NAMEinternals2.opcodes.do-fcall-by-name -level:internals2.opcodes.do-fcall-by-name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===DO_FCALLinternals2.opcodes.do-fcall -level:internals2.opcodes.do-fcall<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ECHOinternals2.opcodes.echo -level:internals2.opcodes.echo<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===END_SILENCEinternals2.opcodes.end-silence -level:internals2.opcodes.end-silence<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===EXITinternals2.opcodes.exit -level:internals2.opcodes.exit<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===EXT_FCALL_BEGINinternals2.opcodes.ext-fcall-begin -level:internals2.opcodes.ext-fcall-begin<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===EXT_FCALL_ENDinternals2.opcodes.ext-fcall-end -level:internals2.opcodes.ext-fcall-end<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===EXT_NOPinternals2.opcodes.ext-nop -level:internals2.opcodes.ext-nop<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===EXT_STMTinternals2.opcodes.ext-stmt -level:internals2.opcodes.ext-stmt<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FE_FETCHinternals2.opcodes.fe-fetch -level:internals2.opcodes.fe-fetch<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FE_RESETinternals2.opcodes.fe-reset -level:internals2.opcodes.fe-reset<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_CLASSinternals2.opcodes.fetch-class -level:internals2.opcodes.fetch-class<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_CONSTANTinternals2.opcodes.fetch-constant -level:internals2.opcodes.fetch-constant<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_FUNC_ARGinternals2.opcodes.fetch-dim-func-arg -level:internals2.opcodes.fetch-dim-func-arg<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_ISinternals2.opcodes.fetch-dim-is -level:internals2.opcodes.fetch-dim-is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_Rinternals2.opcodes.fetch-dim-r -level:internals2.opcodes.fetch-dim-r<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_RWinternals2.opcodes.fetch-dim-rw -level:internals2.opcodes.fetch-dim-rw<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_TMP_VARinternals2.opcodes.fetch-dim-tmp-var -level:internals2.opcodes.fetch-dim-tmp-var<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_UNSETinternals2.opcodes.fetch-dim-unset -level:internals2.opcodes.fetch-dim-unset<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_DIM_Winternals2.opcodes.fetch-dim-w -level:internals2.opcodes.fetch-dim-w<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_FUNC_ARGinternals2.opcodes.fetch-func-arg -level:internals2.opcodes.fetch-func-arg<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_ISinternals2.opcodes.fetch-is -level:internals2.opcodes.fetch-is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_FUNC_ARGinternals2.opcodes.fetch-obj-func-arg -level:internals2.opcodes.fetch-obj-func-arg<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_ISinternals2.opcodes.fetch-obj-is -level:internals2.opcodes.fetch-obj-is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_Rinternals2.opcodes.fetch-obj-r -level:internals2.opcodes.fetch-obj-r<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_RWinternals2.opcodes.fetch-obj-rw -level:internals2.opcodes.fetch-obj-rw<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_UNSETinternals2.opcodes.fetch-obj-unset -level:internals2.opcodes.fetch-obj-unset<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_OBJ_Winternals2.opcodes.fetch-obj-w -level:internals2.opcodes.fetch-obj-w<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_Rinternals2.opcodes.fetch-r -level:internals2.opcodes.fetch-r<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_RWinternals2.opcodes.fetch-rw -level:internals2.opcodes.fetch-rw<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_UNSETinternals2.opcodes.fetch-unset -level:internals2.opcodes.fetch-unset<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FETCH_Winternals2.opcodes.fetch-w -level:internals2.opcodes.fetch-w<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===FREEinternals2.opcodes.free -level:internals2.opcodes.free<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===GOTOinternals2.opcodes.goto -level:internals2.opcodes.goto<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===HANDLE_EXCEPTIONinternals2.opcodes.handle-exception -level:internals2.opcodes.handle-exception<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INCLUDE_OR_EVALinternals2.opcodes.include-or-eval -level:internals2.opcodes.include-or-eval<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INIT_ARRAYinternals2.opcodes.init-array -level:internals2.opcodes.init-array<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INIT_FCALL_BY_NAMEinternals2.opcodes.init-fcall-by-name -level:internals2.opcodes.init-fcall-by-name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INIT_METHOD_CALLinternals2.opcodes.init-method-call -level:internals2.opcodes.init-method-call<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INIT_NS_FCALL_BY_NAMEinternals2.opcodes.init-ns-fcall-by-name -level:internals2.opcodes.init-ns-fcall-by-name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INIT_STATIC_METHOD_CALLinternals2.opcodes.init-static-method-call -level:internals2.opcodes.init-static-method-call<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INIT_STRINGinternals2.opcodes.init-string -level:internals2.opcodes.init-string<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===INSTANCEOFinternals2.opcodes.instanceof -level:internals2.opcodes.instanceof<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===IS_EQUALinternals2.opcodes.is-equal -level:internals2.opcodes.is-equal<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===IS_IDENTICALinternals2.opcodes.is-identical -level:internals2.opcodes.is-identical<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===IS_NOT_EQUALinternals2.opcodes.is-not-equal -level:internals2.opcodes.is-not-equal<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===IS_NOT_IDENTICALinternals2.opcodes.is-not-identical -level:internals2.opcodes.is-not-identical<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===IS_SMALLER_OR_EQUALinternals2.opcodes.is-smaller-or-equal -level:internals2.opcodes.is-smaller-or-equal<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===IS_SMALLERinternals2.opcodes.is-smaller -level:internals2.opcodes.is-smaller<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ISSET_ISEMPTY_DIM_OBJinternals2.opcodes.isset-isempty-dim-obj -level:internals2.opcodes.isset-isempty-dim-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ISSET_ISEMPTY_PROP_OBJinternals2.opcodes.isset-isempty-prop-obj -level:internals2.opcodes.isset-isempty-prop-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ISSET_ISEMPTY_VARinternals2.opcodes.isset-isempty-var -level:internals2.opcodes.isset-isempty-var<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===JMPinternals2.opcodes.jmp -level:internals2.opcodes.jmp<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===JMPNZ_EXinternals2.opcodes.jmpnz-ex -level:internals2.opcodes.jmpnz-ex<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===JMPNZinternals2.opcodes.jmpnz -level:internals2.opcodes.jmpnz<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===JMPZ_EXinternals2.opcodes.jmpz-ex -level:internals2.opcodes.jmpz-ex<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===JMPZinternals2.opcodes.jmpz -level:internals2.opcodes.jmpz<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===JMPZNZinternals2.opcodes.jmpznz -level:internals2.opcodes.jmpznz<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===MODinternals2.opcodes.mod -level:internals2.opcodes.mod<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===MULinternals2.opcodes.mul -level:internals2.opcodes.mul<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===NEWinternals2.opcodes.new -level:internals2.opcodes.new<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===NOPinternals2.opcodes.nop -level:internals2.opcodes.nop<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===POST_DEC_OBJinternals2.opcodes.post-dec-obj -level:internals2.opcodes.post-dec-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===POST_DECinternals2.opcodes.post-dec -level:internals2.opcodes.post-dec<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===POST_INC_OBJinternals2.opcodes.post-inc-obj -level:internals2.opcodes.post-inc-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===POST_INCinternals2.opcodes.post-inc -level:internals2.opcodes.post-inc<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===PRE_DEC_OBJinternals2.opcodes.pre-dec-obj -level:internals2.opcodes.pre-dec-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===PRE_DECinternals2.opcodes.pre-dec -level:internals2.opcodes.pre-dec<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===PRE_INC_OBJinternals2.opcodes.pre-inc-obj -level:internals2.opcodes.pre-inc-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===PRE_INCinternals2.opcodes.pre-inc -level:internals2.opcodes.pre-inc<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===PRINTinternals2.opcodes.print -level:internals2.opcodes.print<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===QM_ASSIGNinternals2.opcodes.qm-assign -level:internals2.opcodes.qm-assign<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===RAISE_ABSTRACT_ERRORinternals2.opcodes.raise-abstract-error -level:internals2.opcodes.raise-abstract-error<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===RECV_INITinternals2.opcodes.recv-init -level:internals2.opcodes.recv-init<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===RECVinternals2.opcodes.recv -level:internals2.opcodes.recv<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===RETURN_BY_REFinternals2.opcodes.return-by-ref -level:internals2.opcodes.return-by-ref<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===RETURNinternals2.opcodes.return -level:internals2.opcodes.return<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SEND_REFinternals2.opcodes.send-ref -level:internals2.opcodes.send-ref<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SEND_VALinternals2.opcodes.send-val -level:internals2.opcodes.send-val<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SEND_VAR_NO_REFinternals2.opcodes.send-var-no-ref -level:internals2.opcodes.send-var-no-ref<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SEND_VARinternals2.opcodes.send-var -level:internals2.opcodes.send-var<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SLinternals2.opcodes.sl -level:internals2.opcodes.sl<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SRinternals2.opcodes.sr -level:internals2.opcodes.sr<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SUBinternals2.opcodes.sub -level:internals2.opcodes.sub<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===SWITCH_FREEinternals2.opcodes.switch-free -level:internals2.opcodes.switch-free<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===THROWinternals2.opcodes.throw -level:internals2.opcodes.throw<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===TICKSinternals2.opcodes.ticks -level:internals2.opcodes.ticks<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===UNSET_DIMinternals2.opcodes.unset-dim -level:internals2.opcodes.unset-dim<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===UNSET_OBJinternals2.opcodes.unset-obj -level:internals2.opcodes.unset-obj<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===UNSET_VARinternals2.opcodes.unset-var -level:internals2.opcodes.unset-var<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===USER_OPCODEinternals2.opcodes.user-opcode -level:internals2.opcodes.user-opcode<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===VERIFY_ABSTRACT_CLASSinternals2.opcodes.verify-abstract-class -level:internals2.opcodes.verify-abstract-class<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ZEND_DECLARE_LAMBDA_FUNCTIONinternals2.opcodes.zend-declare-lambda-function -level:internals2.opcodes.zend-declare-lambda-function<br>
-&nbsp;&nbsp;&nbsp;&nbsp;===ZEND_JMP_SETinternals2.opcodes.zend-jmp-set -level:internals2.opcodes.zend-jmp-set<br>
-+PDO 驱动internals2.pdo -level:internals2.pdo10<br>
-&nbsp;&nbsp;--Buildinginternals2.pdo.building -level:internals2.pdo.building<br>
-&nbsp;&nbsp;--Constantsinternals2.pdo.constants -level:internals2.pdo.constants<br>
-&nbsp;&nbsp;--Error handlinginternals2.pdo.error-handling -level:internals2.pdo.error-handling<br>
-&nbsp;&nbsp;--Fleshing out your skeletoninternals2.pdo.implementing -level:internals2.pdo.implementing<br>
-&nbsp;&nbsp;--Packaging and distributioninternals2.pdo.packaging -level:internals2.pdo.packaging<br>
-&nbsp;&nbsp;--pdo_dbh_t definitioninternals2.pdo.pdo-dbh-t -level:internals2.pdo.pdo-dbh-t<br>
-&nbsp;&nbsp;--pdo_stmt_t definitioninternals2.pdo.pdo-stmt-t -level:internals2.pdo.pdo-stmt-t<br>
-&nbsp;&nbsp;--配置与管理internals2.pdo.preparation -level:internals2.pdo.preparation<br>
-&nbsp;&nbsp;--前提条件internals2.pdo.prerequisites -level:internals2.pdo.prerequisites<br>
-&nbsp;&nbsp;--Testinginternals2.pdo.testing -level:internals2.pdo.testing<br>
-+序言internals2.preface -level:internals2.preface<br>
-+资源的使用internals2.resources -level:internals2.resources<br>
-+流的使用internals2.streams -level:internals2.streams<br>
-+扩展的结构internals2.structure -level:internals2.structure6<br>
-&nbsp;&nbsp;--Basic constructsinternals2.structure.basics -level:internals2.structure.basics<br>
-&nbsp;&nbsp;--组成扩展的文件internals2.structure.files -level:internals2.structure.files<br>
-&nbsp;&nbsp;--Extension globalsinternals2.structure.globals -level:internals2.structure.globals<br>
-&nbsp;&nbsp;--Life cycle of an extensioninternals2.structure.lifecycle -level:internals2.structure.lifecycle<br>
-&nbsp;&nbsp;--The zend_module structureinternals2.structure.modstruct -level:internals2.structure.modstruct<br>
-&nbsp;&nbsp;--Testing an extensioninternals2.structure.tests -level:internals2.structure.tests<br>
-+变量的使用internals2.variables -level:internals2.variables2<br>
-&nbsp;&nbsp;--创建变量并设置值internals2.variables.creating -level:internals2.variables.creating<br>
-&nbsp;&nbsp;--介绍internals2.variables.intro -level:internals2.variables.intro<br>
-+Zend Engine 1internals2.ze1 -level:internals2.ze14<br>
-&nbsp;&nbsp;--旧的介绍internals2.ze1.intro -level:internals2.ze1.intro<br>
-&nbsp;&nbsp;--Streams API for PHP Extension Authorsinternals2.ze1.streams -level:internals2.ze1.streams<br>
-&nbsp;&nbsp;--TSRM APIinternals2.ze1.tsrm -level:internals2.ze1.tsrm<br>
-&nbsp;&nbsp;--Zend API：深入 PHP 内核internals2.ze1.zendapi -level:internals2.ze1.zendapi<br>
+<h2>&nbsp;&nbsp;--&nbsp;1关于本手册666about -level:2，子目录：8<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1手册的格式about.formats -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2如何生成手册的各种格式about.generate -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3如何帮助改进本文档about.howtohelp -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4如何得到关于 PHP 更多的信息about.more -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5关于用户注释about.notes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6本手册中所涉及的 PHP 版本about.phpversions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7如何阅读函数的定义（函数原型）about.prototypes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8手册译文about.translations -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;2函数别名列表aliases -level:2<br>
+<h2>&nbsp;&nbsp;--&nbsp;3Creative Commons Attribution 3.0cc.license -level:2<br>
+<h2>&nbsp;&nbsp;--&nbsp;4配置选项configure -level:2，子目录：1<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1核心配置选项列表configure.about -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;5PHP 的调试debugger -level:2，子目录：1<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1关于调试器debugger-about -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;6更新日志doc.changelog -level:2<br>
+<h2>&nbsp;&nbsp;--&nbsp;7扩展库列表／归类extensions -level:2，子目录：3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1按字母顺序extensions.alphabetical -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2按归属分extensions.membership -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3按状态分extensions.state -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;8可用过滤器列表filters -level:2，子目录：5<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1压缩过滤器filters.compression -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2转换过滤器filters.convert -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3加密过滤器filters.encryption -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4字符串过滤器filters.string -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5string.strip_tagsfilters.string.strip_tags -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;9PHP 及其相关工程的历史history -level:2，子目录：4<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1history.php.books -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2history.php -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3history.php.publications -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4history.php.related -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;10索引indexes -level:2，子目录：2<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1示例列表indexes.examples -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2函数和方法列表indexes.functions -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;11php.ini 配置ini -level:2，子目录：3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1php.ini 核心配置选项说明ini.core -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2php.ini 配置选项列表ini.list -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3php.ini 配置段列表ini.sections -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;12从 PHP 4 移植到 PHP 5migration5 -level:2，子目录：9<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1错误报告migrating5.errorrep -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2PHP 5 中有哪些改变migration5.changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3CLI 和 CGImigration5.cli-cgi -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4移植配置文件migration5.configuration -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5数据库migration5.databases -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6新函数migration5.functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7未向下兼容的改变migration5.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8新指令migration5.newconf -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9新对象模型migration5.oop -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;13Migrating from PHP 5.0.x to PHP 5.1.xmigration51 -level:2，子目录：9<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1Key PHP 5.1.x featuresmigration51.changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2Changes in database supportmigration51.databases -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3Date/time supportmigration51.datetime -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4Checking for E_STRICTmigration51.errorcheck -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5Extensionsmigration51.extensions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6Integer values in function parametersmigration51.integer-parameters -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7Class and object changesmigration51.oop -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8Reading []migration51.reading -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9Changes in reference handlingmigration51.references -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;14Migrating from PHP 5.1.x to PHP 5.2.xmigration52 -level:2，子目录：15<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1What has changed in PHP 5.2.xmigration52.changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2New Class Constantsmigration52.class-constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3New Classesmigration52.classes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4Changes in PHP datetime
+   supportmigration52.datetime -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5New Error Messagesmigration52.error-messages -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6Error Reportingmigration52.errorrep -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7New Functionsmigration52.functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8New Global Constantsmigration52.global-constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9Backward Incompatible Changesmigration52.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;10New Methodsmigration52.methods -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;11New Extensionsmigration52.new-extensions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;12New INI Configuration Directivesmigration52.newconf -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;13Other Enhancementsmigration52.other -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;14New Parametersmigration52.parameters -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;15Removed Extensionsmigration52.removed-extensions -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;15从 PHP 5.2.x 移植到 PHP 5.3.xmigration53 -level:2，子目录：20<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1PHP 5.3.x 的变化migration53.changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2新增的类常量migration53.class-constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3新类migration53.classes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4PHP 5.3.x 中弃用的功能migration53.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5Other changes to extensionsmigration53.extensions-other -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6新函数migration53.functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7新的全局常量migration53.global-constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8不向下兼容的变化migration53.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9INI 文件处理改变migration53.ini -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;10新增的方法migration53.methods -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;11新的扩展migration53.new-extensions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;12新特性migration53.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;13新的流过滤器migration53.new-stream-filters -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;14新的流包装器migration53.new-stream-wrappers -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;15其他改变migration53.other -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;16新参数migration53.parameters -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;17被移除的扩展migration53.removed-extensions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;18SAPI 模块的改变migration53.sapi -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;19PHP 5.3.x 保留的功能migration53.undeprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;20Windows 支持改变migration53.windows -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;16从 PHP 5.3.X 迁移到 PHP 5.4.Xmigration54 -level:2，子目录：14<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1PHP 5.4.x 中的变更migration54.changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2新的类和接口migration54.classes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3在 PHP 5.4.x 中过时的特性migration54.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4扩展中的其他变化migration54.extensions-other -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5新的函数migration54.functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6新的全局常量migration54.global-constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7不向后兼容的变更migration54.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8INI 文件处理的变化migration54.ini -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9新的方法migration54.methods -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;10新特性migration54.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;11其他变化migration54.other -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;12变更的函数migration54.parameters -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;13移除的扩展migration54.removed-extensions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;14SAPI 模块中的变化migration54.sapi -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;17从 PHP 5.4.x 迁移到 PHP 5.5.xmigration55 -level:2，子目录：12<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1变更的函数migration55.changed-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2PHP 5.5.x 中的变更migration55.changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3新的类和接口migration55.classes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4PHP 5.5.x 中废弃的特性migration55.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5扩展中的其他变更migration55.extensions-other -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6新的全局常量migration55.global-constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7不向后兼容的变更migration55.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8INI 文件处理的变化migration55.ini -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9PHP 内部的变化migration55.internals -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;10新的特性migration55.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;11新的函数migration55.new-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;12新的方法migration55.new-methods -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;18从PHP 5.5.x 移植到 PHP 5.6.xmigration56 -level:2，子目录：8<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1函数的变化migration56.changed-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2新加的全局常量migration56.constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3PHP 5.6.x 中已废止的特性migration56.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4扩展中的变动migration56.extensions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5向后不兼容migration56.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6新特性migration56.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7新加函数migration56.new-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8OpenSSL changes in PHP 5.6.xmigration56.openssl -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;19从PHP 5.6.x 移植到 PHP 7.0.xmigration70 -level:2，子目录：10<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1变更的函数migration70.changed-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2新的类和接口migration70.classes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3新的全局常量migration70.constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4PHP 7.0.x 弃用的功能migration70.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5不向后兼容的变更migration70.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6新特性migration70.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7新函数migration70.new-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8Other Changesmigration70.other-changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9移除的扩展和 SAPImigration70.removed-exts-sapis -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;10SAPI 模块的变化migration70.sapi-changes -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;20从PHP 7.0.x 移植到 PHP 7.1.xmigration71 -level:2，子目录：8<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1变动的函数migration71.changed-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2新增的全局常量migration71.constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3PHP 7.1.x 中废弃的特性migration71.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4不向后兼容的变更migration71.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5新特性migration71.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6新的函数migration71.new-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7Other changesmigration71.other-changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8Windows支持migration71.windows-support -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;21从PHP 7.1.x 移植到 PHP 7.2.xmigration72 -level:2，子目录：6<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1New global constantsmigration72.constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2PHP 7.2.x 中废弃的功能migration72.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3Backward incompatible changesmigration72.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4新特性migration72.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5新函数migration72.new-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6其他变更migration72.other-changes -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;22从 PHP 7.2.x 移植到 PHP 7.3.xmigration73 -level:2，子目录：7<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1新的全局常量migration73.constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2PHP 7.3.x 中废弃的功能migration73.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3Backward Incompatible Changesmigration73.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4New Featuresmigration73.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5新函数migration73.new-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6Other Changesmigration73.other-changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7Windows Supportmigration73.windows-support -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;23Migrating from PHP 7.3.x to PHP 7.4.xmigration74 -level:2，子目录：9<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1New Global Constantsmigration74.constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2Deprecated Featuresmigration74.deprecated -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3Backward Incompatible Changesmigration74.incompatible -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4New Classes and Interfacesmigration74.new-classes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;5New Featuresmigration74.new-features -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;6New Functionsmigration74.new-functions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;7Other Changesmigration74.other-changes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;8Removed Extensionsmigration74.removed-extensions -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;9Windows Supportmigration74.windows-support -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;24保留字列表reserved -level:2，子目录：4<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1预定义类reserved.classes -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2预定义常量reserved.constants -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3关键词列表reserved.keywords -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;4其他保留字列表reserved.other-reserved-words -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;25资源类型列表resource -level:2<br>
+<h2>&nbsp;&nbsp;--&nbsp;26解析器代号列表tokens -level:2<br>
+<h2>&nbsp;&nbsp;--&nbsp;27所支持的套接字传输器（Socket Transports）列表transports -level:2，子目录：2<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1Internet 领域：TCP，UDP，SSL 和 TLStransports.inet -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2Unix 领域：Unix 和 UDGtransports.unix -level:3<br>
+<h2>&nbsp;&nbsp;--&nbsp;28PHP 类型比较表types.comparisons -level:2<br>
+<h2>&nbsp;&nbsp;--&nbsp;29用户空间命名指南userlandnaming -level:2，子目录：3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;1全局命名空间userlandnaming.globalnamespace -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;2规则userlandnaming.rules -level:3<br>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;===&nbsp;3提示userlandnaming.tips -level:3<br>

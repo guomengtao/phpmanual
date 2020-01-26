@@ -16,7 +16,7 @@ class Index extends BaseController
     {
  
 		
-     	$this->getchildcata('funcref');
+     	$this->getchildcata('appendices');
      	die();
      	
         	// $status = Manual::find(1);
@@ -121,6 +121,8 @@ class Index extends BaseController
     	// 获取一个目录的直属子目录
     	$getchildcata = Manual::where('catalog',$file)->select();
     	$this->i = $this->i + 1;
+
+    	// 防止死循环功能，记录循环次数
     	if ($this->i > 300) {
     		echo ">6 stop ";
     		$this->i = 0;

@@ -14,8 +14,28 @@ class Index extends BaseController
 
     public function index()
     {
- 
+ 		$s= Manual::find(222);
+
+ 		dump($s->toArray());
+ 		die();
+
+
+
+ 		for ($i=1; $i < 15037; $i++) { 
+ 			# code...
+ 			echo $i."-";
+ 			$this->i = 0;
+ 			$s= Manual::field('file')->find($i);
+ 			// echo $s->file;
+ 			$getchildrencount = $this->getchildrencount($s->file);
+
+ 			Manual::update(['child' => $getchildrencount], ['id' => $i]);
+ 			echo $getchildrencount."\n";
+
+ 		}
 		
+		// echo $this->getchildrencount("internals2");
+		die();
      	// $tree = $this->getchildcatajson("copyright","1521");
      	// $tree = $this->getchildcatajson("manual","9593");
      	// $tree = $this->getchildcatajson("getting-started","7528");
@@ -24,9 +44,9 @@ class Index extends BaseController
      	// $tree = $this->getchildcatajson("features","2413");
      	// $tree = $this->getchildcatajson("internals2","8706");
      	// $tree = $this->getchildcatajson("faq","2373");
-     	$tree = $this->getchildcatajson("funcref","2527");
-     	dump($tree);
-     	die();
+     	// $tree = $this->getchildcatajson("funcref","2527");
+     	// dump($tree);
+     	// die();
 
         	// $status = Manual::find(1);
 			// dump($status->toArray());
@@ -45,16 +65,16 @@ class Index extends BaseController
 
         // 	$list = [];->order('id', 'asc')
 
-    	$s= Manual::where('level','=',1)->order('sort', 'asc')->select();
+    	// $s= Manual::where('level','=',1)->order('sort', 'asc')->select();
 
 
-    	foreach ($s as $key => $value) {
-    		# code...
-    		// {id: 111, pId: 1, name: "安全", file: "appendicess"},
-    		echo "{id:".$value->id.", pId: 1, name: \"".$value->title."-L".$value->level."S".$value->son."C".$value->child."\", file: \"".$value->file."\"}, <br>";
-    	}
-    	// dump($s->toArray());
-    	die();
+    	// foreach ($s as $key => $value) {
+    	// 	# code...
+    	// 	// {id: 111, pId: 1, name: "安全", file: "appendicess"},
+    	// 	echo "{id:".$value->id.", pId: 1, name: \"".$value->title."-L".$value->level."S".$value->son."C".$value->child."\", file: \"".$value->file."\"}, <br>";
+    	// }
+    	// // dump($s->toArray());
+    	// die();
 
 
         // 	echo count($status)."+";
@@ -132,6 +152,43 @@ class Index extends BaseController
         // echo $this->catalog;
         // echo "ok";
     }
+
+    public function getchildrencount($file){
+
+    	// 获取一个文件包含的所以子目录数总和
+
+    	// 获取一个目录的直属子目录
+    	$getchildcata = Manual::where('catalog',$file)->column('file');
+
+    	$this->i = $this->i + count($getchildcata);
+    	 
+
+    	foreach ($getchildcata as $key => $value) {
+
+    		// 	如果子目录里有目录 递归获取其子目录
+    		$checkchild = Manual::where('catalog',$value)->column('file');
+
+    		$checkchildcount = count($checkchild);
+
+    		// 如果有子目录继续递归
+    		if ($checkchildcount ){
+    			
+    			// dump($checkchild ->toArray());
+    			 
+    			$this->getchildrencount($value);
+    		}
+
+
+
+    	}
+
+    	// 如果递归完成返回生成的数组
+    	// echo $this->i ."\n";
+    	return $this->i;
+    	
+    	 
+    }
+
     public function getchildcatajson($file,$pid){
 
     	// 改为输出数组转json供前端使用

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE> ZTREE DEMO - Simple Data</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="../static/zTree_v3/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="../static/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="../static/zTree_v3/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../static/zTree_v3/js/jquery.ztree.core.js"></script>
+	<!--  <script type="text/javascript" src="../../../js/jquery.ztree.excheck.js"></script>
+	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
+	<SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+
+		var zNodesqqq =[
+			{ id:1, pId:0, name:"父节点1 - 展开", open:true},
+			{ id:11, pId:1, name:"父节点11 - 折叠"},
+			{ id:111, pId:11, name:"叶子节点111"},
+			{ id:112, pId:11, name:"叶子节点112"},
+			{ id:113, pId:11, name:"叶子节点113"},
+			{ id:114, pId:11, name:"叶子节点114"},
+			{ id:12, pId:1, name:"父节点12 - 折叠"},
+			{ id:121, pId:12, name:"叶子节点121"},
+			{ id:122, pId:12, name:"叶子节点122"},
+			{ id:123, pId:12, name:"叶子节点123"},
+			{ id:124, pId:12, name:"叶子节点124"},
+			{ id:13, pId:1, name:"父节点13 - 没有子节点", isParent:true},
+			{ id:2, pId:0, name:"父节点2 - 折叠"},
+			{ id:21, pId:2, name:"父节点21 - 展开", open:true},
+			{ id:211, pId:21, name:"叶子节点211"},
+			{ id:212, pId:21, name:"叶子节点212"},
+			{ id:213, pId:21, name:"叶子节点213"},
+			{ id:214, pId:21, name:"叶子节点214"},
+			{ id:22, pId:2, name:"父节点22 - 折叠"},
+			{ id:221, pId:22, name:"叶子节点221"},
+			{ id:222, pId:22, name:"叶子节点222"},
+			{ id:223, pId:22, name:"叶子节点223"},
+			{ id:224, pId:22, name:"叶子节点224"},
+			{ id:23, pId:2, name:"父节点23 - 折叠"},
+			{ id:231, pId:23, name:"叶子节点231"},
+			{ id:232, pId:23, name:"叶子节点232"},
+			{ id:233, pId:23, name:"叶子节点233"},
+			{ id:234, pId:23, name:"叶子节点234"},
+			{ id:3, pId:0, name:"父节点3 - 没有子节点", isParent:true}
+		];
+		var zNodes =[
+			{ id:1480, pId:8633, name:"运行时配置L2S4C0"},
+{ id:1476, pId:1480, name:"怎样修改配置设定L3S0C0"},
+{ id:1477, pId:1480, name:"配置可被设定范围L3S0C0"},
+{ id:1478, pId:1480, name:"配置文件L3S0C0"},
+{ id:1479, pId:1480, name:".user.ini 文件L3S0C4"},
+{ id:8628, pId:8633, name:"云计算平台上的安装L2S2C0"},
+{ id:8626, pId:8628, name:"Azure App ServicesL3S0C0"},
+{ id:8627, pId:8628, name:"Amazon EC2L3S0C2"},
+{ id:8630, pId:8633, name:"FastCGI 进程管理器（FPM）L2S2C0"},
+{ id:8629, pId:8630, name:"配置L3S0C0"},
+{ id:8631, pId:8630, name:"安装L3S0C2"},
+{ id:8632, pId:8633, name:"安装前需要考虑的事项L2S0C0"},
+{ id:8636, pId:8633, name:"Mac OS X 系统下的安装L2S3C0"},
+{ id:8634, pId:8636, name:"使用内置的 PHPL3S0C0"},
+{ id:8635, pId:8636, name:"在 Mac OS X 下编译 PHPL3S0C0"},
+{ id:8637, pId:8636, name:"使用软件包L3S0C3"},
+{ id:8639, pId:8633, name:"PECL 扩展库安装L2S7C0"},
+{ id:8638, pId:8639, name:"下载 PECL 扩展库L3S0C0"},
+{ id:8640, pId:8639, name:"PECL 安装介绍L3S0C0"},
+{ id:8641, pId:8639, name:"用 PEAR 编译共享 PECL 扩展库L3S0C0"},
+{ id:8642, pId:8639, name:"php-configL3S0C0"},
+{ id:8643, pId:8639, name:"用 phpize 编译共享 PECL 扩展库L3S0C0"},
+{ id:8644, pId:8639, name:"将 PECL 扩展库静态编译入 PHPL3S0C0"},
+{ id:8645, pId:8639, name:"在 Windows 上安装 PHP 扩展L3S0C7"},
+{ id:8648, pId:8633, name:"还有问题？L2S3C0"},
+{ id:8646, pId:8648, name:"错误报告L3S0C0"},
+{ id:8647, pId:8648, name:"阅读 FAQL3S0C0"},
+{ id:8649, pId:8648, name:"其它问题L3S0C3"},
+{ id:8655, pId:8633, name:"Unix 系统下的安装L2S10C0"},
+{ id:8650, pId:8655, name:"Unix 系统下的 Apache 1.3.xL3S0C0"},
+{ id:8651, pId:8655, name:"Unix 系统下的 Apache 2.xL3S0C0"},
+{ id:8652, pId:8655, name:"CGI 和命令行设置L3S0C0"},
+{ id:8653, pId:8655, name:"Debian GNU/Linux 安装说明L3S0C0"},
+{ id:8654, pId:8655, name:"针对 HP-UX 平台的安装提示L3S0C0"},
+{ id:8656, pId:8655, name:"Unix 平台的 Lighttpd 1.4L3S0C0"},
+{ id:8657, pId:8655, name:"Unix 系统下的 Nginx 1.4.xL3S0C0"},
+{ id:8658, pId:8655, name:"在 OpenBSD 系统下的安装L3S0C0"},
+{ id:8659, pId:8655, name:"针对 Solaris 的安装提示L3S0C0"},
+{ id:8660, pId:8655, name:"Sun Solaris 上的 Sun、iPlanet 和 Netscape 服务器L3S0C10"},
+{ id:8661, pId:8633, name:"Windows 系统下的安装L2S7C9"},
+{ id:8662, pId:8661, name:"Installation on old Windows systemsL3S0C0"},
+{ id:8663, pId:8661, name:"Manual PHP Installation on WindowsL3S0C0"},
+{ id:8664, pId:8661, name:"PECLL3S0C0"},
+{ id:8665, pId:8661, name:"Recommended Configuration on Windows systemsL3S0C0"},
+{ id:8666, pId:8661, name:"Install RequirementsL3S0C0"},
+{ id:8667, pId:8661, name:"Windows 下的 PHP 安装程序工具L3S0C0"},
+{ id:8668, pId:8661, name:"Windows 下 PHP 故障排除L3S0C7"},
+		];
+
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		});
+		//-->
+	</SCRIPT>
+ </HEAD>
+
+<BODY>
+<h1>最简单的树 -- 简单 JSON 数据</h1>
+<h6>[ 文件路径: core/simpleData.html ]</h6>
+<div class="content_wrap">
+	<div class="zTreeDemoBackground left">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
+	<div class="right">
+		<ul class="info">
+			<li class="title"><h2>1、setting 配置信息说明</h2>
+				<ul class="list">
+				<li class="highlight_red">必须设置 setting.data.simple 内的属性，详细请参见 API 文档中的相关内容</li>
+				<li>与显示相关的内容请参考 API 文档中 setting.view 内的配置信息</li>
+				<li>name、children、title 等属性定义更改请参考 API 文档中 setting.data.key 内的配置信息</li>
+				</ul>
+			</li>
+			<li class="title"><h2>2、treeNode 节点数据说明</h2>
+				<ul class="list">
+				<li class="highlight_red">简单模式的 JSON 数据需要使用 id / pId 表示节点的父子包含关系，如使用其他属性设置父子关联关系请参考 setting.data.simple 内各项说明
+				<div><pre xmlns=""><code>例如：
+var nodes = [
+	{id:1, pId:0, name: "父节点1"},
+	{id:11, pId:1, name: "子节点1"},
+	{id:12, pId:1, name: "子节点2"}
+];</code></pre></div></li>
+				<li>默认展开的节点，请设置 treeNode.open 属性</li>
+				<li>无子节点的父节点，请设置 treeNode.isParent 属性</li>
+				<li>其他属性说明请参考 API 文档中 "treeNode 节点数据详解"</li>
+				</ul>
+			</li>
+			<li class="title"><h2>3、其他说明</h2>
+				<ul class="list">
+				<li>Demo 中绝大部分都采用简单 JSON 数据模式，以便于大家学习</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+</BODY>
+</HTML>

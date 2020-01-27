@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE> ZTREE DEMO - Simple Data</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="../static/zTree_v3/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="../static/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="../static/zTree_v3/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../static/zTree_v3/js/jquery.ztree.core.js"></script>
+	<!--  <script type="text/javascript" src="../../../js/jquery.ztree.excheck.js"></script>
+	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
+	<SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+
+		var zNodesqqq =[
+			{ id:1, pId:0, name:"父节点1 - 展开", open:true},
+			{ id:11, pId:1, name:"父节点11 - 折叠"},
+			{ id:111, pId:11, name:"叶子节点111"},
+			{ id:112, pId:11, name:"叶子节点112"},
+			{ id:113, pId:11, name:"叶子节点113"},
+			{ id:114, pId:11, name:"叶子节点114"},
+			{ id:12, pId:1, name:"父节点12 - 折叠"},
+			{ id:121, pId:12, name:"叶子节点121"},
+			{ id:122, pId:12, name:"叶子节点122"},
+			{ id:123, pId:12, name:"叶子节点123"},
+			{ id:124, pId:12, name:"叶子节点124"},
+			{ id:13, pId:1, name:"父节点13 - 没有子节点", isParent:true},
+			{ id:2, pId:0, name:"父节点2 - 折叠"},
+			{ id:21, pId:2, name:"父节点21 - 展开", open:true},
+			{ id:211, pId:21, name:"叶子节点211"},
+			{ id:212, pId:21, name:"叶子节点212"},
+			{ id:213, pId:21, name:"叶子节点213"},
+			{ id:214, pId:21, name:"叶子节点214"},
+			{ id:22, pId:2, name:"父节点22 - 折叠"},
+			{ id:221, pId:22, name:"叶子节点221"},
+			{ id:222, pId:22, name:"叶子节点222"},
+			{ id:223, pId:22, name:"叶子节点223"},
+			{ id:224, pId:22, name:"叶子节点224"},
+			{ id:23, pId:2, name:"父节点23 - 折叠"},
+			{ id:231, pId:23, name:"叶子节点231"},
+			{ id:232, pId:23, name:"叶子节点232"},
+			{ id:233, pId:23, name:"叶子节点233"},
+			{ id:234, pId:23, name:"叶子节点234"},
+			{ id:3, pId:0, name:"父节点3 - 没有子节点", isParent:true}
+		];
+		var zNodes =[
+{ id:12169, pId:9732, name:"其它基本扩展L2S22C0"},
+{ id:190, pId:12169, name:"Data StructuresL3S15C0"},
+{ id:200, pId:12169, name:"FANN (快速人工神经网络)L3S6C0"},
+{ id:214, pId:12169, name:"Geo IP 定位L3S4C0"},
+{ id:239, pId:12169, name:"JavaScript对象符号（JSON）L3S5C0"},
+{ id:240, pId:12169, name:"Judy ArraysL3S4C0"},
+{ id:247, pId:12169, name:"LuaL3S4C0"},
+{ id:248, pId:12169, name:"LuaSandboxL3S13C0"},
+{ id:263, pId:12169, name:"杂项函数L3S5C0"},
+{ id:296, pId:12169, name:"ParsekitL3S4C0"},
+{ id:329, pId:12169, name:"SeasLogL3S6C0"},
+{ id:341, pId:12169, name:"SPL Type HandlingL3S8C0"},
+{ id:342, pId:12169, name:"PHP标准库 (SPL)L3S10C0"},
+{ id:350, pId:12169, name:"StreamsL3S10C0"},
+{ id:355, pId:12169, name:"SwooleL3S29C0"},
+{ id:358, pId:12169, name:"TaintL3S4C0"},
+{ id:360, pId:12169, name:"TidyL3S7C0"},
+{ id:361, pId:12169, name:"TokenizerL3S5C0"},
+{ id:367, pId:12169, name:"URLsL3S4C0"},
+{ id:368, pId:12169, name:"V8 Javascript Engine IntegrationL3S5C0"},
+{ id:388, pId:12169, name:"YaconfL3S4C0"},
+{ id:389, pId:12169, name:"Yet Another FrameworkL3S41C0"},
+{ id:390, pId:12169, name:"YAML 数据序列化L3S6C0"},
+{ id:12170, pId:9732, name:"L2S21C0"},
+{ id:158, pId:12170, name:"Alternative PHP Cache (可选 PHP 缓存)L3S5C0"},
+{ id:159, pId:12170, name:"APC User CacheL3S5C0"},
+{ id:160, pId:12170, name:"Advanced PHP debuggerL3S5C0"},
+{ id:164, pId:12170, name:"PHP 字节码编译器L3S4C0"},
+{ id:165, pId:12170, name:"Blenc - BLowfish ENCoder for PHP source scriptsL3S4C0"},
+{ id:175, pId:12170, name:"ComponereL3S8C0"},
+{ id:193, pId:12170, name:"错误处理和日志记录L3S5C0"},
+{ id:203, pId:12170, name:"Foreign Function InterfaceL3S9C0"},
+{ id:223, pId:12170, name:"htaccess-like support for all SAPIsL3S2C0"},
+{ id:234, pId:12170, name:"Inclusion hierarchy viewerL3S6C0"},
+{ id:235, pId:12170, name:"PHP 选项和信息L3S4C0"},
+{ id:259, pId:12170, name:"MemtrackL3S4C0"},
+{ id:289, pId:12170, name:"OPcacheL3S3C0"},
+{ id:292, pId:12170, name:"输出缓冲控制L3S5C0"},
+{ id:305, pId:12170, name:"Interactive PHP DebuggerL3S4C0"},
+{ id:321, pId:12170, name:"runkitL3S4C0"},
+{ id:325, pId:12170, name:"Break the silence operatorL3S3C0"},
+{ id:366, pId:12170, name:"User Operations for ZendL3S4C0"},
+{ id:373, pId:12170, name:"Weak ReferencesL3S4C0"},
+{ id:376, pId:12170, name:"Windows Cache for PHPL3S5C0"},
+{ id:380, pId:12170, name:"层次式性能分析器L3S5C0"},
+{ id:12171, pId:9732, name:"Session 扩展L2S3C0"},
+{ id:268, pId:12171, name:"Mohawk Software Session Handler FunctionsL3S4C0"},
+{ id:331, pId:12171, name:"PostgreSQL Session Save HandlerL3S5C0"},
+{ id:332, pId:12171, name:"Session HandlingL3S9C0"},
+{ id:12172, pId:9732, name:"文本处理L2S7C0"},
+{ id:162, pId:12172, name:"Bulletin Board CodeL3S4C0"},
+{ id:173, pId:12172, name:"CommonMarkL3S29C0"},
+{ id:295, pId:12172, name:"Parsing and lexingL3S14C0"},
+{ id:299, pId:12172, name:"正则表达式(兼容 Perl)L3S6C0"},
+{ id:318, pId:12172, name:"Regular Expression (POSIX Extended)L3S5C0"},
+{ id:346, pId:12172, name:"ssdeep Fuzzy HashingL3S4C0"},
+{ id:351, pId:12172, name:"字符串L3S5C0"},
+{ id:12173, pId:9732, name:"变量与类型相关扩展L2S9C0"},
+{ id:161, pId:12173, name:"数组L3S5C0"},
+{ id:171, pId:12173, name:"ClasskitL3S4C0"},
+{ id:172, pId:12173, name:"类/对象的信息L3S5C0"},
+{ id:178, pId:12173, name:"字符类型检测L3S4C0"},
+{ id:207, pId:12173, name:"Data FilteringL3S6C0"},
+{ id:211, pId:12173, name:"函数处理L3S4C0"},
+{ id:312, pId:12173, name:"QuickhashL3S8C0"},
+{ id:317, pId:12173, name:"反射L3S20C0"},
+{ id:369, pId:12173, name:"Variable handlingL3S4C0"},
+{ id:12174, pId:9732, name:"日期与时间相关扩展L2S3C0"},
+{ id:169, pId:12174, name:"CalendarL3S4C0"},
+{ id:182, pId:12174, name:"日期和时间L3S13C0"},
+{ id:222, pId:12174, name:"High resolution timingL3S6C0"},
+{ id:12175, pId:9732, name:"压缩与归档扩展L2S6C0"},
+{ id:167, pId:12175, name:"Bzip2L3S5C0"},
+{ id:249, pId:12175, name:"LZFL3S4C0"},
+{ id:303, pId:12175, name:"PharL3S10C0"},
+{ id:314, pId:12175, name:"Rar ArchivingL3S8C0"},
+{ id:393, pId:12175, name:"ZipL3S6C0"},
+{ id:394, pId:12175, name:"Zlib CompressionL3S5C0"},
+{ id:12176, pId:9732, name:"信用卡处理L2S1C0"},
+{ id:256, pId:12176, name:"MCVE (Monetra) PaymentL3S4C0"},
+{ id:12177, pId:9732, name:"加密扩展L2S8C0"},
+{ id:176, pId:12177, name:"CracklibL3S5C0"},
+{ id:177, pId:12177, name:"CSPRNGL3S4C0"},
+{ id:221, pId:12177, name:"哈希信息摘要框架L3S4C0"},
+{ id:255, pId:12177, name:"McryptL3S6C0"},
+{ id:260, pId:12177, name:"MhashL3S5C0"},
+{ id:291, pId:12177, name:"OpenSSLL3S6C0"},
+{ id:297, pId:12177, name:"密码散列算法L3S4C0"},
+{ id:338, pId:12177, name:"SodiumL3S4C0"},
+{ id:12179, pId:9732, name:"数据库扩展L2S2C0"},
+{ id:12178, pId:12179, name:"数据库抽象层L3S4C0"},
+{ id:12180, pId:12179, name:"针对各数据库系统对应的扩展L3S23C0"},
+{ id:12181, pId:9732, name:"文件系统相关扩展L2S10C0"},
+{ id:187, pId:12181, name:"Direct IOL3S4C0"},
+{ id:188, pId:12181, name:"目录L3S4C0"},
+{ id:204, pId:12181, name:"文件信息L3S5C0"},
+{ id:206, pId:12181, name:"文件系统L3S4C0"},
+{ id:237, pId:12181, name:"InotifyL3S4C0"},
+{ id:261, pId:12181, name:"MimetypeL3S3C0"},
+{ id:304, pId:12181, name:"PhdfsL3S4C0"},
+{ id:308, pId:12181, name:"ProctitleL3S4C0"},
+{ id:378, pId:12181, name:"xattrL3S4C0"},
+{ id:379, pId:12181, name:"xdiffL3S4C0"},
+{ id:12182, pId:9732, name:"进程控制扩展L2S13C0"},
+{ id:191, pId:12182, name:"EioL3S5C0"},
+{ id:194, pId:12182, name:"EvL3S21C0"},
+{ id:196, pId:12182, name:"系统程序执行L3S4C0"},
+{ id:198, pId:12182, name:"ExpectL3S5C0"},
+{ id:245, pId:12182, name:"LibeventL3S5C0"},
+{ id:294, pId:12182, name:"parallelL3S12C0"},
+{ id:298, pId:12182, name:"进程控制L3S5C0"},
+{ id:306, pId:12182, name:"phtL3S9C0"},
+{ id:307, pId:12182, name:"POSIXL3S4C0"},
+{ id:311, pId:12182, name:"pthreadsL3S12C0"},
+{ id:330, pId:12182, name:"Semaphore, Shared Memory and IPCL3S4C0"},
+{ id:333, pId:12182, name:"Shared MemoryL3S5C0"},
+{ id:357, pId:12182, name:"SyncL3S8C0"},
+{ id:12183, pId:9732, name:"国际化与字符编码支持L2S9C0"},
+{ id:192, pId:12183, name:"Enchant spelling libraryL3S5C0"},
+{ id:209, pId:12183, name:"FriBiDiL3S4C0"},
+{ id:213, pId:12183, name:"Determine gender of firstnamesL3S4C0"},
+{ id:215, pId:12183, name:"GettextL3S4C0"},
+{ id:227, pId:12183, name:"iconvL3S4C0"},
+{ id:238, pId:12183, name:"Internationalization FunctionsL3S27C0"},
+{ id:254, pId:12183, name:"多字节字符串L3S10C0"},
+{ id:310, pId:12183, name:"PspellL3S4C0"},
+{ id:316, pId:12183, name:"GNU RecodeL3S4C0"},
+{ id:12184, pId:9732, name:"数学扩展L2S6C0"},
+{ id:163, pId:12184, name:"BCMath 任意精度数学L3S4C0"},
+{ id:217, pId:12184, name:"GNU Multiple PrecisionL3S6C0"},
+{ id:243, pId:12184, name:"LapackL3S5C0"},
+{ id:252, pId:12184, name:"Mathematical FunctionsL3S4C0"},
+{ id:348, pId:12184, name:"StatisticsL3S4C0"},
+{ id:363, pId:12184, name:"Technical Analysis for TradersL3S4C0"},
+{ id:12185, pId:9732, name:"身份认证服务L2S2C0"},
+{ id:241, pId:12185, name:"Kerberos VL3S5C0"},
+{ id:313, pId:12185, name:"RadiusL3S5C0"},
+{ id:12186, pId:9732, name:"邮件相关扩展L2S5C0"},
+{ id:181, pId:12186, name:"Cyrus IMAP administrationL3S4C0"},
+{ id:233, pId:12186, name:"IMAP, POP3 和 NNTPL3S4C0"},
+{ id:250, pId:12186, name:"MailL3S4C0"},
+{ id:251, pId:12186, name:"MailparseL3S4C0"},
+{ id:371, pId:12186, name:"vpopmailL3S4C0"},
+{ id:12187, pId:9732, name:"其它服务L2S29C0"},
+{ id:170, pId:12187, name:"Constant hash databaseL3S6C0"},
+{ id:180, pId:12187, name:"Client URL 库L3S6C0"},
+{ id:195, pId:12187, name:"EventL3S20C0"},
+{ id:199, pId:12187, name:"File Alteration MonitorL3S4C0"},
+{ id:210, pId:12187, name:"FTPL3S5C0"},
+{ id:212, pId:12187, name:"GearmanL3S9C0"},
+{ id:219, pId:12187, name:"GupnpL3S5C0"},
+{ id:224, pId:12187, name:"Hyperwave APIL3S5C0"},
+{ id:244, pId:12187, name:"Lightweight Directory Access ProtocolL3S7C0"},
+{ id:257, pId:12187, name:"MemcacheL3S6C0"},
+{ id:258, pId:12187, name:"MemcachedL3S7C0"},
+{ id:267, pId:12187, name:"mqseriesL3S4C0"},
+{ id:281, pId:12187, name:"Net GopherL3S5C0"},
+{ id:282, pId:12187, name:"网络L3S4C0"},
+{ id:284, pId:12187, name:"YP/NISL3S4C0"},
+{ id:320, pId:12187, name:"RRDtoolL3S8C0"},
+{ id:322, pId:12187, name:"Simple Asynchronous MessagingL3S5C0"},
+{ id:324, pId:12187, name:"ScoutAPML3S4C0"},
+{ id:335, pId:12187, name:"SNMPL3S6C0"},
+{ id:337, pId:12187, name:"SocketsL3S6C0"},
+{ id:347, pId:12187, name:"Secure Shell2L3S4C0"},
+{ id:349, pId:12187, name:"Stomp ClientL3S7C0"},
+{ id:352, pId:12187, name:"支持向量机L3S5C0"},
+{ id:353, pId:12187, name:"SubversionL3S4C0"},
+{ id:359, pId:12187, name:"TCP WrappersL3S4C0"},
+{ id:370, pId:12187, name:"VarnishL3S7C0"},
+{ id:392, pId:12187, name:"YAZL3S5C0"},
+{ id:395, pId:12187, name:"ZMQL3S7C0"},
+{ id:396, pId:12187, name:"ZooKeeperL3S13C0"},
+{ id:12188, pId:9732, name:"搜索引擎扩展L2S4C0"},
+{ id:264, pId:12188, name:"mnoGoSearchL3S4C0"},
+{ id:339, pId:12188, name:"Apache SolrL3S27C0"},
+{ id:340, pId:12188, name:"Sphinx 客户端L3S5C0"},
+{ id:354, pId:12188, name:"Swish IndexingL3S5C0"},
+{ id:12189, pId:9732, name:"图形用户界面(GUI) 扩展L2S1C0"},
+{ id:364, pId:12189, name:"UIL3S50C0"},
+{ id:12190, pId:9732, name:"音频格式操作L2S4C0"},
+{ id:228, pId:12190, name:"ID3 TagsL3S4C0"},
+{ id:242, pId:12190, name:"KTaglibL3S9C0"},
+{ id:288, pId:12190, name:"OGG/VorbisL3S5C0"},
+{ id:290, pId:12190, name:"OpenAL Audio BindingsL3S4C0"},
+{ id:12191, pId:9732, name:"针对命令行的扩展L2S3C0"},
+{ id:280, pId:12191, name:"Ncurses Terminal Screen ControlL3S4C0"},
+{ id:283, pId:12191, name:"NewtL3S5C0"},
+{ id:315, pId:12191, name:"GNU ReadlineL3S4C0"},
+{ id:12192, pId:9732, name:"图像生成和处理L2S5C0"},
+{ id:168, pId:12192, name:"CairoL3S45C0"},
+{ id:197, pId:12192, name:"可交换图像信息L3S4C0"},
+{ id:216, pId:12192, name:"GmagickL3S7C0"},
+{ id:231, pId:12192, name:"图像处理和 GDL3S5C0"},
+{ id:232, pId:12192, name:"图像处理(ImageMagick)L3S8C0"},
+{ id:12193, pId:9732, name:"非文本内容的 MIME 输出L2S9C0"},
+{ id:202, pId:12193, name:"Forms Data FormatL3S5C0"},
+{ id:218, pId:12193, name:"GNU Privacy GuardL3S5C0"},
+{ id:220, pId:12193, name:"Haru PDFL3S14C0"},
+{ id:262, pId:12193, name:"Ming (flash)L3S23C0"},
+{ id:300, pId:12193, name:"PDFL3S5C0"},
+{ id:309, pId:12193, name:"PostScript document creationL3S4C0"},
+{ id:319, pId:12193, name:"RPM Header ReadingL3S5C0"},
+{ id:377, pId:12193, name:"wkhtmltoxL3S5C0"},
+{ id:381, pId:12193, name:"XLSWriterL3S5C0"},
+{ id:12194, pId:9732, name:"针对服务器的扩展L2S4C0"},
+{ id:157, pId:12194, name:"ApacheL3S4C0"},
+{ id:208, pId:12194, name:"FastCGI 进程管理器L3S3C0"},
+{ id:230, pId:12194, name:"IIS AdministrationL3S4C0"},
+{ id:285, pId:12194, name:"NSAPIL3S4C0"},
+{ id:12195, pId:9732, name:"Windows 专用扩展L2S3C0"},
+{ id:174, pId:12195, name:"COM and .Net (Windows)L3S10C0"},
+{ id:374, pId:12195, name:"win32psL3S5C0"},
+{ id:375, pId:12195, name:"win32serviceL3S5C0"},
+{ id:12196, pId:9732, name:"Web 服务L2S5C0"},
+{ id:286, pId:12196, name:"OAuthL3S8C0"},
+{ id:323, pId:12196, name:"SCAL3S5C0"},
+{ id:336, pId:12196, name:"SOAPL3S10C0"},
+{ id:385, pId:12196, name:"XML-RPCL3S4C0"},
+{ id:391, pId:12196, name:"Yet Another RPC FrameworkL3S9C0"},
+{ id:12197, pId:9732, name:"XML 操作L2S12C0"},
+{ id:189, pId:12197, name:"Document Object ModelL3S24C0"},
+{ id:246, pId:12197, name:"libxmlL3S5C0"},
+{ id:326, pId:12197, name:"SDO XML Data Access ServiceL3S5C0"},
+{ id:327, pId:12197, name:"Service Data ObjectsL3S6C0"},
+{ id:328, pId:12197, name:"SDO Relational Data Access ServiceL3S6C0"},
+{ id:334, pId:12197, name:"SimpleXMLL3S7C0"},
+{ id:372, pId:12197, name:"WDDXL3S5C0"},
+{ id:382, pId:12197, name:"XML 解析器L3S9C0"},
+{ id:383, pId:12197, name:"XML diff and mergeL3S6C0"},
+{ id:384, pId:12197, name:"XMLReaderL3S3C0"},
+{ id:386, pId:12197, name:"XMLWriterL3S5C0"},
+{ id:387, pId:12197, name:"XSLL3S5C0"}
+		];
+
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		});
+		//-->
+	</SCRIPT>
+ </HEAD>
+
+<BODY>
+<h1>最简单的树 -- 简单 JSON 数据</h1>
+<h6>[ 文件路径: core/simpleData.html ]</h6>
+<div class="content_wrap">
+	<div class="zTreeDemoBackground left">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
+	<div class="right">
+		<ul class="info">
+			<li class="title"><h2>1、setting 配置信息说明</h2>
+				<ul class="list">
+				<li class="highlight_red">必须设置 setting.data.simple 内的属性，详细请参见 API 文档中的相关内容</li>
+				<li>与显示相关的内容请参考 API 文档中 setting.view 内的配置信息</li>
+				<li>name、children、title 等属性定义更改请参考 API 文档中 setting.data.key 内的配置信息</li>
+				</ul>
+			</li>
+			<li class="title"><h2>2、treeNode 节点数据说明</h2>
+				<ul class="list">
+				<li class="highlight_red">简单模式的 JSON 数据需要使用 id / pId 表示节点的父子包含关系，如使用其他属性设置父子关联关系请参考 setting.data.simple 内各项说明
+				<div><pre xmlns=""><code>例如：
+var nodes = [
+	{id:1, pId:0, name: "父节点1"},
+	{id:11, pId:1, name: "子节点1"},
+	{id:12, pId:1, name: "子节点2"}
+];</code></pre></div></li>
+				<li>默认展开的节点，请设置 treeNode.open 属性</li>
+				<li>无子节点的父节点，请设置 treeNode.isParent 属性</li>
+				<li>其他属性说明请参考 API 文档中 "treeNode 节点数据详解"</li>
+				</ul>
+			</li>
+			<li class="title"><h2>3、其他说明</h2>
+				<ul class="list">
+				<li>Demo 中绝大部分都采用简单 JSON 数据模式，以便于大家学习</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+</BODY>
+</HTML>

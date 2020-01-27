@@ -16,11 +16,18 @@ class Index extends BaseController
     {
  
 		
+     	// $tree = $this->getchildcatajson("copyright","1521");
+     	// $tree = $this->getchildcatajson("manual","9593");
+     	// $tree = $this->getchildcatajson("getting-started","7528");
      	// $tree = $this->getchildcatajson("install","8633");
-     	$tree = $this->getchildcatajson("funcref","9732");
+     	// $tree = $this->getchildcatajson("security","12514");
+     	// $tree = $this->getchildcatajson("features","2413");
+     	// $tree = $this->getchildcatajson("internals2","8706");
+     	// $tree = $this->getchildcatajson("faq","2373");
+     	$tree = $this->getchildcatajson("funcref","2527");
      	dump($tree);
      	die();
-     	
+
         	// $status = Manual::find(1);
 			// dump($status->toArray());
 			// dump($status->path);
@@ -36,11 +43,20 @@ class Index extends BaseController
         // for ($i=0; $i < 8; $i++) { 
         	
 
-        // 	$list = [];
+        // 	$list = [];->order('id', 'asc')
 
-    	$s= Manual::where('level','=',1)->field('id,file')->select();
-    	dump($s->toArray());
+    	$s= Manual::where('level','=',1)->order('sort', 'asc')->select();
+
+
+    	foreach ($s as $key => $value) {
+    		# code...
+    		// {id: 111, pId: 1, name: "安全", file: "appendicess"},
+    		echo "{id:".$value->id.", pId: 1, name: \"".$value->title."-L".$value->level."S".$value->son."C".$value->child."\", file: \"".$value->file."\"}, <br>";
+    	}
+    	// dump($s->toArray());
     	die();
+
+
         // 	echo count($status)."+";
         // }
     	// foreach ($s as $key => $value) {
@@ -172,7 +188,7 @@ class Index extends BaseController
     		echo "<br>\n";
 
     		// 如果有子目录继续递归
-    		if ($checkchildcount and $value->level < 3){
+    		if ($checkchildcount ){
     			
     			// dump($checkchild ->toArray());
     			 

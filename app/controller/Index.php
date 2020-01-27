@@ -16,7 +16,9 @@ class Index extends BaseController
     {
  
 		
-     	$this->getchildcata('appendices');
+     	// $tree = $this->getchildcatajson("install","8633");
+     	$tree = $this->getchildcatajson("funcref","9732");
+     	dump($tree);
      	die();
      	
         	// $status = Manual::find(1);
@@ -25,7 +27,7 @@ class Index extends BaseController
 			// die();
         // $s = Manual::where('level',0)->count();
         // $s= Manual::where('file','internals2.buildsys.configunix')->select();
-        // $s= Manual::where('file','internals2.buildsys')->select();
+        // $s= Manual::where('file','install')->select();
         
         // Manual::update(['catalog' =>  "funcref" ], ['file' => "refs.basic.php"]);
         // // $s= Manual::where('path','like','/%')->select();
@@ -36,18 +38,18 @@ class Index extends BaseController
 
         // 	$list = [];
 
-        // 	$status = Manual::where('level','=',$i)->field('id,file')->select();
-
+    	$s= Manual::where('level','=',1)->field('id,file')->select();
+    	dump($s->toArray());
+    	die();
         // 	echo count($status)."+";
         // }
-        	// foreach ($status as $key => $value) {
-        	// 	# code...
-        	// 	// echo $value->id;
-        	// 	$id = $value->id;
-        	// 	$p = ['id'=>$id, 'status'=>8];
-        	// 	array_push($list,$p);
+    	// foreach ($s as $key => $value) {
+     //    		# code...
+     //    		// echo $value->id;
         		
-        	// }
+     //    		$this->getchildcatajson($value->file,$value->id);
+        		
+    	// }
 
    //      	$user = new Manual;
 			// $user->saveAll($list);
@@ -59,10 +61,10 @@ class Index extends BaseController
        //  echo $this->checkchild("faq");
        // die();
 
-    	$getfilecata  = $this->getfilecata(8673);
-    	Manual::update(['path' =>  $getfilecata[0] ,'level' =>  $getfilecata[1]], ['id' => 8673]);
-    	dump($getfilecata);
-    	die();
+    	// $getfilecata  = $this->getfilecata(8673);
+    	// Manual::update(['path' =>  $getfilecata[0] ,'level' =>  $getfilecata[1]], ['id' => 8673]);
+    	// dump($getfilecata);
+    	// die();
 		// // Manual::update(['path' =>  $path ], ['id' => $value->id]);
 
 		// die();
@@ -74,45 +76,115 @@ class Index extends BaseController
 
 		// die();
 
-		foreach ($s as $key => $value) {
-			# code...
-			// echo $value->id;
-			// echo $this->getfilecata($value->id);
-			$this->catalog = "";
-			$this->i = 0;
+		// foreach ($s as $key => $value) {
+		// 	# code...
+		// 	// echo $value->id;
+		// 	// echo $this->getfilecata($value->id);
+		// 	$this->catalog = "";
+		// 	$this->i = 0;
 			 
-			$getfilecata = $this->getfilecata($value->id);
+		// 	$getfilecata = $this->getfilecata($value->id);
 
-			// dump($path);
-			// echo $value->id . "\n";
+		// 	// dump($path);
+		// 	// echo $value->id . "\n";
 
-			$status = Manual::find($value->id);
-			$path = $status->path;
-			$level = $status->level;
+		// 	$status = Manual::find($value->id);
+		// 	$path = $status->path;
+		// 	$level = $status->level;
 
-			if ($path == $getfilecata[0] and $level == $getfilecata[1]) {
-				echo $value->id ."\n";
-			} else {
-				echo "发现一个问题";
-				dump($status->toArray());
-				dump($getfilecata);
-				Manual::update(['path' =>  $getfilecata[0] ,'level' =>  $getfilecata[1]], ['id' => $value->id]);
-				// die();
-				sleep(9);
-			}
+		// 	if ($path == $getfilecata[0] and $level == $getfilecata[1]) {
+		// 		echo $value->id ."\n";
+		// 	} else {
+		// 		echo "发现一个问题";
+		// 		dump($status->toArray());
+		// 		dump($getfilecata);
+		// 		Manual::update(['path' =>  $getfilecata[0] ,'level' =>  $getfilecata[1]], ['id' => $value->id]);
+		// 		// die();
+		// 		sleep(9);
+		// 	}
 			
 			
-			// die();
-		}
+		// 	// die();
+		// }
 
 		// 提柜单个排除测试程序
 		// 递归前先初始化默认值
 		// $this->catalog = "";
 		// $this->i = 0;
-  //       $this->getfilecata(1466);
+        // $this->levelone();
 
         // echo $this->catalog;
         // echo "ok";
+    }
+    public function getchildcatajson($file,$pid){
+
+    	// 改为输出数组转json供前端使用
+    	// 思路：通过目录level字段定位数组的维度
+    	// 尝试用方法里的默认传值存储递归数据
+
+    	// 指定的文件
+    	// 仅仅列出文件的子目录
+
+    	// 获取一个目录的直属子目录
+    	$getchildcata = Manual::where('catalog',$file)->select();
+
+    	// $this->i = $this->i + 1;
+
+    	// // 防止死循环功能，记录循环次数
+    	// if ($this->i > 300) {
+    	// 	echo ">6 stop ";
+    	// 	$this->i = 0;
+    	// 	die();
+    	// }
+    	// 遍历直属子目录
+    	// level字段是记录自己属于第几级目录
+    	// 查询属于几级目录
+    	
+ 		
+    	$getchildcatacount = count($getchildcata);
+    	foreach ($getchildcata as $key => $value) {
+
+
+    		 // { id:1, pId:0, name:"父节点1 - 展开", open:true},
+    		 // { id:自己的id, pId:父id, name:"父节点1 - 展开", open:true},
+    		// 获取目录级别
+    		// 例如 $tree['一级目录id']['二级目录id']
+    		// 限制
+	     
+
+	    	$mark = "{ id:";
+
+    		// 	如果子目录里有目录 递归获取其子目录
+    		$checkchild = Manual::where('catalog',$value->file)->select();
+    		$checkchildcount = count($checkchild);
+	    	$key = $key +1;
+    		// echo $mark . $key;
+    		// echo $value->title.$value->file . " -level:".$value->level;
+
+    		echo $mark.$value->id.", pId:".$pid.", name:\"".$value->title."L".$value->level."S".$value->son."C".$value->child."\"},";
+    		 
+    		if ($checkchildcount) {
+    			// echo ",,,子目录：".$checkchildcount ;
+    		}
+
+	   		//输出或存储结果
+ 
+    		echo "<br>\n";
+
+    		// 如果有子目录继续递归
+    		if ($checkchildcount and $value->level < 3){
+    			
+    			// dump($checkchild ->toArray());
+    			 
+    			$this->getchildcatajson($value->file,$value->id);
+    		}
+
+
+
+    	}
+
+    	// 如果递归完成返回生成的数组
+    	 
     }
     public function getchildcata($file,$level = 1){
     	// 指定的文件
@@ -324,17 +396,17 @@ class Index extends BaseController
 
  
 		$levelone =[
-			1  => ["sort" =>1,  "level"=>"1","file"=>"copyright","title"=>"版权信息"],
-			2  => ["sort" =>2,  "level"=>"1","file"=>"manual",   "title"=>"PHP 手册"],
-			3  => ["sort" =>3,  "level"=>"1","file"=>"getting-started","title"=>"入门指引"],
-			4  => ["sort" =>4,  "level"=>"1","file"=>"install","title"=>"安装与配置"],
-			5  => ["sort" =>5,  "level"=>"1","file"=>"langref","title"=>"语言参考"],
-			6  => ["sort" =>6,  "level"=>"1","file"=>"security","title"=>"安全"],
-			7  => ["sort" =>7,  "level"=>"1","file"=>"features","title"=>"特点"],
-			8  => ["sort" =>8,  "level"=>"1","file"=>"funcref","title"=>"函数参考"],
-			9  => ["sort" =>9,  "level"=>"1","file"=>"internals2","title"=>"PHP 核心：骇客指南"],
-			10 => ["sort" =>10, "level"=>"1","file"=>"faq","title"=>"FAQ"],
-			11 => ["sort" =>11, "level"=>"1","file"=>"appendices","title"=>"附录"],
+			1  => ["sort" =>1,  "level"=>"1","id"=>"1","file"=>"copyright","title"=>"版权信息"],
+			2  => ["sort" =>2,  "level"=>"1","id"=>"1","file"=>"manual",   "title"=>"PHP 手册"],
+			3  => ["sort" =>3,  "level"=>"1","id"=>"1","file"=>"getting-started","title"=>"入门指引"],
+			4  => ["sort" =>4,  "level"=>"1","id"=>"1","file"=>"install","title"=>"安装与配置"],
+			5  => ["sort" =>5,  "level"=>"1","id"=>"1","file"=>"langref","title"=>"语言参考"],
+			6  => ["sort" =>6,  "level"=>"1","id"=>"1","file"=>"security","title"=>"安全"],
+			7  => ["sort" =>7,  "level"=>"1","id"=>"1","file"=>"features","title"=>"特点"],
+			8  => ["sort" =>8,  "level"=>"1","id"=>"1","file"=>"funcref","title"=>"函数参考"],
+			9  => ["sort" =>9,  "level"=>"1","id"=>"1","file"=>"internals2","title"=>"PHP 核心：骇客指南"],
+			10 => ["sort" =>10, "level"=>"1","id"=>"1","file"=>"faq","title"=>"FAQ"],
+			11 => ["sort" =>11, "level"=>"1","id"=>"1","file"=>"appendices","title"=>"附录"],
 		];
 
 		
@@ -343,12 +415,17 @@ class Index extends BaseController
 		foreach ($levelone as $key => $value) {
 			 	# code...
 				$file  = $value["file"];
+				$id    = $value["id"];
 				$sort  = $value["sort"];
 				$title = $value["title"];
 
+
+				// 查询tree树形目录
+				$this->getchildcatajson($file,$id);
+
 				// 查询所有的子目录总数
-				$child = $this->checkchild($file);
-				echo "+" . $child;
+				// $child = $this->checkchild($file);
+				// echo "+" . $child;
 
 				// 从一级目录循环遍历
 				// $this->one($file);

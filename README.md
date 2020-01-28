@@ -16,7 +16,7 @@ PHP Manual Analysis 一份PHP手册的分析
 大年初二，持续关注肺炎疫情
 文件总数：15037
 
-目录总数：12034 + 纯页面：1010
+目录总数：1486 + 纯页面：13351
 
 目录一共6层:
     一级目录：11
@@ -44,8 +44,8 @@ PHP Manual Analysis 一份PHP手册的分析
 10.  [FAQ](https://www.php.net/manual/zh/faq.php) 11 — FAQ：常见问题
 11.  [附录](https://www.php.net/manual/zh/appendices.php) 219
 
-0+1+10+47+207+27+27+11278+194+11+219 = 12021
 
+0+1+10+47+208+27+27+14293+210+11+192 = 15026
 二级目录：
 
 * [版权信息](https://www.php.net/manual/zh/copyright.php)

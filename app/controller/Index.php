@@ -14,14 +14,19 @@ class Index extends BaseController
 
     public function index()
     {
- 		$s= Manual::find(222);
+ 		$s= Manual::where("child",'>',0)->order("sort")->select();
 
  		dump($s->toArray());
+ 		// foreach ($s as $key => $value) {
+ 		// 	# code...
+ 		// 	echo $value->child."+";
+ 		// }
+ 		// echo date("Y-m-d h:i:sa");
  		die();
 
 
 
- 		for ($i=1; $i < 15037; $i++) { 
+ 		for ($i=15037; $i < 15038; $i++) { 
  			# code...
  			echo $i."-";
  			$this->i = 0;
@@ -30,7 +35,8 @@ class Index extends BaseController
  			$getchildrencount = $this->getchildrencount($s->file);
 
  			Manual::update(['child' => $getchildrencount], ['id' => $i]);
- 			echo $getchildrencount."\n";
+ 			echo $getchildrencount."-";
+ 			echo date("Y-m-d h:i:sa")."\n";
 
  		}
 		

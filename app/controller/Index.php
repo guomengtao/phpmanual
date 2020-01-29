@@ -14,6 +14,23 @@ class Index extends BaseController
 
     public function index()
     {
+ 		// $num = 122;
+
+ 		// $num = round($num/15037*100, 2); 
+
+ 		// $num = $num."%";
+
+ 		// echo $num; 
+
+ 		// die();
+
+
+		// $str = "中文preg";
+		// // $str = preg_replace( '/[\W]/', '', $str);
+		//  $str = str_replace('"', '', $str);
+		// $str = mb_substr($str, 0, 50);
+		// echo $str;
+		// die();
  		// $s= Manual::where("child",'>',0)->order("sort")->select();
 
  		// dump($s->toArray());
@@ -22,41 +39,55 @@ class Index extends BaseController
  		// 	echo $value->child."+";
  		// }
  		// echo date("Y-m-d h:i:sa");
- 		echo $this->getsoncount(1);
+ 		// echo $this->getsoncount(1);
 
- 		die();
+ 		// die();
 
 
 
- 		for ($i=15037; $i < 15038; $i++) { 
- 			# code...
- 			echo $i."-";
- 			$this->i = 0;
- 			$s= Manual::field('file')->find($i);
- 			// echo $s->file;
- 			$getchildrencount = $this->getchildrencount($s->file);
+ 	// 	for ($i=15037; $i < 15038; $i++) { 
+ 	// 		# code...
+ 	// 		echo $i."-";
+ 	// 		$this->i = 0;
+ 	// 		$s= Manual::field('file')->find($i);
+ 	// 		// echo $s->file;
+ 	// 		$getchildrencount = $this->getchildrencount($s->file);
 
- 			Manual::update(['child' => $getchildrencount], ['id' => $i]);
- 			echo $getchildrencount."-";
- 			echo date("Y-m-d h:i:sa")."\n";
+ 	// 		Manual::update(['child' => $getchildrencount], ['id' => $i]);
+ 	// 		echo $getchildrencount."-";
+ 	// 		echo date("Y-m-d h:i:sa")."\n";
 
- 		}
+ 	// 	}
 		
 		// echo $this->getchildrencount("internals2");
-		die();
+		// die();
      	// $tree = $this->getchildcatajson("copyright","1521");
      	// $tree = $this->getchildcatajson("manual","9593");
      	// $tree = $this->getchildcatajson("getting-started","7528");
      	// $tree = $this->getchildcatajson("install","8633");
+     	// $tree = $this->getchildcatajson("langref","9372");
      	// $tree = $this->getchildcatajson("security","12514");
      	// $tree = $this->getchildcatajson("features","2413");
      	// $tree = $this->getchildcatajson("internals2","8706");
      	// $tree = $this->getchildcatajson("faq","2373");
-     	// $tree = $this->getchildcatajson("funcref","2527");
+     	$tree = $this->getchildcatajson("funcref","2527");
+     	// $tree = $this->getchildcatajson("appendices","56");
      	// dump($tree);
-     	// die();
+     	die();
+      // {id: 1, pId: 0, name: "PHP手册 一级目录 11", open: true},
+      // {id:1521, pId: 1, name: "版权信息-L1S0C0", file: "../static/php-chunked-xhtml/about"},
+      // {id:9593, pId: 1, name: "PHP 手册-L1S1C1", file: "manual"},
+      // {id:7528, pId: 1, name: "入门指引-L1S2C10", file: "getting-started"},
+      // {id:8633, pId: 1, name: "安装与配置-L1S9C47", file: "install"},
+      // {id:9372, pId: 1, name: "语言参考-L1S19C207", file: "langref"},
+      // {id:12514, pId: 1, name: "安全-L1S13C27", file: "security"},
+      // {id:2413, pId: 1, name: "特点-L1S12C27", file: "features"},
+      // {id:2527, pId: 1, name: "函数参考-L1S27C13751", file: "funcref-all"},
+      // {id:8706, pId: 1, name: "PHP 核心：骇客指南-L1S16C210", file: "internals2"},
+      // {id:2373, pId: 1, name: "FAQ-L1S11C11", file: "faq"},
+      // {id:56, pId: 1, name: "附录-L1S29C7188", file: "appendices"},
 
-        	// $status = Manual::find(1);
+   //      	$status = Manual::find(9372);
 			// dump($status->toArray());
 			// dump($status->path);
 			// die();
@@ -151,7 +182,7 @@ class Index extends BaseController
 		// 	// die();
 		// }
 
-		// 提柜单个排除测试程序
+		// 单个排除测试程序
 		// 递归前先初始化默认值
 		// $this->catalog = "";
 		// $this->i = 0;
@@ -261,19 +292,40 @@ class Index extends BaseController
     		 // { id:自己的id, pId:父id, name:"父节点1 - 展开", open:true},
     		// 获取目录级别
     		// 例如 $tree['一级目录id']['二级目录id']
-    		// 限制
+
 	     
 
-	    	$mark = "{ id:";
+	    	$mark = "{id:";
 
     		// 	如果子目录里有目录 递归获取其子目录
     		$checkchild = Manual::where('catalog',$value->file)->select();
     		$checkchildcount = count($checkchild);
 	    	$key = $key +1;
-    		// echo $mark . $key;
-    		// echo $value->title.$value->file . " -level:".$value->level;
 
-    		echo $mark.$value->id.", pId:".$pid.", name:\"".$value->title."L".$value->level."S".$value->son."C".$value->child."\"},";
+
+			$str = str_replace('"', '', $value->title);
+			$str = mb_substr($str, 0, 50);
+
+			$c1 = '';
+			if ($value->child) {
+				$c1 = round($value->child/15037*100, 2); 
+	 			$c1 = "-".$c1."%";
+			}
+
+			$child = "";
+			if ($value->child) {
+				# code...
+				$child = "c".$value->child;
+			}
+
+			$son = '';
+			if ($value->son) {
+				# code...
+				$son = "s".$value->son;
+			}
+	
+
+    		echo $mark.$value->id.", pId:".$pid.", name:\"".$str.$son.$child.$c1."\"".", file: \"".$value->file."\"},";
     		 
     		if ($checkchildcount) {
     			// echo ",,,子目录：".$checkchildcount ;

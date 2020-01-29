@@ -1,0 +1,525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+  <TITLE> ZTREE DEMO </TITLE>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="../static/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <style>
+    body {
+      background-color: white;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    div, p, table, th, td {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      font-size: 12px;
+      font-family: dotum, Verdana, Arial, Helvetica, AppleGothic, sans-serif;
+    }
+
+    #testIframe {
+      margin-left: 10px;
+    }
+  </style>
+  <script type="text/javascript" src="../static/zTree_v3/js/jquery-1.4.4.min.js"></script>
+  <script type="text/javascript" src="../static/zTree_v3/js/jquery.ztree.core.js"></script>
+  <SCRIPT type="text/javascript">
+    <!--
+    var zTree;
+    var demoIframe;
+
+    var setting = {
+      view: {
+        dblClickExpand: false,
+        showLine: true,
+        selectedMulti: false
+      },
+      data: {
+        simpleData: {
+          enable: true,
+          idKey: "id",
+          pIdKey: "pId",
+          rootPId: ""
+        }
+      },
+      callback: {
+        beforeClick: function (treeId, treeNode) {
+          var zTree = $.fn.zTree.getZTreeObj("tree");
+          if (treeNode.isParent) {
+            zTree.expandNode(treeNode);
+            return false;
+          } else {
+            demoIframe.attr("src", "../static/php-chunked-xhtml/"+treeNode.file + ".html");
+            return true;
+          }
+        }
+      }
+    };
+
+// 1.  [版权信息](https://www.php.net/manual/zh/copyright.php) 0
+// 2.  [PHP 手册](https://www.php.net/manual/zh/manual.php) 1
+// 3.  [入门指引](https://www.php.net/manual/zh/getting-started.php) 10
+// 4.  [安装与配置](https://www.php.net/manual/zh/install.php) 47
+// 5.  [语言参考](https://www.php.net/manual/zh/langref.php) 207
+// 6.  [安全](https://www.php.net/manual/zh/security.php) 27
+// 7.  [特点](https://www.php.net/manual/zh/features.php) 27
+// 8.  [函数参考](https://www.php.net/manual/zh/funcref.php) 11278
+// 9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php) 194
+// 10.  [FAQ](https://www.php.net/manual/zh/faq.php) 11 — FAQ：常见问题
+// 11.  [附录](https://www.php.net/manual/zh/appendices.php) 219
+
+    var zNodes = [
+      {id: 1, pId: 0, name: "PHP手册 一级目录 11", open: false},
+      {id:1521, pId: 1, name: "版权信息-L1S0C0", file: "about"},
+      {id:9593, pId: 1, name: "PHP 手册-L1S1C1", file: "manual"},
+      {id:7528, pId: 1, name: "入门指引-L1S2C10", file: "getting-started"},
+      {id:8633, pId: 1, name: "安装与配置-L1S9C47", file: "install"},
+      {id:9372, pId: 1, name: "语言参考-L1S19C207", file: "langref"},
+      {id:12514, pId: 1, name: "安全-L1S13C27", file: "security"},
+      {id:2413, pId: 1, name: "特点-L1S12C27", file: "features"},
+      {id:2527, pId: 1, name: "函数参考-L1S27C13751", file: "funcref-all"},
+      {id:8706, pId: 1, name: "PHP 核心：骇客指南-L1S16C210", file: "internals2"},
+      {id:2373, pId: 1, name: "FAQ-L1S11C11", file: "faq"},
+      {id:56, pId: 1, name: "附录-L1S29C7188", file: "appendices"},
+
+      {id: 2, pId: 0, name: "[excheck] 复/单选框功能 演示", open: false},
+      {id: 201, pId: 2, name: "联网示例", file: "https://www.php.net/manual/zh/funcref.php#"},
+      {id: 206, pId: 2, name: "Checkbox nocheck 演示", file: "excheck/checkbox_nocheck"},
+      {id: 207, pId: 2, name: "Checkbox chkDisabled 演示", file: "excheck/checkbox_chkDisabled"},
+      {id: 208, pId: 2, name: "Checkbox halfCheck 演示", file: "excheck/checkbox_halfCheck"},
+      {id: 202, pId: 2, name: "Checkbox 勾选统计", file: "excheck/checkbox_count"},
+      {id: 203, pId: 2, name: "用 zTree 方法 勾选 Checkbox", file: "excheck/checkbox_fun"},
+      {id: 204, pId: 2, name: "Radio 勾选操作", file: "excheck/radio"},
+      {id: 209, pId: 2, name: "Radio nocheck 演示", file: "excheck/radio_nocheck"},
+      {id: 210, pId: 2, name: "Radio chkDisabled 演示", file: "excheck/radio_chkDisabled"},
+      {id: 211, pId: 2, name: "Radio halfCheck 演示", file: "excheck/radio_halfCheck"},
+      {id: 205, pId: 2, name: "用 zTree 方法 勾选 Radio", file: "excheck/radio_fun"},
+
+      {id: 3, pId: 0, name: "[exedit] 编辑功能 演示", open: false},
+      {id: 301, pId: 3, name: "拖拽 节点 基本控制", file: "exedit/drag"},
+      {id: 302, pId: 3, name: "拖拽 节点 高级控制", file: "exedit/drag_super"},
+      {id: 303, pId: 3, name: "用 zTree 方法 移动 / 复制 节点", file: "exedit/drag_fun"},
+      {id: 304, pId: 3, name: "基本 增 / 删 / 改 节点", file: "exedit/edit"},
+      {id: 305, pId: 3, name: "高级 增 / 删 / 改 节点", file: "exedit/edit_super"},
+      {id: 306, pId: 3, name: "用 zTree 方法 增 / 删 / 改 节点", file: "exedit/edit_fun"},
+      {id: 307, pId: 3, name: "异步加载 & 编辑功能 共存", file: "exedit/async_edit"},
+      {id: 308, pId: 3, name: "多棵树之间 的 数据交互", file: "exedit/multiTree"},
+
+      {id: 4, pId: 0, name: "大数据量 演示", open: false},
+      {id: 401, pId: 4, name: "一次性加载大数据量", file: "bigdata/common"},
+      {id: 402, pId: 4, name: "分批异步加载大数据量", file: "bigdata/diy_async"},
+      {id: 403, pId: 4, name: "分批异步加载大数据量", file: "bigdata/page"},
+
+      {id: 5, pId: 0, name: "组合功能 演示", open: false},
+      {id: 501, pId: 5, name: "冻结根节点", file: "super/oneroot"},
+      {id: 502, pId: 5, name: "单击展开/折叠节点", file: "super/oneclick"},
+      {id: 503, pId: 5, name: "保持展开单一路径", file: "super/singlepath"},
+      {id: 516, pId: 5, name: "模糊查找节点", file: "super/fuzzySearch"},
+      {id: 504, pId: 5, name: "添加 自定义控件", file: "super/diydom"},
+      {id: 505, pId: 5, name: "checkbox / radio 共存", file: "super/checkbox_radio"},
+      {id: 506, pId: 5, name: "左侧菜单", file: "super/left_menu"},
+      {id: 513, pId: 5, name: "OutLook 风格", file: "super/left_menuForOutLook"},
+      {id: 515, pId: 5, name: "Awesome 风格", file: "super/awesome"},
+      {id: 514, pId: 5, name: "Metro 风格", file: "super/metro"},
+      {id: 507, pId: 5, name: "下拉菜单", file: "super/select_menu"},
+      {id: 509, pId: 5, name: "带 checkbox 的多选下拉菜单", file: "super/select_menu_checkbox"},
+      {id: 510, pId: 5, name: "带 radio 的单选下拉菜单", file: "super/select_menu_radio"},
+      {id: 508, pId: 5, name: "右键菜单 的 实现", file: "super/rightClickMenu"},
+      {id: 511, pId: 5, name: "与其他 DOM 拖拽互动", file: "super/dragWithOther"},
+      {id: 512, pId: 5, name: "异步加载模式下全部展开", file: "super/asyncForAll"},
+
+      {id: 6, pId: 0, name: "PHP手册", open: true},
+      {id:1521, pId: 6, name: "版权信息-L1S0C0", file: "copyright"},
+
+      {id:9593, pId: 6, name: "PHP 手册-L1S1C1", file: "manual"},
+      {id:11550, pId:9593, name:"序言L2S0C0"},
+
+      {id:7528, pId: 6, name: "入门指引-L1S2C10", file: "getting-started"},
+{id:9313, pId:7528, name:"简介L2S2C2", file: "introduction"},
+{id:9075, pId:9313, name:"PHP 能做什么？L3S0C0", file: "intro-whatcando"},
+{id:9076, pId:9313, name:"PHP 是什么？L3S0C0", file: "intro-whatis"},
+{id:14075, pId:7528, name:"简明教程L2S6C6", file: "tutorial"},
+{id:14073, pId:14075, name:"第一个 PHP 页面L3S0C0", file: "tutorial.firstpage"},
+{id:14074, pId:14075, name:"处理表单L3S0C0", file: "tutorial.forms"},
+{id:14076, pId:14075, name:"在新版本的 PHP 中使用旧的 PHP 代码L3S0C0", file: "tutorial.oldcode"},
+{id:14077, pId:14075, name:"需要些什么？L3S0C0", file: "tutorial.requirements"},
+{id:14078, pId:14075, name:"实用的脚本L3S0C0", file: "tutorial.useful"},
+{id:14079, pId:14075, name:"下一步做什么？L3S0C0", file: "tutorial.whatsnext"},
+
+      {id:8633, pId: 6, name: "安装与配置-L1S9C47", file: "install"},
+{id:1480, pId:8633, name:"运行时配置L2S4C4", file: "configuration"},
+{id:1476, pId:1480, name:"怎样修改配置设定L3S0C0", file: "configuration.changes"},
+{id:1477, pId:1480, name:"配置可被设定范围L3S0C0", file: "configuration.changes.modes"},
+{id:1478, pId:1480, name:"配置文件L3S0C0", file: "configuration.file"},
+{id:1479, pId:1480, name:".user.ini 文件L3S0C0", file: "configuration.file.per-user"},
+{id:8628, pId:8633, name:"云计算平台上的安装L2S2C2", file: "install.cloud"},
+{id:8626, pId:8628, name:"Azure App ServicesL3S0C0", file: "install.cloud.azure"},
+{id:8627, pId:8628, name:"Amazon EC2L3S0C0", file: "install.cloud.ec2"},
+{id:8630, pId:8633, name:"FastCGI 进程管理器（FPM）L2S2C2", file: "install.fpm"},
+{id:8629, pId:8630, name:"配置L3S0C0", file: "install.fpm.configuration"},
+{id:8631, pId:8630, name:"安装L3S0C0", file: "install.fpm.install"},
+{id:8632, pId:8633, name:"安装前需要考虑的事项L2S0C0", file: "install.general"},
+{id:8636, pId:8633, name:"Mac OS X 系统下的安装L2S3C3", file: "install.macosx"},
+{id:8634, pId:8636, name:"使用内置的 PHPL3S0C0", file: "install.macosx.bundled"},
+{id:8635, pId:8636, name:"在 Mac OS X 下编译 PHPL3S0C0", file: "install.macosx.compile"},
+{id:8637, pId:8636, name:"使用软件包L3S0C0", file: "install.macosx.packages"},
+{id:8639, pId:8633, name:"PECL 扩展库安装L2S7C7", file: "install.pecl"},
+{id:8638, pId:8639, name:"下载 PECL 扩展库L3S0C0", file: "install.pecl.downloads"},
+{id:8640, pId:8639, name:"PECL 安装介绍L3S0C0", file: "install.pecl.intro"},
+{id:8641, pId:8639, name:"用 PEAR 编译共享 PECL 扩展库L3S0C0", file: "install.pecl.pear"},
+{id:8642, pId:8639, name:"php-configL3S0C0", file: "install.pecl.php-config"},
+{id:8643, pId:8639, name:"用 phpize 编译共享 PECL 扩展库L3S0C0", file: "install.pecl.phpize"},
+{id:8644, pId:8639, name:"将 PECL 扩展库静态编译入 PHPL3S0C0", file: "install.pecl.static"},
+{id:8645, pId:8639, name:"在 Windows 上安装 PHP 扩展L3S0C0", file: "install.pecl.windows"},
+{id:8648, pId:8633, name:"还有问题？L2S3C3", file: "install.problems"},
+{id:8646, pId:8648, name:"错误报告L3S0C0", file: "install.problems.bugs"},
+{id:8647, pId:8648, name:"阅读 FAQL3S0C0", file: "install.problems.faq"},
+{id:8649, pId:8648, name:"其它问题L3S0C0", file: "install.problems.support"},
+{id:8655, pId:8633, name:"Unix 系统下的安装L2S10C10", file: "install.unix"},
+{id:8650, pId:8655, name:"Unix 系统下的 Apache 1.3.xL3S0C0", file: "install.unix.apache"},
+{id:8651, pId:8655, name:"Unix 系统下的 Apache 2.xL3S0C0", file: "install.unix.apache2"},
+{id:8652, pId:8655, name:"CGI 和命令行设置L3S0C0", file: "install.unix.commandline"},
+{id:8653, pId:8655, name:"Debian GNU/Linux 安装说明L3S0C0", file: "install.unix.debian"},
+{id:8654, pId:8655, name:"针对 HP-UX 平台的安装提示L3S0C0", file: "install.unix.hpux"},
+{id:8656, pId:8655, name:"Unix 平台的 Lighttpd 1.4L3S0C0", file: "install.unix.lighttpd-14"},
+{id:8657, pId:8655, name:"Unix 系统下的 Nginx 1.4.xL3S0C0", file: "install.unix.nginx"},
+{id:8658, pId:8655, name:"在 OpenBSD 系统下的安装L3S0C0", file: "install.unix.openbsd"},
+{id:8659, pId:8655, name:"针对 Solaris 的安装提示L3S0C0", file: "install.unix.solaris"},
+{id:8660, pId:8655, name:"Sun Solaris 上的 Sun、iPlanet 和 Netscape 服务器L3S0C0", file: "install.unix.sun"},
+{id:8661, pId:8633, name:"Windows 系统下的安装L2S7C7", file: "install.windows"},
+{id:8662, pId:8661, name:"Installation on old Windows systemsL3S0C0", file: "install.windows.legacy.index"},
+{id:8663, pId:8661, name:"Manual PHP Installation on WindowsL3S0C0", file: "install.windows.manual"},
+{id:8664, pId:8661, name:"PECLL3S0C0", file: "install.windows.pecl"},
+{id:8665, pId:8661, name:"Recommended Configuration on Windows systemsL3S0C0", file: "install.windows.recommended"},
+{id:8666, pId:8661, name:"Install RequirementsL3S0C0", file: "install.windows.requirements"},
+{id:8667, pId:8661, name:"Windows 下的 PHP 安装程序工具L3S0C0", file: "install.windows.tools"},
+{id:8668, pId:8661, name:"Windows 下 PHP 故障排除L3S0C0", file: "install.windows.troubleshooting"},
+
+      {id:9372, pId: 6, name: "语言参考-L1S19C207", file: "langref"},
+
+      {id:12514, pId: 6, name: "安全-L1S13C27", file: "security"},
+      {id:12495, pId:12514, name:"以 Apache 模块安装时L2S0C0", file: "security.apache"},
+{id:12500, pId:12514, name:"以 CGI 模式安装时L2S5C5", file: "security.cgi-bin"},
+{id:12496, pId:12500, name:"可能受到的攻击L3S0C0", file: "security.cgi-bin.attacks"},
+{id:12497, pId:12500, name:"情形一：只运行公开的文件L3S0C0", file: "security.cgi-bin.default"},
+{id:12498, pId:12500, name:"情形三：设置 doc_root 或 user_dirL3S0C0", file: "security.cgi-bin.doc-root"},
+{id:12499, pId:12500, name:"情形二：使用 --enable-force-cgi-redirect 选项L3S0C0", file: "security.cgi-bin.force-redirect"},
+{id:12501, pId:12500, name:"情形四：PHP 解释器放在 web 目录以外L3S0C0", file: "security.cgi-bin.shell"},
+{id:12502, pId:12514, name:"保持更新L2S0C0", file: "security.current"},
+{id:12505, pId:12514, name:"数据库安全L2S4C4", file: "security.database"},
+{id:12503, pId:12505, name:"连接数据库L3S0C0", file: "security.database.connection"},
+{id:12504, pId:12505, name:"设计数据库L3S0C0", file: "security.database.design"},
+{id:12506, pId:12505, name:"SQL 注入L3S0C0", file: "security.database.sql-injection"},
+{id:12507, pId:12505, name:"加密存储模型L3S0C0", file: "security.database.storage"},
+{id:12508, pId:12514, name:"错误报告L2S0C0", file: "security.errors"},
+{id:12509, pId:12514, name:"文件系统安全L2S1C1", file: "security.filesystem"},
+{id:12510, pId:12509, name:"Null 字符问题L3S0C0", file: "security.filesystem.nullbytes"},
+{id:12511, pId:12514, name:"总则L2S0C0", file: "security.general"},
+{id:12512, pId:12514, name:"使用 Register GlobalsL2S0C0", file: "security.globals"},
+{id:12513, pId:12514, name:"隐藏 PHPL2S0C0", file: "security.hiding"},
+{id:12515, pId:12514, name:"简介L2S0C0", file: "security.intro"},
+{id:12517, pId:12514, name:"魔术引号L2S4C4", file: "security.magicquotes"},
+{id:12516, pId:12517, name:"关闭魔术引号L3S0C0", file: "security.magicquotes.disabling"},
+{id:12518, pId:12517, name:"什么是魔术引号L3S0C0", file: "security.magicquotes.what"},
+{id:12519, pId:12517, name:"为什么要用魔术引号L3S0C0", file: "security.magicquotes.why"},
+{id:12520, pId:12517, name:"为什么不用魔术引号L3S0C0", file: "security.magicquotes.whynot"},
+{id:12521, pId:12514, name:"会话（Session）安全L2S0C0", file: "security.sessions"},
+{id:12522, pId:12514, name:"用户提交的数据L2S0C0", file: "security.variables"},
+
+      {id:2413, pId: 6, name: "特点-L1S12C27", file: "features"},
+{id:2394, pId:2413, name:"PHP 的命令行模式L2S2C2", file: "features.commandline"},
+{id:2395, pId:2394, name:"INI 配置L3S0C0", file: "features.commandline.ini"},
+{id:2396, pId:2394, name:"内置Web ServerL3S0C0", file: "features.commandline.webserver"},
+{id:2397, pId:2413, name:"连接处理L2S0C0", file: "features.connection-handling"},
+{id:2398, pId:2413, name:"CookieL2S0C0", file: "features.cookies"},
+{id:2400, pId:2413, name:"DTrace 动态跟踪L2S3C3", file: "features.dtrace"},
+{id:2399, pId:2400, name:"使用 PHP 和 DTraceL3S0C0", file: "features.dtrace.dtrace"},
+{id:2401, pId:2400, name:"PHP 和 DTrace 介绍L3S0C0", file: "features.dtrace.introduction"},
+{id:2402, pId:2400, name:"使用 SystemTap 监控 PHP DTrace 静态探针L3S0C0", file: "features.dtrace.systemtap"},
+{id:2405, pId:2413, name:"文件上传处理L2S5C5", file: "features.file-upload"},
+{id:2403, pId:2405, name:"常见缺陷L3S0C0", file: "features.file-upload.common-pitfalls"},
+{id:2404, pId:2405, name:"错误信息说明L3S0C0", file: "features.file-upload.errors"},
+{id:2406, pId:2405, name:"上传多个文件L3S0C0", file: "features.file-upload.multiple"},
+{id:2407, pId:2405, name:"POST 方法上传L3S0C0", file: "features.file-upload.post-method"},
+{id:2408, pId:2405, name:"对 PUT 方法的支持L3S0C0", file: "features.file-upload.put-method"},
+{id:2410, pId:2413, name:"垃圾回收机制L2S3C3", file: "features.gc"},
+{id:2409, pId:2410, name:"回收周期(Collecting Cycles)L3S0C0", file: "features.gc.collecting-cycles"},
+{id:2411, pId:2410, name:"性能方面考虑的因素L3S0C0", file: "features.gc.performance-considerations"},
+{id:2412, pId:2410, name:"引用计数基本知识L3S0C0", file: "features.gc.refcounting-basics"},
+{id:2414, pId:2413, name:"用 PHP 进行 HTTP 认证L2S0C0", file: "features.http-auth"},
+{id:2415, pId:2413, name:"数据库持久连接L2S0C0", file: "features.persistent-connections"},
+{id:2416, pId:2413, name:"使用远程文件L2S0C0", file: "features.remote-files"},
+{id:2418, pId:2413, name:"安全模式L2S2C2", file: "features.safe-mode"},
+{id:2417, pId:2418, name:"被安全模式限制或屏蔽的函数L3S0C0", file: "features.safe-mode.functions"},
+{id:8618, pId:2418, name:"保安措施和安全模式L3S0C0", file: "ini.sect.safe-mode"},
+{id:2420, pId:2413, name:"会话L2S0C0", file: "features.sessions"},
+{id:2421, pId:2413, name:"处理 XFormsL2S0C0", file: "features.xforms"},
+      {id:2527, pId: 6, name: "函数参考-L1S27C13751", file: "funcref-all"},
+      {id:8706, pId: 6, name: "PHP 核心：骇客指南-L1S16C210", file: "internals2"},
+{id:8669, pId:8706, name:"Zend Engine 2 API 参考L2S0C0", file: "internals2.apiref"},
+{id:8673, pId:8706, name:"PHP 5 构建系统L2S4C4", file: "internals2.buildsys"},
+{id:8670, pId:8673, name:"与 UNIX 构建系统交互: config.m4L3S0C0", file: "internals2.buildsys.configunix"},
+{id:8671, pId:8673, name:"使用 Windows 构建系统：config.w32L3S0C0", file: "internals2.buildsys.configwin"},
+{id:8672, pId:8673, name:"PHP 扩展开发构建L3S0C0", file: "internals2.buildsys.environment"},
+{id:8674, pId:8673, name:"ext_skel 脚本L3S0C0", file: "internals2.buildsys.skeleton"},
+{id:8699, pId:8706, name:"\"counter\" 扩展 - 一个连续的实例L2S6C28", file: "internals2.counter"},
+{id:8675, pId:8699, name:"简单接口L3S3C3", file: "internals2.counter.basic-interface"},
+{id:8691, pId:8675, name:"修改简单计数器的当前值。L4S0C0", file: "internals2.counter.function.counter-bump"},
+{id:8696, pId:8675, name:"获取简单计数器的当前值。L4S0C0", file: "internals2.counter.function.counter-get"},
+{id:8698, pId:8675, name:"重置简单计数器的当前值。L4S0C0", file: "internals2.counter.function.counter-reset"},
+{id:8676, pId:8699, name:"预定义常量L3S0C0", file: "internals2.counter.constants"},
+{id:8682, pId:8699, name:"Counter 类L3S7C7", file: "internals2.counter.counter-class"},
+{id:8677, pId:8682, name:"修改计数器的当前值。L4S0C0", file: "internals2.counter.counter-class.bumpValue"},
+{id:8678, pId:8682, name:"创建一个包含单一数值的计数器实例。L4S0C0", file: "internals2.counter.counter-class.construct"},
+{id:8679, pId:8682, name:"返回计数器的部分元信息。L4S0C0", file: "internals2.counter.counter-class.getMeta"},
+{id:8680, pId:8682, name:"取回一个名称已存在的计数器。L4S0C0", file: "internals2.counter.counter-class.getNamed"},
+{id:8681, pId:8682, name:"获取计数器的当前值。L4S0C0", file: "internals2.counter.counter-class.getValue"},
+{id:8683, pId:8682, name:"重置计数器的当前值。L4S0C0", file: "internals2.counter.counter-class.resetValue"},
+{id:8684, pId:8682, name:"设置由 Counter::getNamed 返回的计数器类。L4S0C0", file: "internals2.counter.counter-class.setCounterClass"},
+{id:8687, pId:8699, name:"范例L3S3C3", file: "internals2.counter.examples"},
+{id:8685, pId:8687, name:"简单接口L4S0C0", file: "internals2.counter.examples.basic"},
+{id:8686, pId:8687, name:"扩展接口L4S0C0", file: "internals2.counter.examples.extended"},
+{id:8688, pId:8687, name:"对象化接口L4S0C0", file: "internals2.counter.examples.objective"},
+{id:8689, pId:8699, name:"扩展接口L3S6C6", file: "internals2.counter.extended-interface"},
+{id:8690, pId:8689, name:"更新计数器资源的当前值。L4S0C0", file: "internals2.counter.function.counter-bump-value"},
+{id:8692, pId:8689, name:"创建一个包含单个数值的计数器。L4S0C0", file: "internals2.counter.function.counter-create"},
+{id:8693, pId:8689, name:"返回计数器资源的部分元信息。L4S0C0", file: "internals2.counter.function.counter-get-meta"},
+{id:8694, pId:8689, name:"按名称查询一个已存在的计数器，并作为资源返回。L4S0C0", file: "internals2.counter.function.counter-get-named"},
+{id:8695, pId:8689, name:"获取计数器资源的当前值。L4S0C0", file: "internals2.counter.function.counter-get-value"},
+{id:8697, pId:8689, name:"重置计数器资源的当前值。L4S0C0", file: "internals2.counter.function.counter-reset-value"},
+{id:8703, pId:8699, name:"安装／配置L3S3C3", file: "internals2.counter.setup"},
+{id:8700, pId:8703, name:"运行时配置L4S0C0", file: "internals2.counter.ini"},
+{id:8701, pId:8703, name:"简介L4S0C0", file: "internals2.counter.intro"},
+{id:8702, pId:8703, name:"资源类型L4S0C0", file: "internals2.counter.resources"},
+{id:8704, pId:8706, name:"扩展相关 FAQL2S0C0", file: "internals2.faq"},
+{id:8705, pId:8706, name:"函数的编写L2S0C0", file: "internals2.funcs"},
+{id:8707, pId:8706, name:"INI 设置的使用L2S0C0", file: "internals2.ini"},
+{id:8708, pId:8706, name:"内存管理L2S3C3", file: "internals2.memory"},
+{id:8709, pId:8708, name:"内存管理基础L3S0C0", file: "internals2.memory.management"},
+{id:8710, pId:8708, name:"数据持久化L3S0C0", file: "internals2.memory.persistence"},
+{id:8711, pId:8708, name:"线程安全的资源管理器L3S0C0", file: "internals2.memory.TSRM"},
+{id:8712, pId:8706, name:"类和对象的使用L2S0C0", file: "internals2.objects"},
+{id:8790, pId:8706, name:"Zend Engine 2 操作码列表L2S1C137", file: "internals2.opcodes"},
+{id:8814, pId:8790, name:"Opcode Descriptions and ExamplesL3S136C136", file: "internals2.opcodes.list"},
+{id:8713, pId:8814, name:"ADD_ARRAY_ELEMENTL4S0C0", file: "internals2.opcodes.add-array-element"},
+{id:8714, pId:8814, name:"ADD_CHARL4S0C0", file: "internals2.opcodes.add-char"},
+{id:8715, pId:8814, name:"ADD_INTERFACEL4S0C0", file: "internals2.opcodes.add-interface"},
+{id:8716, pId:8814, name:"ADD_STRINGL4S0C0", file: "internals2.opcodes.add-string"},
+{id:8717, pId:8814, name:"ADD_VARL4S0C0", file: "internals2.opcodes.add-var"},
+{id:8718, pId:8814, name:"ADDL4S0C0", file: "internals2.opcodes.add"},
+{id:8719, pId:8814, name:"ASSIGN_ADDL4S0C0", file: "internals2.opcodes.assign-add"},
+{id:8720, pId:8814, name:"ASSIGN_BW_ANDL4S0C0", file: "internals2.opcodes.assign-bw-and"},
+{id:8721, pId:8814, name:"ASSIGN_BW_ORL4S0C0", file: "internals2.opcodes.assign-bw-or"},
+{id:8722, pId:8814, name:"ASSIGN_BW_XORL4S0C0", file: "internals2.opcodes.assign-bw-xor"},
+{id:8723, pId:8814, name:"ASSIGN_CONCATL4S0C0", file: "internals2.opcodes.assign-concat"},
+{id:8724, pId:8814, name:"ASSIGN_DIML4S0C0", file: "internals2.opcodes.assign-dim"},
+{id:8725, pId:8814, name:"ASSIGN_DIVL4S0C0", file: "internals2.opcodes.assign-div"},
+{id:8726, pId:8814, name:"ASSIGN_MODL4S0C0", file: "internals2.opcodes.assign-mod"},
+{id:8727, pId:8814, name:"ASSIGN_MULL4S0C0", file: "internals2.opcodes.assign-mul"},
+{id:8728, pId:8814, name:"ASSIGN_OBJL4S0C0", file: "internals2.opcodes.assign-obj"},
+{id:8729, pId:8814, name:"ASSIGN_REFL4S0C0", file: "internals2.opcodes.assign-ref"},
+{id:8730, pId:8814, name:"ASSIGN_SLL4S0C0", file: "internals2.opcodes.assign-sl"},
+{id:8731, pId:8814, name:"ASSIGN_SRL4S0C0", file: "internals2.opcodes.assign-sr"},
+{id:8732, pId:8814, name:"ASSIGN_SUBL4S0C0", file: "internals2.opcodes.assign-sub"},
+{id:8733, pId:8814, name:"ASSIGNL4S0C0", file: "internals2.opcodes.assign"},
+{id:8734, pId:8814, name:"BEGIN_SILENCEL4S0C0", file: "internals2.opcodes.begin-silence"},
+{id:8735, pId:8814, name:"BOOL_NOTL4S0C0", file: "internals2.opcodes.bool-not"},
+{id:8736, pId:8814, name:"BOOL_XORL4S0C0", file: "internals2.opcodes.bool-xor"},
+{id:8737, pId:8814, name:"BOOLL4S0C0", file: "internals2.opcodes.bool"},
+{id:8738, pId:8814, name:"BRKL4S0C0", file: "internals2.opcodes.brk"},
+{id:8739, pId:8814, name:"BW_ANDL4S0C0", file: "internals2.opcodes.bw-and"},
+{id:8740, pId:8814, name:"BW_NOTL4S0C0", file: "internals2.opcodes.bw-not"},
+{id:8741, pId:8814, name:"BW_ORL4S0C0", file: "internals2.opcodes.bw-or"},
+{id:8742, pId:8814, name:"BW_XORL4S0C0", file: "internals2.opcodes.bw-xor"},
+{id:8743, pId:8814, name:"CASEL4S0C0", file: "internals2.opcodes.case"},
+{id:8744, pId:8814, name:"CASTL4S0C0", file: "internals2.opcodes.cast"},
+{id:8745, pId:8814, name:"CATCHL4S0C0", file: "internals2.opcodes.catch"},
+{id:8746, pId:8814, name:"CLONEL4S0C0", file: "internals2.opcodes.clone"},
+{id:8747, pId:8814, name:"CONCATL4S0C0", file: "internals2.opcodes.concat"},
+{id:8748, pId:8814, name:"CONTL4S0C0", file: "internals2.opcodes.cont"},
+{id:8749, pId:8814, name:"DECLARE_CLASSL4S0C0", file: "internals2.opcodes.declare-class"},
+{id:8750, pId:8814, name:"DECLARE_CONSTL4S0C0", file: "internals2.opcodes.declare-const"},
+{id:8751, pId:8814, name:"DECLARE_FUNCTIONL4S0C0", file: "internals2.opcodes.declare-function"},
+{id:8752, pId:8814, name:"DECLARE_INHERITED_CLASS_DELAYEDL4S0C0", file: "internals2.opcodes.declare-inherited-class-delayed"},
+{id:8753, pId:8814, name:"DECLARE_INHERITED_CLASSL4S0C0", file: "internals2.opcodes.declare-inherited-class"},
+{id:8754, pId:8814, name:"DIVL4S0C0", file: "internals2.opcodes.div"},
+{id:8755, pId:8814, name:"DO_FCALL_BY_NAMEL4S0C0", file: "internals2.opcodes.do-fcall-by-name"},
+{id:8756, pId:8814, name:"DO_FCALLL4S0C0", file: "internals2.opcodes.do-fcall"},
+{id:8757, pId:8814, name:"ECHOL4S0C0", file: "internals2.opcodes.echo"},
+{id:8758, pId:8814, name:"END_SILENCEL4S0C0", file: "internals2.opcodes.end-silence"},
+{id:8759, pId:8814, name:"EXITL4S0C0", file: "internals2.opcodes.exit"},
+{id:8760, pId:8814, name:"EXT_FCALL_BEGINL4S0C0", file: "internals2.opcodes.ext-fcall-begin"},
+{id:8761, pId:8814, name:"EXT_FCALL_ENDL4S0C0", file: "internals2.opcodes.ext-fcall-end"},
+{id:8762, pId:8814, name:"EXT_NOPL4S0C0", file: "internals2.opcodes.ext-nop"},
+{id:8763, pId:8814, name:"EXT_STMTL4S0C0", file: "internals2.opcodes.ext-stmt"},
+{id:8764, pId:8814, name:"FE_FETCHL4S0C0", file: "internals2.opcodes.fe-fetch"},
+{id:8765, pId:8814, name:"FE_RESETL4S0C0", file: "internals2.opcodes.fe-reset"},
+{id:8766, pId:8814, name:"FETCH_CLASSL4S0C0", file: "internals2.opcodes.fetch-class"},
+{id:8767, pId:8814, name:"FETCH_CONSTANTL4S0C0", file: "internals2.opcodes.fetch-constant"},
+{id:8768, pId:8814, name:"FETCH_DIM_FUNC_ARGL4S0C0", file: "internals2.opcodes.fetch-dim-func-arg"},
+{id:8769, pId:8814, name:"FETCH_DIM_ISL4S0C0", file: "internals2.opcodes.fetch-dim-is"},
+{id:8770, pId:8814, name:"FETCH_DIM_RL4S0C0", file: "internals2.opcodes.fetch-dim-r"},
+{id:8771, pId:8814, name:"FETCH_DIM_RWL4S0C0", file: "internals2.opcodes.fetch-dim-rw"},
+{id:8772, pId:8814, name:"FETCH_DIM_TMP_VARL4S0C0", file: "internals2.opcodes.fetch-dim-tmp-var"},
+{id:8773, pId:8814, name:"FETCH_DIM_UNSETL4S0C0", file: "internals2.opcodes.fetch-dim-unset"},
+{id:8774, pId:8814, name:"FETCH_DIM_WL4S0C0", file: "internals2.opcodes.fetch-dim-w"},
+{id:8775, pId:8814, name:"FETCH_FUNC_ARGL4S0C0", file: "internals2.opcodes.fetch-func-arg"},
+{id:8776, pId:8814, name:"FETCH_ISL4S0C0", file: "internals2.opcodes.fetch-is"},
+{id:8777, pId:8814, name:"FETCH_OBJ_FUNC_ARGL4S0C0", file: "internals2.opcodes.fetch-obj-func-arg"},
+{id:8778, pId:8814, name:"FETCH_OBJ_ISL4S0C0", file: "internals2.opcodes.fetch-obj-is"},
+{id:8779, pId:8814, name:"FETCH_OBJ_RL4S0C0", file: "internals2.opcodes.fetch-obj-r"},
+{id:8780, pId:8814, name:"FETCH_OBJ_RWL4S0C0", file: "internals2.opcodes.fetch-obj-rw"},
+{id:8781, pId:8814, name:"FETCH_OBJ_UNSETL4S0C0", file: "internals2.opcodes.fetch-obj-unset"},
+{id:8782, pId:8814, name:"FETCH_OBJ_WL4S0C0", file: "internals2.opcodes.fetch-obj-w"},
+{id:8783, pId:8814, name:"FETCH_RL4S0C0", file: "internals2.opcodes.fetch-r"},
+{id:8784, pId:8814, name:"FETCH_RWL4S0C0", file: "internals2.opcodes.fetch-rw"},
+{id:8785, pId:8814, name:"FETCH_UNSETL4S0C0", file: "internals2.opcodes.fetch-unset"},
+{id:8786, pId:8814, name:"FETCH_WL4S0C0", file: "internals2.opcodes.fetch-w"},
+{id:8787, pId:8814, name:"FREEL4S0C0", file: "internals2.opcodes.free"},
+{id:8788, pId:8814, name:"GOTOL4S0C0", file: "internals2.opcodes.goto"},
+{id:8789, pId:8814, name:"HANDLE_EXCEPTIONL4S0C0", file: "internals2.opcodes.handle-exception"},
+{id:8791, pId:8814, name:"INCLUDE_OR_EVALL4S0C0", file: "internals2.opcodes.include-or-eval"},
+{id:8792, pId:8814, name:"INIT_ARRAYL4S0C0", file: "internals2.opcodes.init-array"},
+{id:8793, pId:8814, name:"INIT_FCALL_BY_NAMEL4S0C0", file: "internals2.opcodes.init-fcall-by-name"},
+{id:8794, pId:8814, name:"INIT_METHOD_CALLL4S0C0", file: "internals2.opcodes.init-method-call"},
+{id:8795, pId:8814, name:"INIT_NS_FCALL_BY_NAMEL4S0C0", file: "internals2.opcodes.init-ns-fcall-by-name"},
+{id:8796, pId:8814, name:"INIT_STATIC_METHOD_CALLL4S0C0", file: "internals2.opcodes.init-static-method-call"},
+{id:8797, pId:8814, name:"INIT_STRINGL4S0C0", file: "internals2.opcodes.init-string"},
+{id:8798, pId:8814, name:"INSTANCEOFL4S0C0", file: "internals2.opcodes.instanceof"},
+{id:8799, pId:8814, name:"IS_EQUALL4S0C0", file: "internals2.opcodes.is-equal"},
+{id:8800, pId:8814, name:"IS_IDENTICALL4S0C0", file: "internals2.opcodes.is-identical"},
+{id:8801, pId:8814, name:"IS_NOT_EQUALL4S0C0", file: "internals2.opcodes.is-not-equal"},
+{id:8802, pId:8814, name:"IS_NOT_IDENTICALL4S0C0", file: "internals2.opcodes.is-not-identical"},
+{id:8803, pId:8814, name:"IS_SMALLER_OR_EQUALL4S0C0", file: "internals2.opcodes.is-smaller-or-equal"},
+{id:8804, pId:8814, name:"IS_SMALLERL4S0C0", file: "internals2.opcodes.is-smaller"},
+{id:8805, pId:8814, name:"ISSET_ISEMPTY_DIM_OBJL4S0C0", file: "internals2.opcodes.isset-isempty-dim-obj"},
+{id:8806, pId:8814, name:"ISSET_ISEMPTY_PROP_OBJL4S0C0", file: "internals2.opcodes.isset-isempty-prop-obj"},
+{id:8807, pId:8814, name:"ISSET_ISEMPTY_VARL4S0C0", file: "internals2.opcodes.isset-isempty-var"},
+{id:8808, pId:8814, name:"JMPL4S0C0", file: "internals2.opcodes.jmp"},
+{id:8809, pId:8814, name:"JMPNZ_EXL4S0C0", file: "internals2.opcodes.jmpnz-ex"},
+{id:8810, pId:8814, name:"JMPNZL4S0C0", file: "internals2.opcodes.jmpnz"},
+{id:8811, pId:8814, name:"JMPZ_EXL4S0C0", file: "internals2.opcodes.jmpz-ex"},
+{id:8812, pId:8814, name:"JMPZL4S0C0", file: "internals2.opcodes.jmpz"},
+{id:8813, pId:8814, name:"JMPZNZL4S0C0", file: "internals2.opcodes.jmpznz"},
+{id:8815, pId:8814, name:"MODL4S0C0", file: "internals2.opcodes.mod"},
+{id:8816, pId:8814, name:"MULL4S0C0", file: "internals2.opcodes.mul"},
+{id:8817, pId:8814, name:"NEWL4S0C0", file: "internals2.opcodes.new"},
+{id:8818, pId:8814, name:"NOPL4S0C0", file: "internals2.opcodes.nop"},
+{id:8819, pId:8814, name:"POST_DEC_OBJL4S0C0", file: "internals2.opcodes.post-dec-obj"},
+{id:8820, pId:8814, name:"POST_DECL4S0C0", file: "internals2.opcodes.post-dec"},
+{id:8821, pId:8814, name:"POST_INC_OBJL4S0C0", file: "internals2.opcodes.post-inc-obj"},
+{id:8822, pId:8814, name:"POST_INCL4S0C0", file: "internals2.opcodes.post-inc"},
+{id:8823, pId:8814, name:"PRE_DEC_OBJL4S0C0", file: "internals2.opcodes.pre-dec-obj"},
+{id:8824, pId:8814, name:"PRE_DECL4S0C0", file: "internals2.opcodes.pre-dec"},
+{id:8825, pId:8814, name:"PRE_INC_OBJL4S0C0", file: "internals2.opcodes.pre-inc-obj"},
+{id:8826, pId:8814, name:"PRE_INCL4S0C0", file: "internals2.opcodes.pre-inc"},
+{id:8827, pId:8814, name:"PRINTL4S0C0", file: "internals2.opcodes.print"},
+{id:8828, pId:8814, name:"QM_ASSIGNL4S0C0", file: "internals2.opcodes.qm-assign"},
+{id:8829, pId:8814, name:"RAISE_ABSTRACT_ERRORL4S0C0", file: "internals2.opcodes.raise-abstract-error"},
+{id:8830, pId:8814, name:"RECV_INITL4S0C0", file: "internals2.opcodes.recv-init"},
+{id:8831, pId:8814, name:"RECVL4S0C0", file: "internals2.opcodes.recv"},
+{id:8832, pId:8814, name:"RETURN_BY_REFL4S0C0", file: "internals2.opcodes.return-by-ref"},
+{id:8833, pId:8814, name:"RETURNL4S0C0", file: "internals2.opcodes.return"},
+{id:8834, pId:8814, name:"SEND_REFL4S0C0", file: "internals2.opcodes.send-ref"},
+{id:8835, pId:8814, name:"SEND_VALL4S0C0", file: "internals2.opcodes.send-val"},
+{id:8836, pId:8814, name:"SEND_VAR_NO_REFL4S0C0", file: "internals2.opcodes.send-var-no-ref"},
+{id:8837, pId:8814, name:"SEND_VARL4S0C0", file: "internals2.opcodes.send-var"},
+{id:8838, pId:8814, name:"SLL4S0C0", file: "internals2.opcodes.sl"},
+{id:8839, pId:8814, name:"SRL4S0C0", file: "internals2.opcodes.sr"},
+{id:8840, pId:8814, name:"SUBL4S0C0", file: "internals2.opcodes.sub"},
+{id:8841, pId:8814, name:"SWITCH_FREEL4S0C0", file: "internals2.opcodes.switch-free"},
+{id:8842, pId:8814, name:"THROWL4S0C0", file: "internals2.opcodes.throw"},
+{id:8843, pId:8814, name:"TICKSL4S0C0", file: "internals2.opcodes.ticks"},
+{id:8844, pId:8814, name:"UNSET_DIML4S0C0", file: "internals2.opcodes.unset-dim"},
+{id:8845, pId:8814, name:"UNSET_OBJL4S0C0", file: "internals2.opcodes.unset-obj"},
+{id:8846, pId:8814, name:"UNSET_VARL4S0C0", file: "internals2.opcodes.unset-var"},
+{id:8847, pId:8814, name:"USER_OPCODEL4S0C0", file: "internals2.opcodes.user-opcode"},
+{id:8848, pId:8814, name:"VERIFY_ABSTRACT_CLASSL4S0C0", file: "internals2.opcodes.verify-abstract-class"},
+{id:8849, pId:8814, name:"ZEND_DECLARE_LAMBDA_FUNCTIONL4S0C0", file: "internals2.opcodes.zend-declare-lambda-function"},
+{id:8850, pId:8814, name:"ZEND_JMP_SETL4S0C0", file: "internals2.opcodes.zend-jmp-set"},
+{id:8854, pId:8706, name:"PDO 驱动L2S10C10", file: "internals2.pdo"},
+{id:8851, pId:8854, name:"BuildingL3S0C0", file: "internals2.pdo.building"},
+{id:8852, pId:8854, name:"ConstantsL3S0C0", file: "internals2.pdo.constants"},
+{id:8853, pId:8854, name:"Error handlingL3S0C0", file: "internals2.pdo.error-handling"},
+{id:8855, pId:8854, name:"Fleshing out your skeletonL3S0C0", file: "internals2.pdo.implementing"},
+{id:8856, pId:8854, name:"Packaging and distributionL3S0C0", file: "internals2.pdo.packaging"},
+{id:8857, pId:8854, name:"pdo_dbh_t definitionL3S0C0", file: "internals2.pdo.pdo-dbh-t"},
+{id:8858, pId:8854, name:"pdo_stmt_t definitionL3S0C0", file: "internals2.pdo.pdo-stmt-t"},
+{id:8859, pId:8854, name:"配置与管理L3S0C0", file: "internals2.pdo.preparation"},
+{id:8860, pId:8854, name:"前提条件L3S0C0", file: "internals2.pdo.prerequisites"},
+{id:8861, pId:8854, name:"TestingL3S0C0", file: "internals2.pdo.testing"},
+{id:8862, pId:8706, name:"序言L2S0C0", file: "internals2.preface"},
+{id:8863, pId:8706, name:"资源的使用L2S0C0", file: "internals2.resources"},
+{id:8864, pId:8706, name:"流的使用L2S0C0", file: "internals2.streams"},
+{id:8868, pId:8706, name:"扩展的结构L2S6C6", file: "internals2.structure"},
+{id:8865, pId:8868, name:"Basic constructsL3S0C0", file: "internals2.structure.basics"},
+{id:8866, pId:8868, name:"组成扩展的文件L3S0C0", file: "internals2.structure.files"},
+{id:8867, pId:8868, name:"Extension globalsL3S0C0", file: "internals2.structure.globals"},
+{id:8869, pId:8868, name:"Life cycle of an extensionL3S0C0", file: "internals2.structure.lifecycle"},
+{id:8870, pId:8868, name:"The zend_module structureL3S0C0", file: "internals2.structure.modstruct"},
+{id:8871, pId:8868, name:"Testing an extensionL3S0C0", file: "internals2.structure.tests"},
+{id:8873, pId:8706, name:"变量的使用L2S2C2", file: "internals2.variables"},
+{id:8872, pId:8873, name:"创建变量并设置值L3S0C0", file: "internals2.variables.creating"},
+{id:8874, pId:8873, name:"介绍L3S0C0", file: "internals2.variables.intro"},
+{id:8875, pId:8706, name:"Zend Engine 1L2S4C4", file: "internals2.ze1"},
+{id:8876, pId:8875, name:"旧的介绍L3S0C0", file: "internals2.ze1.intro"},
+{id:8877, pId:8875, name:"Streams API for PHP Extension AuthorsL3S0C0", file: "internals2.ze1.streams"},
+{id:8878, pId:8875, name:"TSRM APIL3S0C0", file: "internals2.ze1.tsrm"},
+{id:8879, pId:8875, name:"Zend API：深入 PHP 内核L3S0C0", file: "internals2.ze1.zendapi"},
+      {id:2373, pId: 6, name: "FAQ-L1S11C11", file: "faq"},
+      {id:2369, pId:2373, name:"编译问题L2S0C0", file: "faq.build"},
+{id:2370, pId:2373, name:"PHP 和 COML2S0C0", file: "faq.com"},
+{id:2371, pId:2373, name:"数据库问题L2S0C0", file: "faq.databases"},
+{id:2372, pId:2373, name:"一般信息L2S0C0", file: "faq.general"},
+{id:2374, pId:2373, name:"PHP 和 HTMLL2S0C0", file: "faq.html"},
+{id:2375, pId:2373, name:"安装常见问题L2S0C0", file: "faq.installation"},
+{id:2376, pId:2373, name:"邮件列表L2S0C0", file: "faq.mailinglist"},
+{id:2377, pId:2373, name:"其他问题L2S0C0", file: "faq.misc"},
+{id:2378, pId:2373, name:"获取 PHPL2S0C0", file: "faq.obtaining"},
+{id:2379, pId:2373, name:"密码散列安全L2S0C0", file: "faq.passwords"},
+{id:2380, pId:2373, name:"使用 PHPL2S0C0", file: "faq.using"},
+      {id:56, pId: 6, name: "附录-L1S29C7188", file: "appendices"},
+    ];
+
+    $(document).ready(function () {
+      var t = $("#tree");
+      t = $.fn.zTree.init(t, setting, zNodes);
+      demoIframe = $("#testIframe");
+      demoIframe.bind("load", loadReady);
+      var zTree = $.fn.zTree.getZTreeObj("tree");
+      zTree.selectNode(zTree.getNodeByParam("id", 101));
+
+    });
+
+    function loadReady() {
+      var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
+        htmlH = demoIframe.contents().find("html").get(0).scrollHeight,
+        maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
+        h = demoIframe.height() >= maxH ? minH : maxH;
+      if (h < 530) h = 530;
+      demoIframe.height(h);
+    }
+
+    //-->
+  </SCRIPT>
+</HEAD>
+
+<BODY>
+<TABLE border=0 height=600px align=left>
+  <TR>
+    <TD width=260px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
+      <ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
+    </TD>
+    <TD width=100% align=left valign=top>
+      <IFRAME ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100% height=100%
+              SRC="../static/php-chunked-xhtml/index.html"></IFRAME>
+    </TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

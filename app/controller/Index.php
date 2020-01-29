@@ -14,14 +14,16 @@ class Index extends BaseController
 
     public function index()
     {
- 		$s= Manual::where("child",'>',0)->order("sort")->select();
+ 		// $s= Manual::where("child",'>',0)->order("sort")->select();
 
- 		dump($s->toArray());
+ 		// dump($s->toArray());
  		// foreach ($s as $key => $value) {
  		// 	# code...
  		// 	echo $value->child."+";
  		// }
  		// echo date("Y-m-d h:i:sa");
+ 		echo $this->getsoncount(1);
+
  		die();
 
 
@@ -159,6 +161,37 @@ class Index extends BaseController
         // echo "ok";
     }
 
+    public function getsoncount($id){
+
+    	// 获取一个文件包含直属子目录数量，不包括孙目录
+
+    	$file = Manual::where('id',$id)->column("file");
+
+    	// 获取一个目录的直属子目录
+    	$getsoncount = Manual::where('catalog',$file[0])->count();
+
+    	 
+    	echo  $id."-".$getsoncount."<br>";
+
+    	Manual::update(['son' => $getsoncount], ['id' => $id]);
+
+ 		$id = $id +1;
+
+		// 继续递归查询
+		if ($id < 15038){
+			
+			$this->getsoncount($id);
+		}
+
+
+
+    	
+
+    	// 如果递归完成返回生成的数组
+    	return "ok";
+    	
+    	 
+    }
     public function getchildrencount($file){
 
     	// 获取一个文件包含的所以子目录数总和

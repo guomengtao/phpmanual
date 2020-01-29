@@ -2,18 +2,17 @@
 PHP Manual Analysis 一份PHP手册的分析
 ===============
 
-* 作为一名phper，你是否没有通读过php官方手册？
-* 你是否觉得手册初看上去内容不多，但总是也没有浏览完？
-* 你可能不知道php手册有1万5千多页,函数几千个...
+* 作为一名phper，是否没有通读过php官方手册？
+* 是否觉得手册初看上去内容不多，但总是也没有浏览完？
+* 是否点击php手册栏目点到手软都点不完成
+* 可能不知道php手册有1万5千多页,函数几千个...
 * 本项目将帮助你分析php手册各级目录的内容多少，占比多少。以及将尝试统计函数总数量、类总数量等
 * 希望为你的php学习带来一点帮助。
 
 > 已同步发布此项目实战开发视频教程
 
 # 核心基础统计分析结果： 
-
-# 新的一年第一天，大年初一。预防肺炎病毒，取消走亲访友。
-大年初二，持续关注肺炎疫情
+ 
 文件总数：15037
 
 目录总数：1486 + 纯页面：13351
@@ -30,6 +29,8 @@ PHP Manual Analysis 一份PHP手册的分析
 
  
 11+138+634+1632+9705+1907+1010 = 15037
+
+
 一级目录：
  
 1.  [版权信息](https://www.php.net/manual/zh/copyright.php) 0
@@ -39,13 +40,15 @@ PHP Manual Analysis 一份PHP手册的分析
 5.  [语言参考](https://www.php.net/manual/zh/langref.php) 207
 6.  [安全](https://www.php.net/manual/zh/security.php) 27
 7.  [特点](https://www.php.net/manual/zh/features.php) 27
-8.  [函数参考](https://www.php.net/manual/zh/funcref.php) 11278
-9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php) 194
+8.  [函数参考](https://www.php.net/manual/zh/funcref.php) 14293
+9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php) 210
 10.  [FAQ](https://www.php.net/manual/zh/faq.php) 11 — FAQ：常见问题
-11.  [附录](https://www.php.net/manual/zh/appendices.php) 219
+11.  [附录](https://www.php.net/manual/zh/appendices.php) 192
 
 
-0+1+10+47+208+27+27+14293+210+11+192 = 15026
+0+1+10+47+208+27+27+14293+210+11+192 = 15026 = 15037 -11
+
+
 二级目录：
 
 * [版权信息](https://www.php.net/manual/zh/copyright.php)
@@ -217,6 +220,12 @@ PHP Manual Analysis 一份PHP手册的分析
 4. 如果确实存在一个文件属于多个目录，考虑一个统计方案
 5. 增加字段 son 直属子目录，记录含有的下级一级子目录数 不包扣孙目录
 6. 循环遍历中时时统计 分类的 直属子目录 数组数量 ，并入库。只需一次
+
+
+完成直属子目录的统计
+整理汇总新的ztree分类
+
+计划增加 百分比
 
 ## 统计分析
 

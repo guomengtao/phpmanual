@@ -1,0 +1,17 @@
+[{
+    "name": "学员管理",
+    "open": true,
+    "children": [{
+            "name": "大一",
+            "children": [{
+                    "name": "张三",
+                    "img": "img/psd.png"
+                }, {
+                    "name": "小赵",
+                    "img": "img/psa.png"
+                }, {
+                    "name": "凡小芬",
+                    "img": "img/psc.png"
+                }]
+        }]
+}]

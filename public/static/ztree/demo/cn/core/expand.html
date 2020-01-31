@@ -1,94 +1,39 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <HTML>
 <HEAD>
-  <TITLE> ZTREE DEMO </TITLE>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="../static/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-  <style>
-    body {
-      background-color: white;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
+	<TITLE> ZTREE DEMO - beforeExpand / onExpand && beforeCollapse / onCollapse</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="../../../css/demo.css" type="text/css">
+	<link rel="stylesheet" href="../../../css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="../../../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.ztree.core.js"></script>
+	<!--  <script type="text/javascript" src="../../../js/jquery.ztree.excheck.js"></script>
+	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
+	<SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			view: {
+				selectedMulti: false
+			},
+			data: {
+				key: {
+					title:"t"
+				},
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				beforeClick: beforeClick,
+				beforeCollapse: beforeCollapse,
+				beforeExpand: beforeExpand,
+				onCollapse: onCollapse,
+				onExpand: onExpand
+			}
+		};
 
-    div, p, table, th, td {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      font-size: 12px;
-      font-family: dotum, Verdana, Arial, Helvetica, AppleGothic, sans-serif;
-    }
-
-    #testIframe {
-      margin-left: 10px;
-    }
-  </style>
-  <script type="text/javascript" src="../static/ztree/js/jquery-1.4.4.min.js"></script>
-  <script type="text/javascript" src="../static/ztree/js/jquery.ztree.core.js"></script>
-  <SCRIPT type="text/javascript">
-    <!--
-    var zTree;
-    var demoIframe;
-
-    var setting = {
-      view: {
-        dblClickExpand: false,
-        showLine: true,
-        selectedMulti: false
-      },
-      data: {
-        simpleData: {
-          enable: true,
-          idKey: "id",
-          pIdKey: "pId",
-          rootPId: ""
-        }
-      },
-      callback: {
-        beforeClick: function (treeId, treeNode) {
-          var zTree = $.fn.zTree.getZTreeObj("tree");
-          if (treeNode.isParent) {
-            demoIframe.attr("src", "../static/php-chunked-xhtml/"+treeNode.file + ".html");
-            zTree.expandNode(treeNode);
-            return false;
-          } else {
-            demoIframe.attr("src", "../static/php-chunked-xhtml/"+treeNode.file + ".html");
-            return true;
-          }
-        }
-      }
-    };
-
-// 1.  [版权信息](https://www.php.net/manual/zh/copyright.php) 0
-// 2.  [PHP 手册](https://www.php.net/manual/zh/manual.php) 1
-// 3.  [入门指引](https://www.php.net/manual/zh/getting-started.php) 10
-// 4.  [安装与配置](https://www.php.net/manual/zh/install.php) 47
-// 5.  [语言参考](https://www.php.net/manual/zh/langref.php) 207
-// 6.  [安全](https://www.php.net/manual/zh/security.php) 27
-// 7.  [特点](https://www.php.net/manual/zh/features.php) 27
-// 8.  [函数参考](https://www.php.net/manual/zh/funcref.php) 11278
-// 9.  [PHP 核心：骇客指南](https://www.php.net/manual/zh/internals2.php) 194
-// 10.  [FAQ](https://www.php.net/manual/zh/faq.php) 11 — FAQ：常见问题
-// 11.  [附录](https://www.php.net/manual/zh/appendices.php) 219
-
-    var zNodes = [
- 
-
-      {id:1521, pId: 0, name: "版权信息 ", file: "copyright"},
-      {id:9593, pId: 0, name: "PHP 手册-s1c1", file: "manual"},
-      {id:7528, pId: 1, name: "入门指引-s2c10-0.07%", file: "getting-started"},
-      {id:8633, pId: 0, name: "安装与配置-s9c47-0.31%", file: "install"},
-      {id:9372, pId: 0, name: "语言参考-s19c208-1.38%", file: "langref"},
-      {id:12514, pId: 0, name: "安全-s13c27-0.18%", file: "security"},
-      {id:2413, pId: 0, name: "特点-s12c27-0.18%", file: "features"},
-      {id:2527, pId: 0, name: "函数参考-s27c14293-95.05%", file: "funcref-all"},
-      {id:8706, pId: 0, name: "PHP 核心：骇客指南-s16c210-1.4%", file: "internals2"},
-      {id:2373, pId: 0, name: "FAQ-s11c11-0.07%", file: "faq"},
-      {id:56, pId: 0, name: "附录-s29c192-1.28%", file: "appendices"},
-
-{id:1, pId:4, name:"手册的格式", file: "about.formats"},
+		var zNodes =[
+ {id:1, pId:4, name:"手册的格式", file: "about.formats"},
 {id:2, pId:4, name:"如何生成手册的各种格式", file: "about.generate"},
 {id:3, pId:4, name:"如何帮助改进本文档", file: "about.howtohelp"},
 {id:4, pId:56, name:"关于本手册s8c8-0.05%", file: "about"},
@@ -143,6 +88,7 @@
 {id:53, pId:55, name:"需求", file: "apd.requirements"},
 {id:54, pId:55, name:"资源类型", file: "apd.resources"},
 {id:55, pId:160, name:"安装／配置s5c5-0.03%", file: "apd.setup"},
+{id:56, pId:0, name:"附录s29c192-1.28%", file: "appendices"},
 {id:57, pId:657, name:"Appends an iterator", file: "appenditerator.append"},
 {id:58, pId:657, name:"Constructs an AppendIterator", file: "appenditerator.construct"},
 {id:59, pId:657, name:"Gets the current value", file: "appenditerator.current"},
@@ -1607,6 +1553,7 @@
 {id:1518, pId:9381, name:"简介", file: "control-structures.intro"},
 {id:1519, pId:9381, name:"switch", file: "control-structures.switch"},
 {id:1520, pId:9381, name:"while", file: "control-structures.while"},
+{id:1521, pId:0, name:"版权信息", file: "copyright"},
 {id:1522, pId:743, name:"统计一个对象的元素个数", file: "countable.count"},
 {id:1523, pId:1529, name:"运行时配置", file: "crack.configuration"},
 {id:1524, pId:176, name:"预定义常量", file: "crack.constants"},
@@ -2458,6 +2405,7 @@
 {id:2370, pId:2373, name:"PHP 和 COM", file: "faq.com"},
 {id:2371, pId:2373, name:"数据库问题", file: "faq.databases"},
 {id:2372, pId:2373, name:"一般信息", file: "faq.general"},
+{id:2373, pId:0, name:"FAQs11c11-0.07%", file: "faq"},
 {id:2374, pId:2373, name:"PHP 和 HTML", file: "faq.html"},
 {id:2375, pId:2373, name:"安装常见问题", file: "faq.installation"},
 {id:2376, pId:2373, name:"邮件列表", file: "faq.mailinglist"},
@@ -2497,6 +2445,7 @@
 {id:2410, pId:2413, name:"垃圾回收机制s3c3-0.02%", file: "features.gc"},
 {id:2411, pId:2410, name:"性能方面考虑的因素", file: "features.gc.performance-considerations"},
 {id:2412, pId:2410, name:"引用计数基本知识", file: "features.gc.refcounting-basics"},
+{id:2413, pId:0, name:"特点s12c27-0.18%", file: "features"},
 {id:2414, pId:2413, name:"用 PHP 进行 HTTP 认证", file: "features.http-auth"},
 {id:2415, pId:2413, name:"数据库持久连接", file: "features.persistent-connections"},
 {id:2416, pId:2413, name:"使用远程文件", file: "features.remote-files"},
@@ -2610,6 +2559,7 @@
 {id:2524, pId:2526, name:"需求", file: "funchand.requirements"},
 {id:2525, pId:2526, name:"资源类型", file: "funchand.resources"},
 {id:2526, pId:211, name:"安装／配置s4c4-0.03%", file: "funchand.setup"},
+{id:2527, pId:0, name:"函数参考s27c14293-95.05%", file: "funcref"},
 {id:2528, pId:11822, name:"绝对值", file: "function.abs"},
 {id:2529, pId:11822, name:"反余弦", file: "function.acos"},
 {id:2530, pId:11822, name:"反双曲余弦", file: "function.acosh"},
@@ -7610,6 +7560,7 @@
 {id:7525, pId:7527, name:"需求", file: "gettext.requirements"},
 {id:7526, pId:7527, name:"资源类型", file: "gettext.resources"},
 {id:7527, pId:215, name:"安装／配置s4c4-0.03%", file: "gettext.setup"},
+{id:7528, pId:0, name:"入门指引s2c10-0.07%", file: "getting-started"},
 {id:7529, pId:830, name:"Construct a directory using glob", file: "globiterator.construct"},
 {id:7530, pId:830, name:"Get the number of directories and files", file: "globiterator.count"},
 {id:7531, pId:831, name:"Adds new image to Gmagick object image list", file: "gmagick.addimage"},
@@ -8714,6 +8665,7 @@
 {id:8630, pId:8633, name:"FastCGI 进程管理器（FPM）s2c2-0.01%", file: "install.fpm"},
 {id:8631, pId:8630, name:"安装", file: "install.fpm.install"},
 {id:8632, pId:8633, name:"安装前需要考虑的事项", file: "install.general"},
+{id:8633, pId:0, name:"安装与配置s9c47-0.31%", file: "install"},
 {id:8634, pId:8636, name:"使用内置的 PHP", file: "install.macosx.bundled"},
 {id:8635, pId:8636, name:"在 Mac OS X 下编译 PHP", file: "install.macosx.compile"},
 {id:8636, pId:8633, name:"Mac OS X 系统下的安装s3c3-0.02%", file: "install.macosx"},
@@ -8786,6 +8738,7 @@
 {id:8703, pId:8699, name:"安装／配置s3c3-0.02%", file: "internals2.counter.setup"},
 {id:8704, pId:8706, name:"扩展相关 FAQ", file: "internals2.faq"},
 {id:8705, pId:8706, name:"函数的编写", file: "internals2.funcs"},
+{id:8706, pId:0, name:"PHP 核心：骇客指南s16c210-1.4%", file: "internals2"},
 {id:8707, pId:8706, name:"INI 设置的使用", file: "internals2.ini"},
 {id:8708, pId:8706, name:"内存管理s3c3-0.02%", file: "internals2.memory"},
 {id:8709, pId:8708, name:"内存管理基础", file: "internals2.memory.management"},
@@ -9451,6 +9404,7 @@
 {id:9369, pId:9371, name:"安装", file: "ktaglib.installation"},
 {id:9370, pId:9371, name:"需求", file: "ktaglib.requirements"},
 {id:9371, pId:242, name:"安装／配置s2c2-0.01%", file: "ktaglib.setup"},
+{id:9372, pId:0, name:"语言参考s19c208-1.38%", file: "langref"},
 {id:9373, pId:9374, name:"注释", file: "language.basic-syntax.comments"},
 {id:9374, pId:9372, name:"基本语法s4c4-0.03%", file: "language.basic-syntax"},
 {id:9375, pId:9374, name:"指令分隔符", file: "language.basic-syntax.instruction-separation"},
@@ -9671,6 +9625,7 @@
 {id:9590, pId:9592, name:"需求", file: "mailparse.requirements"},
 {id:9591, pId:9592, name:"资源类型", file: "mailparse.resources"},
 {id:9592, pId:251, name:"安装／配置s4c4-0.03%", file: "mailparse.setup"},
+{id:9593, pId:0, name:"PHP 手册s1c1", file: "manual"},
 {id:9594, pId:9599, name:"运行时配置", file: "math.configuration"},
 {id:9595, pId:252, name:"预定义常量", file: "math.constants"},
 {id:9596, pId:9599, name:"安装", file: "math.installation"},
@@ -12591,6 +12546,7 @@
 {id:12511, pId:12514, name:"总则", file: "security.general"},
 {id:12512, pId:12514, name:"使用 Register Globals", file: "security.globals"},
 {id:12513, pId:12514, name:"隐藏 PHP", file: "security.hiding"},
+{id:12514, pId:0, name:"安全s13c27-0.18%", file: "security"},
 {id:12515, pId:12514, name:"简介", file: "security.intro"},
 {id:12516, pId:12517, name:"关闭魔术引号", file: "security.magicquotes.disabling"},
 {id:12517, pId:12514, name:"魔术引号s4c4-0.03%", file: "security.magicquotes"},
@@ -15114,55 +15070,134 @@
 {id:15035, pId:1360, name:"Gets the last committed configuration of the ZooKe", file: "zookeeperconfig.get"},
 {id:15036, pId:1360, name:"Remove servers from the ensemble", file: "zookeeperconfig.remove"},
 {id:15037, pId:1360, name:"Change ZK cluster ensemble membership and roles of", file: "zookeeperconfig.set"},
-    ];
+		];
 
-    $(document).ready(function () {
-      var t = $("#tree");
-      t = $.fn.zTree.init(t, setting, zNodes);
-      demoIframe = $("#testIframe");
-      demoIframe.bind("load", loadReady);
-      var zTree = $.fn.zTree.getZTreeObj("tree");
-      // zTree.selectNode(zTree.getNodeByParam("id", 1019));
+		var log, className = "dark";
+		function beforeClick(treeId, treeNode) {
+			if (treeNode.isParent) {
+				return true;
+			} else {
+				alert("这个 Demo 是用来测试 展开 / 折叠 的...\n\n去点击父节点吧... ");
+				return false;
+			}
+		}
+		function beforeCollapse(treeId, treeNode) {
+			className = (className === "dark" ? "":"dark");
+			showLog("[ "+getTime()+" beforeCollapse ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name );
+			return (treeNode.collapse !== false);
+		}
+		function onCollapse(event, treeId, treeNode) {
+			showLog("[ "+getTime()+" onCollapse ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+		}		
+		function beforeExpand(treeId, treeNode) {
+			className = (className === "dark" ? "":"dark");
+			showLog("[ "+getTime()+" beforeExpand ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name );
+			return (treeNode.expand !== false);
+		}
+		function onExpand(event, treeId, treeNode) {
+			showLog("[ "+getTime()+" onExpand ]&nbsp;&nbsp;&nbsp;&nbsp;" + treeNode.name);
+		}
+		function showLog(str) {
+			if (!log) log = $("#log");
+			log.append("<li class='"+className+"'>"+str+"</li>");
+			if(log.children("li").length > 8) {
+				log.get(0).removeChild(log.children("li")[0]);
+			}
+		}
+		function getTime() {
+			var now= new Date(),
+			h=now.getHours(),
+			m=now.getMinutes(),
+			s=now.getSeconds(),
+			ms=now.getMilliseconds();
+			return (h+":"+m+":"+s+ " " +ms);
+		}
 
-    });
+		function expandNode(e) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			type = e.data.type,
+			nodes = zTree.getSelectedNodes();
+			if (type.indexOf("All")<0 && nodes.length == 0) {
+				alert("请先选择一个父节点");
+			}
 
-    function loadReady() {
-      var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
-        htmlH = demoIframe.contents().find("html").get(0).scrollHeight,
-        maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
-        h = demoIframe.height() >= maxH ? minH : maxH;
-      if (h < 530) h = 530;
-      demoIframe.height(h);
-    }
+			if (type == "expandAll") {
+				zTree.expandAll(true);
+			} else if (type == "collapseAll") {
+				zTree.expandAll(false);
+			} else {
+				var callbackFlag = $("#callbackTrigger").attr("checked");
+				for (var i=0, l=nodes.length; i<l; i++) {
+					zTree.setting.view.fontCss = {};
+					if (type == "expand") {
+						zTree.expandNode(nodes[i], true, null, null, callbackFlag);
+					} else if (type == "collapse") {
+						zTree.expandNode(nodes[i], false, null, null, callbackFlag);
+					} else if (type == "toggle") {
+						zTree.expandNode(nodes[i], null, null, null, callbackFlag);
+					} else if (type == "expandSon") {
+						zTree.expandNode(nodes[i], true, true, null, callbackFlag);
+					} else if (type == "collapseSon") {
+						zTree.expandNode(nodes[i], false, true, null, callbackFlag);
+					}
+				}
+			}
+		}
 
-    //-->
-  </SCRIPT>
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			$("#expandBtn").bind("click", {type:"expand"}, expandNode);
+			$("#collapseBtn").bind("click", {type:"collapse"}, expandNode);
+			$("#toggleBtn").bind("click", {type:"toggle"}, expandNode);
+			$("#expandSonBtn").bind("click", {type:"expandSon"}, expandNode);
+			$("#collapseSonBtn").bind("click", {type:"collapseSon"}, expandNode);
+			$("#expandAllBtn").bind("click", {type:"expandAll"}, expandNode);
+			$("#collapseAllBtn").bind("click", {type:"collapseAll"}, expandNode);
+		});
+		//-->
+	</SCRIPT>
 </HEAD>
 
 <BODY>
-<TABLE border=0 height=600px align=left>
-  <TR>
-    <TD width=260px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
-       <b>全网首个PHP7.4手册分析报告</b>
-          <br/>
-      <ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
-
-    
-
-      安装：composer create-project guomengtao/phpmanual <br/>
-       <a href="https://github.com/guomengtao/phpmanual">github</a>  
-       <a href="https://gitee.com/rinuo/phpmanual">gitee</a> <br/>
-
-         Note： s=子目录 c=包含文件 %=手册比例 <br/>
-
-         
-    </TD>
-    <TD width=100% align=left valign=top>
-      <IFRAME ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100% height=100%
-              SRC="../static/php-chunked-xhtml/index.html"></IFRAME>
-    </TD>
-  </TR>
-</TABLE>
-
+<h1>展开 / 折叠父节点控制</h1>
+<h6>[ 文件路径: core/expand.html ]</h6>
+<div class="content_wrap">
+	<div class="zTreeDemoBackground left">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
+	<div class="right">
+		<ul class="info">
+			<li class="title"><h2>1、beforeCollapse / onCollapse<br/>&nbsp;&nbsp;beforeExpand / onExpand 事件回调函数控制</h2>
+				<ul class="list">
+				<li>利用 collapse / expand 事件回调函数 可以控制父节点是否允许 展开 / 折叠，这里简单演示如何监控此事件</li>
+				<li><p>试试看：<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="callbackTrigger" checked /> expandNode 方法是否触发 callback<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;单个节点--[ <a id="expandBtn" href="#" title="不想展开我就不展开你..." onclick="return false;">展开</a> ]
+					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="collapseBtn" href="#" title="不想折叠我就不折叠你..." onclick="return false;">折叠</a> ]
+					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="toggleBtn" href="#" title="你想怎样？..." onclick="return false;">展开 / 折叠 切换</a> ]<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;单个节点（包括子节点）--[ <a id="expandSonBtn" href="#" title="不想展开我就不展开你..." onclick="return false;">展开</a> ]
+					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="collapseSonBtn" href="#" title="不想折叠我就不折叠你..." onclick="return false;">折叠</a> ]<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;全部节点--[ <a id="expandAllBtn" href="#" title="不管你有多NB，统统都要听我的！！" onclick="return false;">展开</a> ]
+					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="collapseAllBtn" href="#" title="不管你有多NB，统统都要听我的！！" onclick="return false;">折叠</a> ]</p>
+				<li><p><span class="highlight_red">使用 zTreeObj.expandNode 方法，详细请参见 API 文档中的相关内容</span><br/>
+					collapse / expand log:<br/>
+					<ul id="log" class="log"></ul></p>
+				</li>
+				</ul>
+			</li>
+			<li class="title"><h2>2、setting 配置信息说明</h2>
+				<ul class="list">
+				<li class="highlight_red">事件回调函数的使用，详细请参见 API 文档中 setting.callback 的相关内容</li>
+				<li class="highlight_red">如果需要调整 展开 / 折叠 的动画效果， 详细请参见 API 文档中 setting.view.expandSpeed 的相关内容</li>
+				</ul>
+			</li>
+			<li class="title"><h2>3、treeNode 节点数据说明</h2>
+				<ul class="list">
+				<li>对 节点数据 没有特殊要求，用户可以根据自己的需求添加自定义属性</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
 </BODY>
 </HTML>

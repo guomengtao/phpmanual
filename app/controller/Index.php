@@ -70,9 +70,10 @@ class Index extends BaseController
      	// $tree = $this->getchildcatajson("features","2413");
      	// $tree = $this->getchildcatajson("internals2","8706");
      	// $tree = $this->getchildcatajson("faq","2373");
-     	$tree = $this->getchildcatajson("funcref","2527");
+     	// $tree = $this->getchildcatajson("funcref","2527");
      	// $tree = $this->getchildcatajson("appendices","56");
      	// dump($tree);
+        $this->getalljson(1);
      	die();
       // {id: 1, pId: 0, name: "PHP手册 一级目录 11", open: true},
       // {id:1521, pId: 1, name: "版权信息-L1S0C0", file: "../static/php-chunked-xhtml/about"},
@@ -259,96 +260,187 @@ class Index extends BaseController
     	 
     }
 
+    // 递归获取所有文件的pid父目录id
+    public function getallpid($id){
+
+        // 获取一个文件的catalog字段名
+        $file = Manual::field('id,catalog')->find($id);
+ 
+        // 根据catalog字段名获pid
+        $value = Manual::where('file',$file->catalog)->field('id')->find();
+ 
+     
+        // 把获取的pid存入到当前目录里
+         Manual::update(['pid' =>  $value['id'] ], ['id' => $id]);
+
+         ++$id;
+
+         echo $id . "\n";
+
+        // 递归循环一遍
+         if ($id < 15038) {
+             # code...
+            $this->getallpid($id);
+         }
+
+    }
+
+    // 根据zTree可以自动排序目录功能，直接生成全部json
+    public function getalljson($id){
+
+    	// 获取一个文件的json数据
+    	$value = Manual::find($id);
+
+  
+ 		
+        // dump($value->toArray());
+
+        // echo $value->file;
+
+         
+
+
+    	$mark = "{id:";
+
+     
+
+
+		$str = str_replace('"', '', $value->title);
+		$str = mb_substr($str, 0, 50);
+
+		$c1 = '';
+		if ($value->child >1) {
+			$c1 = round($value->child/15037*100, 2); 
+ 			$c1 = "-".$c1."%";
+		}
+
+		$child = "";
+		if ($value->child) {
+			# code...
+			$child = "c".$value->child;
+		}
+
+		$son = '';
+		if ($value->son) {
+			# code...
+			$son = "s".$value->son;
+		}
+
+        $level = $value->level;
+        if ($level > 1) {
+
+            echo $mark.$value->id.", pId:".$value->pid.", name:\"".$str.$son.$child.$c1."\"".", file: \"".$value->file."\"},";
+      
+            echo "<br>\n";  
+        }
+
+        //输出json
+
+
+        $id = $id +1;
+
+		// 如果有子目录继续递归
+		if ($id < 15038){
+			
+			// dump($checkchild ->toArray());
+			 
+			$this->getalljson($id);
+		}
+
+
+ 
+    	 
+    }
     public function getchildcatajson($file,$pid){
 
-    	// 改为输出数组转json供前端使用
-    	// 思路：通过目录level字段定位数组的维度
-    	// 尝试用方法里的默认传值存储递归数据
+        // 改为输出数组转json供前端使用
+        // 思路：通过目录level字段定位数组的维度
+        // 尝试用方法里的默认传值存储递归数据
 
-    	// 指定的文件
-    	// 仅仅列出文件的子目录
+        // 指定的文件
+        // 仅仅列出文件的子目录
 
-    	// 获取一个目录的直属子目录
-    	$getchildcata = Manual::where('catalog',$file)->select();
+        // 获取一个目录的直属子目录
+        $getchildcata = Manual::where('catalog',$file)->select();
 
-    	// $this->i = $this->i + 1;
+        // $this->i = $this->i + 1;
 
-    	// // 防止死循环功能，记录循环次数
-    	// if ($this->i > 300) {
-    	// 	echo ">6 stop ";
-    	// 	$this->i = 0;
-    	// 	die();
-    	// }
-    	// 遍历直属子目录
-    	// level字段是记录自己属于第几级目录
-    	// 查询属于几级目录
-    	
- 		
-    	$getchildcatacount = count($getchildcata);
-    	foreach ($getchildcata as $key => $value) {
-
-
-    		 // { id:1, pId:0, name:"父节点1 - 展开", open:true},
-    		 // { id:自己的id, pId:父id, name:"父节点1 - 展开", open:true},
-    		// 获取目录级别
-    		// 例如 $tree['一级目录id']['二级目录id']
-
-	     
-
-	    	$mark = "{id:";
-
-    		// 	如果子目录里有目录 递归获取其子目录
-    		$checkchild = Manual::where('catalog',$value->file)->select();
-    		$checkchildcount = count($checkchild);
-	    	$key = $key +1;
+        // // 防止死循环功能，记录循环次数
+        // if ($this->i > 300) {
+        //  echo ">6 stop ";
+        //  $this->i = 0;
+        //  die();
+        // }
+        // 遍历直属子目录
+        // level字段是记录自己属于第几级目录
+        // 查询属于几级目录
+        
+        
+        $getchildcatacount = count($getchildcata);
+        foreach ($getchildcata as $key => $value) {
 
 
-			$str = str_replace('"', '', $value->title);
-			$str = mb_substr($str, 0, 50);
+             // { id:1, pId:0, name:"父节点1 - 展开", open:true},
+             // { id:自己的id, pId:父id, name:"父节点1 - 展开", open:true},
+            // 获取目录级别
+            // 例如 $tree['一级目录id']['二级目录id']
 
-			$c1 = '';
-			if ($value->child) {
-				$c1 = round($value->child/15037*100, 2); 
-	 			$c1 = "-".$c1."%";
-			}
+         
 
-			$child = "";
-			if ($value->child) {
-				# code...
-				$child = "c".$value->child;
-			}
+            $mark = "{id:";
 
-			$son = '';
-			if ($value->son) {
-				# code...
-				$son = "s".$value->son;
-			}
-	
+            //  如果子目录里有目录 递归获取其子目录
+            $checkchild = Manual::where('catalog',$value->file)->select();
+            $checkchildcount = count($checkchild);
+            $key = $key +1;
 
-    		echo $mark.$value->id.", pId:".$pid.", name:\"".$str.$son.$child.$c1."\"".", file: \"".$value->file."\"},";
-    		 
-    		if ($checkchildcount) {
-    			// echo ",,,子目录：".$checkchildcount ;
-    		}
 
-	   		//输出或存储结果
+            $str = str_replace('"', '', $value->title);
+            $str = mb_substr($str, 0, 50);
+
+            $c1 = '';
+            if ($value->child >1) {
+                $c1 = round($value->child/15037*100, 2); 
+                $c1 = "-".$c1."%";
+            }
+
+            $child = "";
+            if ($value->child) {
+                # code...
+                $child = "c".$value->child;
+            }
+
+            $son = '';
+            if ($value->son) {
+                # code...
+                $son = "s".$value->son;
+            }
+    
+
+            echo $mark.$value->id.", pId:".$pid.", name:\"".$str.$son.$child.$c1."\"".", file: \"".$value->file."\"},";
+             
+            if ($checkchildcount) {
+                // echo ",,,子目录：".$checkchildcount ;
+            }
+
+            //输出或存储结果
  
-    		echo "<br>\n";
+            echo "<br>\n";
 
-    		// 如果有子目录继续递归
-    		if ($checkchildcount ){
-    			
-    			// dump($checkchild ->toArray());
-    			 
-    			$this->getchildcatajson($value->file,$value->id);
-    		}
+            // 如果有子目录继续递归
+            if ($checkchildcount ){
+                
+                // dump($checkchild ->toArray());
+                 
+                $this->getchildcatajson($value->file,$value->id);
+            }
 
 
 
-    	}
+        }
 
-    	// 如果递归完成返回生成的数组
-    	 
+        // 如果递归完成返回生成的数组
+         
     }
     public function getchildcata($file,$level = 1){
     	// 指定的文件

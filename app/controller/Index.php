@@ -14,7 +14,24 @@ class Index extends BaseController
 
     public function index()
     {
- 		// $num = 122;
+ 		// 通过querylist实现了采集栏目包含内容的页面顺序
+        // 难点jquery选择器的写法，带空格和不带空格意义区别
+        // 有空格指的是 包含在内部的，没有空格指的是连续的  个人理解
+        $data = QueryList::get('http://www.php.com/public/static/php-chunked-xhtml/funcref.html')
+        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/tutorial.html')
+        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/getting-started.html')
+        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
+        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
+            // 设置采集规则
+            ->rules([ 
+                'title'=>array('#layout-content div>ul>li>a','text'),
+                'link'=>array('#layout-content div>ul>li>a','href' ,'-.chunklist .chunklist_book .chunklist_children')
+            ])
+            ->query()->getData();
+
+        print_r($data->all());
+        die;
+        // $num = 122;
 
  		// $num = round($num/15037*100, 2); 
 

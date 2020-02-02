@@ -216,13 +216,13 @@ class Index extends BaseController
 		// }
 
 		// 单个排除测试程序
-		// 递归前先初始化默认值
-		// $this->catalog = "";
-		// $this->i = 0;
+        // echo "ok";
+        // 递归前先初始化默认值
+        // $this->catalog = "";
+        // $this->i = 0;
         // $this->levelone();
 
         // echo $this->catalog;
-        // echo "ok";
     }
 
     public function qlfastgetfilesort($id,$ql){
@@ -235,24 +235,33 @@ class Index extends BaseController
 
             $file = Manual::where('id',$id)->column("file");
 
+
+            // 排除这个文件，此文件ul li并非目录列表
+            if ($file[0]=='indexes.examples') {
+                # code...
+
+                $file[0] = 'tutorial.forms';
+            }
        
+            // 改为从本地目录读取方式，解决文件名带.php无法正确访问问题
+            $url = "static/php-chunked-xhtml/".$file[0].".html";
+            $url = file_get_contents($url);
 
-            $url = "http://www.php.com/static/php-chunked-xhtml/".$file[0].".html";
 
-            echo "开始采集".$url."\n";
+            // echo "开始采集".$url."\n";
  
             
         
-            if($this->httpcode($url)<>"200") {
+            // if($this->httpcode($url)<>"200") {
 
-                    echo "不可访问页面，注意排查，已跳过".$url."\n";
-                    sleep(6);
+            //         echo "不可访问页面，注意排查，已跳过".$url."\n";
+            //         sleep(6);
                      
-            }else{
+            // }else{
 
                 // echo "组合到采集地址".trim($value->file);
                 // 每条链接都会应用上面设置好的采集规则
-                $data = $ql->get($url)->query()->getData();
+                $data = $ql->html($url)->query()->getData();
 
                 $dataall = $data->all();
 
@@ -274,7 +283,7 @@ class Index extends BaseController
                     echo $id ."null<br>\n";
                     // die();
                 }
-            }
+            // }
 
               
 
@@ -295,7 +304,7 @@ class Index extends BaseController
 
         
 
-        echo "执行完成"."\n";
+        
 
     }
     public function getfilesort($id){
@@ -528,23 +537,13 @@ class Index extends BaseController
         // 指定的文件
         // 仅仅列出文件的子目录
 
-        // 获取一个目录的直属子目录
-        $getchildcata = Manual::where('catalog',$file)->select();
+        // 获取一个目录的直属子目录，增加sort排序
+        $getchildcata = Manual::where('catalog',$file)->order("sort")->select();
 
-        // $this->i = $this->i + 1;
 
-        // // 防止死循环功能，记录循环次数
-        // if ($this->i > 300) {
-        //  echo ">6 stop ";
-        //  $this->i = 0;
-        //  die();
-        // }
-        // 遍历直属子目录
-        // level字段是记录自己属于第几级目录
-        // 查询属于几级目录
-        
         
         $getchildcatacount = count($getchildcata);
+
         foreach ($getchildcata as $key => $value) {
 
 

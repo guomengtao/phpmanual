@@ -14,22 +14,22 @@ class Index extends BaseController
 
     public function index()
     {
- 		// 通过querylist实现了采集栏目包含内容的页面顺序
-        // 难点jquery选择器的写法，带空格和不带空格意义区别
-        // 有空格指的是 包含在内部的，没有空格指的是连续的  个人理解
-        $data = QueryList::get('http://www.php.com/public/static/php-chunked-xhtml/funcref.html')
-        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/tutorial.html')
-        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/getting-started.html')
-        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
-        // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
-            // 设置采集规则
-            ->rules([ 
-                'title'=>array('#layout-content div>ul>li>a','text'),
-                'link'=>array('#layout-content div>ul>li>a','href' ,'-.chunklist .chunklist_book .chunklist_children')
-            ])
-            ->query()->getData();
 
-        print_r($data->all());
+
+            //        $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
+            // // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
+            // // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
+            // // 设置采集规则
+            // ->rules([ 
+            //     'title'=>array('#layout-content div>ul>li>a','text'),
+            //     'link'=>array('#layout-content div>ul>li>a','href' )
+            // ])
+            // ->query()->getData();
+
+            // print_r($data->all());
+
+            // die();
+        $this->getfilesort(1);
         die;
         // $num = 122;
 
@@ -208,6 +208,68 @@ class Index extends BaseController
 
         // echo $this->catalog;
         // echo "ok";
+    }
+    public function getfilesort($id){
+
+        // 获取一个文件的文件名
+
+        $file = Manual::where('id',$id)->column("file");
+
+       
+
+            $url = "http://www.php.com/static/php-chunked-xhtml/".$file[0].".html";
+
+            // 通过querylist实现了采集栏目包含内容的页面顺序
+            // 难点jquery选择器的写法，带空格和不带空格意义区别
+            // 有空格指的是 包含在内部的，没有空格指的是连续的  个人理解
+            $data = QueryList::get($url)
+            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/tutorial.html')
+            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/getting-started.html')
+            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
+            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
+            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
+            // 设置采集规则
+            ->rules([ 
+                'title'=>array('#layout-content div>ul>li>a','text'),
+                'link'=>array('#layout-content div>ul>li>a','href' )
+            ])
+            ->query()->getData();
+
+            // print_r($data->all());
+
+            $dataall = $data->all();
+
+            if (count($dataall)) {
+                    echo $id ."--".count($dataall)."ok<br>\n";
+                    foreach ($dataall as $key => $value) {
+     
+                    // 过滤掉末尾的.html后缀
+                    $value['link'] =  substr($value['link'],0,-5);
+                    // echo $value['link'];
+                    $file = $value['link'];
+                    $sort = $key+1;
+                    Manual::update(['sort' => $sort], ['file' => $file]);
+                    // echo  $file ."ok\n";
+
+                }
+     
+            }else{
+                echo $id ."null<br>\n";
+                // die();
+            }
+
+
+
+        $id = $id +1;
+
+        // 继续递归查询
+
+        if ($id < 15038){
+            
+            $this->getfilesort($id);
+        }
+
+
     }
 
     public function getsoncount($id){

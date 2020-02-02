@@ -15,36 +15,37 @@ class Index extends BaseController
     public function index()
     {
 
-// // 
-//                    $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
-//             // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
-//             // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
-//             // $data = QueryList::get('http://www.php.com/static/php-chunked-xhtml/getting-started.html')
-//             // 设置采集规则
-//             ->rules([ 
-//                 'title'=>array('#layout-content div>ul>li>a','text'),
-//                 'link'=>array('#layout-content div>ul>li>a','href' )
-//             ])
-//             ->query()->getData();
 
-//             print_r($data->all());
+// $this->getchildcatajson('index',0);
+// die();
 
-//             die();
 
-               // 设置采集规则
+                   // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
+                   $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/langref.html')
+            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
+            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
+            // $data = QueryList::get('http://www.php.com/static/php-chunked-xhtml/getting-started.html')
+            // 设置采集规则
+            ->rules([ 
+                'title'=>array('#layout-content div>ul>li>a','text'),
+                'link'=>array('#layout-content div>ul>li>a','href' )
+            ])
+            ->query()->getData();
+
+            print_r($data->all());
+
+            die();
+
+        // 设置采集规则
         //采集规则
-        $rules = array(
-           'title'=>array('#layout-content div>ul>li>a','text'),
-           'link'=>array('#layout-content div>ul>li>a','href' )
-        );
+        // $rules = array(
+        //    'title'=>array('#layout-content div>ul>li>a','text'),
+        //    'link'=>array('#layout-content div>ul>li>a','href' )
+        // );
 
-        $ql = QueryList::rules($rules);
+        // $ql = QueryList::rules($rules);
 
- 
-
-
-
-        $this->qlfastgetfilesort(1,$ql);
+        // $this->qlfastgetfilesort(1,$ql);
         die;
         // $num = 122;
 
@@ -563,7 +564,7 @@ class Index extends BaseController
 
 
             $str = str_replace('"', '', $value->title);
-            $str = mb_substr($str, 0, 50);
+            $str = mb_substr($str, 0, 10);
 
             $c1 = '';
             if ($value->child >1) {
@@ -593,6 +594,8 @@ class Index extends BaseController
             //输出或存储结果
  
             echo "<br>\n";
+
+            // die();
 
             // 如果有子目录继续递归
             if ($checkchildcount ){

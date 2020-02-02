@@ -15,21 +15,36 @@ class Index extends BaseController
     public function index()
     {
 
+// // 
+//                    $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
+//             // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
+//             // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
+//             // $data = QueryList::get('http://www.php.com/static/php-chunked-xhtml/getting-started.html')
+//             // 设置采集规则
+//             ->rules([ 
+//                 'title'=>array('#layout-content div>ul>li>a','text'),
+//                 'link'=>array('#layout-content div>ul>li>a','href' )
+//             ])
+//             ->query()->getData();
 
-            //        $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
-            // // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
-            // // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
-            // // 设置采集规则
-            // ->rules([ 
-            //     'title'=>array('#layout-content div>ul>li>a','text'),
-            //     'link'=>array('#layout-content div>ul>li>a','href' )
-            // ])
-            // ->query()->getData();
+//             print_r($data->all());
 
-            // print_r($data->all());
+//             die();
 
-            // die();
-        $this->getfilesort(1);
+               // 设置采集规则
+        //采集规则
+        $rules = array(
+           'title'=>array('#layout-content div>ul>li>a','text'),
+           'link'=>array('#layout-content div>ul>li>a','href' )
+        );
+
+        $ql = QueryList::rules($rules);
+
+ 
+
+
+
+        $this->qlfastgetfilesort(1,$ql);
         die;
         // $num = 122;
 
@@ -208,6 +223,80 @@ class Index extends BaseController
 
         // echo $this->catalog;
         // echo "ok";
+    }
+
+    public function qlfastgetfilesort($id,$ql){
+
+ 
+        // 防ql内存溢出原理，只加载一次实例化，在递归循环之外
+
+ 
+            // 获取一个文件的文件名
+
+            $file = Manual::where('id',$id)->column("file");
+
+       
+
+            $url = "http://www.php.com/static/php-chunked-xhtml/".$file[0].".html";
+
+            echo "开始采集".$url."\n";
+ 
+            
+        
+            if($this->httpcode($url)<>"200") {
+
+                    echo "不可访问页面，注意排查，已跳过".$url."\n";
+                    sleep(6);
+                     
+            }else{
+
+                // echo "组合到采集地址".trim($value->file);
+                // 每条链接都会应用上面设置好的采集规则
+                $data = $ql->get($url)->query()->getData();
+
+                $dataall = $data->all();
+
+                if (count($dataall)) {
+                    echo $id ."--".count($dataall)."ok<br>\n";
+                    foreach ($dataall as $key => $value) {
+     
+                    // 过滤掉末尾的.html后缀
+                    $value['link'] =  substr($value['link'],0,-5);
+                    // echo $value['link'];
+                    $file = $value['link'];
+                    $sort = $key+1;
+                    Manual::update(['sort' => $sort], ['file' => $file]);
+                    // echo  $file ."ok\n";
+
+                    }
+         
+                }else{
+                    echo $id ."null<br>\n";
+                    // die();
+                }
+            }
+
+              
+
+               
+
+
+            // 释放Document内存占用
+                $ql->destruct();
+
+        $id = $id +1;
+
+        // 继续递归查询
+
+        if ($id < 15038){
+            
+            $this->qlfastgetfilesort($id,$ql);
+        } 
+
+        
+
+        echo "执行完成"."\n";
+
     }
     public function getfilesort($id){
 
@@ -1072,12 +1161,6 @@ class Index extends BaseController
 
     public function qlfast($files){
 
-    	 
- 	// ini_set('max_execution_time','10000');
-
- 
-
-
  
  		// 准备一个数组存储所有html页面
  		// 重构了querylist的加载逻辑，重复循环内存溢出
@@ -1160,6 +1243,7 @@ class Index extends BaseController
 		echo "执行完成"."\n";
 
     }
+
     public function bigdata(){
 
 	    echo $this->qldate("about");

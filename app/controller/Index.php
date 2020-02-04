@@ -15,37 +15,47 @@ class Index extends BaseController
     public function index()
     {
 
+        // 设置采集规则
+        //采集规则
+        $rules = array(
+           'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
+           'title' => array('title','text'),
+        );
 
+        $ql = QueryList::rules($rules);
+
+
+$this->qlfast(1,$ql);
 // $this->getchildcatajson('index',0);
-// die();
+die();
 
 
                    // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
-                   $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/langref.html')
-            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
-            // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
-            // $data = QueryList::get('http://www.php.com/static/php-chunked-xhtml/getting-started.html')
-            // 设置采集规则
-            ->rules([ 
-                'title'=>array('#layout-content div>ul>li>a','text'),
-                'link'=>array('#layout-content div>ul>li>a','href' )
-            ])
-            ->query()->getData();
+            //        $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/langref.html')
+            // // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
+            // // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/features.dtrace.systemtap.html')
+            // // $data = QueryList::get('http://www.php.com/static/php-chunked-xhtml/getting-started.html')
+            // // 设置采集规则
+            // ->rules([ 
+            //     'title'=>array('#layout-content div>ul>li>a','text'),
+            //     'link'=>array('#layout-content div>ul>li>a','href' )
+            // ])
+            // ->query()->getData();
 
-            print_r($data->all());
+            // print_r($data->all());
 
-            die();
+            // die();
 
         // 设置采集规则
         //采集规则
-        // $rules = array(
-        //    'title'=>array('#layout-content div>ul>li>a','text'),
-        //    'link'=>array('#layout-content div>ul>li>a','href' )
-        // );
+        $rules = array(
+           'title'=>array('#layout-content div>ul>li>a','text'),
+           'link'=>array('#layout-content div>ul>li>a','href' )
+        );
 
-        // $ql = QueryList::rules($rules);
+        $ql = QueryList::rules($rules);
 
-        // $this->qlfastgetfilesort(1,$ql);
+        $this->qlfastgetfilesort(1,$ql);
         die;
         // $num = 122;
 
@@ -1161,9 +1171,16 @@ class Index extends BaseController
 
 	}
 
-    public function qlfast($files){
+    public function qlfastold($files){
 
- 
+        // 起因：部分带".php."字符串的过滤了没有采集到标题和上级目录
+        // 授课方式：一起编写，巩固分析已用的知识点
+        // 核心改进:用本地的html文件直接获取分析
+        // 采用递归优化效率和代码量
+        // 去掉原来2次循环的重复遍历
+
+        // ----------------- 升级优化 -----------------
+
  		// 准备一个数组存储所有html页面
  		// 重构了querylist的加载逻辑，重复循环内存溢出
 
@@ -1243,6 +1260,94 @@ class Index extends BaseController
 		}
 
 		echo "执行完成"."\n";
+
+    }    
+
+    public function qlfast($id,$ql){
+
+        // 起因：部分带".php."字符串的过滤了没有采集到标题和上级目录
+        // 授课方式：一起编写，巩固分析已用的知识点
+        // 核心改进:用本地的html文件直接获取分析
+        // 采用递归优化效率和代码量
+        // 去掉原来2次循环的重复遍历
+
+        // ----------------- 升级优化 -----------------
+        
+        // 准备一个数组存储所有html页面
+        // 重构了querylist的加载逻辑，重复循环内存溢出
+
+        $id = 9173;
+
+        // 获取一个目录的直属子目录，增加sort排序
+        $getfile = Manual::order('file')->where('title','')->find($id);
+        
+        $file = $getfile['file'];
+
+
+        if ($file) {
+            # code...
+
+        
+
+        // echo $file;
+
+        // die();
+ 
+        $url= "static/php-chunked-xhtml/".$file.".html";
+                
+                    
+        $html= file_get_contents($url);
+
+        // echo $url;
+
+        // die;
+
+
+            echo "开始采集"."\n";
+ 
+            // 每条链接都会应用上面设置好的采集规则
+            $data = $ql->html($html)->query()->getData();
+            
+            // dump($data[0]['catalog']);
+            // die();
+
+            if(!empty($data[0]['catalog'])){
+
+
+                 // 过滤掉末尾的.html后缀
+                 $catalog  =  substr($data[0]['catalog'],0,-5);
+
+                 $title    =  $data[0]['title'];
+                 $title    = str_replace('"', '', $title);
+                 $title    = mb_substr($title, 0, 50);
+                 
+            
+                echo "采集成功 开始入库".$url ;
+                echo $catalog . $title."\n";
+                echo "入库文件为".$file."\n";
+                echo $id;
+             // 通过模型修改的入库操作
+             Manual::update(['catalog' =>  $catalog,'title' => $title], ['id' => $id]);
+
+             } 
+
+
+
+       
+
+               // 释放Document内存占用
+                $ql->destruct();
+
+        }
+
+        $id = $id +1;
+
+        // 继续递归查询
+
+        if ($id <= 15037){
+            
+            $this->qlfast($id,$ql);
+        }
 
     }
 

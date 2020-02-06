@@ -6,6 +6,8 @@ use QL\QueryList;
 use think\facade\Request;
 use app\model\Manual;
 // use app\controller\Catalog;
+
+
 class Index extends BaseController
 {
     // 全局变量 用于递归传值
@@ -1266,10 +1268,10 @@ die();
     public function qlfast($id,$ql){
 
         // 起因：部分带".php."字符串的过滤了没有采集到标题和上级目录
-        // 授课方式：一起编写，巩固分析已用的知识点
         // 核心改进:用本地的html文件直接获取分析
         // 采用递归优化效率和代码量
         // 去掉原来2次循环的重复遍历
+        // 心得：需要梳理每个流程
 
         // ----------------- 升级优化 -----------------
         

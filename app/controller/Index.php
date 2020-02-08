@@ -20,16 +20,27 @@ class Index extends BaseController
         // 设置采集规则
         //采集规则
         $rules = array(
-           'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
-           'title' => array('title','text'),
+           // 'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
+           // 'title' => array('.refname','text'),
+           'title' => array('.title','text'),
         );
 
         $ql = QueryList::rules($rules);
 
 
-$this->qlfast(1,$ql);
-// $this->getchildcatajson('index',0);
-die();
+        $this->qlsearch(1,$ql);
+
+        // $rules = array(
+        //    'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
+        //    'title' => array('title','text'),
+        // );
+
+        // $ql = QueryList::rules($rules);
+
+
+        // $this->qlfast(1,$ql);
+        // $this->getchildcatajson('index',0);
+        die();
 
 
                    // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
@@ -236,6 +247,58 @@ die();
         // $this->levelone();
 
         // echo $this->catalog;
+    }
+
+    public function qlsearch($id,$ql){
+        // querylist 统一搜索函数
+        // 只初始化一次，放内存溢出
+        // 原理，外部传入不同的采集规则，实现不同的搜索功能
+        // 目前统一返回一个数组
+
+ 
+            // 获取一个文件的文件名
+            $file = Manual::where('id',$id)->column("file");
+
+
+            // 排除这个文件，此文件ul li并非目录列表
+            if ($file[0]=='indexes.examples') {
+                # code...
+
+                $file[0] = 'tutorial.forms';
+            }
+       
+            // 从本地目录读取方式，解决文件名带.php无法正确访问问题
+            $url = "static/php-chunked-xhtml/".$file[0].".html";
+            $url = file_get_contents($url);
+
+ 
+            // 开始采集
+            $data = $ql->html($url)->query()->getData();
+            $dataall = $data->all();
+
+            if (count($dataall)) {
+                // dump($dataall[0]['title']);
+                
+                // echo $id ."--".$file[0]." - ok<br>\n";
+
+                
+            }else{
+                echo $id .$file[0].",没采集到<br>\n";
+                // die();
+            }
+                    
+
+            // 释放Document内存占用
+            $ql->destruct();
+
+        $id = $id +1;
+
+        // 继续递归查询
+
+        if ($id < 15038){
+            
+            $this->qlsearch($id,$ql);
+        } 
     }
 
     public function qlfastgetfilesort($id,$ql){

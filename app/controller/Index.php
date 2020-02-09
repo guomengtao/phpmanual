@@ -6,7 +6,7 @@ use app\BaseController;
 use QL\QueryList;
 use think\facade\Request;
 use app\model\Manual;
-
+use think\facade\Db;
 // use app\controller\Catalog;
 
 class Index extends BaseController
@@ -20,9 +20,18 @@ class Index extends BaseController
      */
     public function index()
     {
-        // ->group('user_id')
-        $classname = Manual::where('classname', '<>', '')->group('classname')->select();
-        dump($classname->toarray());
+
+        // $classname = Manual::where('classname', '<>', '')->order('classname')->group('classname')->select();
+        // dump($classname->toarray());
+
+        $classname = Db::table('think_manual')
+            ->where('classname','<>','null')
+            ->where('classname','<>','')
+            ->field('classname,count(classname) as num')
+            ->group('classname')
+            ->select();
+
+        dump($classname);
         die();
         // 设置采集规则
         //采集规则
@@ -293,7 +302,7 @@ class Index extends BaseController
             echo $dataall[0]['methodsynopsis'];
             echo "+";
             $str = $dataall[0]['methodsynopsis'];
-            $str = substr($str, 0, strpos($str, ':'));
+            $str = substr($str, 0, strpos($str, '::'));
             echo $str;
             echo "--" . $id . "--" . $file[0] . " - ok<br>\n";
             Manual::update(['classname' => $str], ['id' => $id]);

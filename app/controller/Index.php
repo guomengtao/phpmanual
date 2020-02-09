@@ -7,6 +7,7 @@ use QL\QueryList;
 use think\facade\Request;
 use app\model\Manual;
 use think\facade\Db;
+
 // use app\controller\Catalog;
 
 class Index extends BaseController
@@ -25,8 +26,8 @@ class Index extends BaseController
         // dump($classname->toarray());
 
         $classname = Db::table('think_manual')
-            ->where('classname','<>','null')
-            ->where('classname','<>','')
+            ->where('classname', '<>', 'null')
+            ->where('classname', '<>', '')
             ->field('classname,count(classname) as num')
             ->group('classname')
             ->select();

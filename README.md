@@ -68,10 +68,12 @@ Note： s=子目录 c=包含文件 %=手册比例
 
 函数和方法合计11241个
 function 函数 4598个
+ 函数表：./public/tree/json/fn.html
 method 方法  6643个 
-  详细列表见：./public/tree/json/method.html
+  方法见：./public/tree/json/method.html
   
-函数4千多，方法6千多 。合计占了手册了三分之二
+类有584个，每个类包含的方法数
+ 类名单见：public/analysis/basic/class.html
 
 ## 目前最新版V2.5.2
 * 完成了前端树形结果的展示

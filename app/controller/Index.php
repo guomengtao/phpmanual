@@ -42,9 +42,13 @@ class Index extends BaseController
 
         // $this->qlfast(1,$ql);
         // $this->getchildcatajson('index',0);
+        $appletest = 1555;
+        $big       = 333333333;
+        $name = "tom";
+
+        ++$appletest ;
         die();
-        $a   = 1;
-        $big = 333333333;
+
         // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
         //        $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/langref.html')
         // // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/security.magicquotes.html')
@@ -67,7 +71,7 @@ class Index extends BaseController
             'title' => array('#layout-content div>ul>li>a', 'text'),
             'link'  => array('#layout-content div>ul>li>a', 'href')
         );
-
+        // i like use monokai thememo
         $ql = QueryList::rules($rules);
 
         $this->qlfastgetfilesort(1, $ql);

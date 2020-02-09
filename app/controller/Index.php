@@ -9,26 +9,30 @@ use app\model\Manual;
 
 // use app\controller\Catalog;
 
-
 class Index extends BaseController
 {
     // 全局变量 用于递归传值
     public $catalog = '';
     public $i = 0;
 
+    /**
+     * 临时cli命令行统一入库【待解决cli路由传值问题】
+     */
     public function index()
     {
-
+        // ->group('user_id')
+        $classname = Manual::where('classname', '<>', '')->group('classname')->select();
+        dump($classname->toarray());
+        die();
         // 设置采集规则
         //采集规则
         $rules = array(
             // 'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
             // 'title' => array('.refname','text'),
-            'methodsynopsis' => array('.methodsynopsis.dc-description', 'text'),
+            'methodsynopsis' => array('.methodsynopsis.dc-description strong', 'text'),
         );
 
         $ql = QueryList::rules($rules);
-
 
         $this->qlsearch(1, $ql);
 
@@ -41,12 +45,14 @@ class Index extends BaseController
 
 
         // $this->qlfast(1,$ql);
-        // $this->getchildcatajson('index',0);
-        $appletest = 1555;
-        $big       = 333333333;
-        $name = "tom";
 
-        ++$appletest ;
+        // 核心公功能：生成带排序的所有目录json
+        // $this->getchildcatajson('index', 0);
+        // $appletest = 1555;
+        // $big       = 333333333;
+        // $name = "tom";
+        //
+        // ++$appletest ;
         die();
 
         // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/appendices.html')
@@ -67,15 +73,15 @@ class Index extends BaseController
 
         // 设置采集规则
         //采集规则
-        $rules = array(
-            'title' => array('#layout-content div>ul>li>a', 'text'),
-            'link'  => array('#layout-content div>ul>li>a', 'href')
-        );
-        // i like use monokai thememo
-        $ql = QueryList::rules($rules);
-
-        $this->qlfastgetfilesort(1, $ql);
-        die;
+        // $rules = array(
+        //     'title' => array('#layout-content div>ul>li>a', 'text'),
+        //     'link'  => array('#layout-content div>ul>li>a', 'href')
+        // );
+        //
+        // $ql = QueryList::rules($rules);
+        //
+        // $this->qlfastgetfilesort(1, $ql);
+        // die;
         // $num = 122;
 
         // $num = round($num/15037*100, 2);
@@ -134,8 +140,8 @@ class Index extends BaseController
         // $tree = $this->getchildcatajson("funcref","2527");
         // $tree = $this->getchildcatajson("appendices","56");
         // dump($tree);
-        $this->getalljson(1);
-        die();
+        // $this->getalljson(1);
+        // die();
         // {id: 1, pId: 0, name: "PHP手册 一级目录 11", open: true},
         // {id:1521, pId: 1, name: "版权信息-L1S0C0", file: "../static/php-chunked-xhtml/about"},
         // {id:9593, pId: 1, name: "PHP 手册-L1S1C1", file: "manual"},
@@ -261,7 +267,6 @@ class Index extends BaseController
         // 原理，外部传入不同的采集规则，实现不同的搜索功能
         // 目前统一返回一个数组
 
-
         // 获取一个文件的文件名
         $file = Manual::where('id', $id)->column("file");
 
@@ -283,10 +288,15 @@ class Index extends BaseController
         $dataall = $data->all();
 
         if (count($dataall)) {
-            dump($dataall[0]['methodsynopsis']);
 
-            echo $id . "--" . $file[0] . " - ok<br>\n";
 
+            echo $dataall[0]['methodsynopsis'];
+            echo "+";
+            $str = $dataall[0]['methodsynopsis'];
+            $str = substr($str, 0, strpos($str, ':'));
+            echo $str;
+            echo "--" . $id . "--" . $file[0] . " - ok<br>\n";
+            Manual::update(['classname' => $str], ['id' => $id]);
 
         } else {
             // echo $id .$file[0].",没采集到<br>\n";
@@ -305,6 +315,7 @@ class Index extends BaseController
 
             $this->qlsearch($id, $ql);
         }
+
     }
 
     public function qlfastgetfilesort($id, $ql)
@@ -394,7 +405,7 @@ class Index extends BaseController
         $url = "http://www.php.com/static/php-chunked-xhtml/" . $file[0] . ".html";
 
         // 通过querylist实现了采集栏目包含内容的页面顺序
-        // 难点jquery选择器的写法，带空格和不带空格意义区别
+        // 难点jquery选择器的写法，带空格和不带空格意义区别a
         // 有空格指的是 包含在内部的，没有空格指的是连续的  个人理解
         $data = QueryList::get($url)
             // $data = QueryList::get('http://rinuo.gitee.io/phpmanual/public/static/php-chunked-xhtml/tutorial.html')
@@ -546,7 +557,13 @@ class Index extends BaseController
 
     }
 
-    // 根据zTree可以自动排序目录功能，直接生成全部json
+    /**
+     * 按照id简单递归输出每个目录json【无排序】
+     * @param $id
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function getalljson($id)
     {
 
@@ -607,8 +624,19 @@ class Index extends BaseController
 
     }
 
-    public function getchildcatajson($file, $pid)
+    /**
+     * 核心功能：生成带排序的所有目录json
+     * @param string $file
+     * @param int $pid
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getchildcatajson($file = 'index', $pid = 0)
     {
+        // 核心功能：生成带排序的所有目录json
+        // $this->getchildcatajson('index',0);
+
 
         // 改为输出数组转json供前端使用
         // 思路：通过目录level字段定位数组的维度
@@ -641,7 +669,8 @@ class Index extends BaseController
 
 
             $str = str_replace('"', '', $value->title);
-            $str = mb_substr($str, 0, 10);
+            $str = str_replace('\\', '', $str);
+            $str = mb_substr($str, 0, 20);
 
             $c1 = '';
             if ($value->child > 1) {
@@ -1295,6 +1324,15 @@ class Index extends BaseController
 
     }
 
+    /**
+     * 递归+防内存溢出，采集标题和上级目录
+     *
+     * @param $id
+     * @param $ql
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function qlfast($id, $ql)
     {
 
@@ -1309,40 +1347,25 @@ class Index extends BaseController
         // 准备一个数组存储所有html页面
         // 重构了querylist的加载逻辑，重复循环内存溢出
 
-        $id = 9173;
+        // $id = 9173;
 
-        // 获取一个目录的直属子目录，增加sort排序
+        // 查询一个文件标题是否为空记录
         $getfile = Manual::order('file')->where('title', '')->find($id);
 
         $file = $getfile['file'];
 
 
         if ($file) {
-            # code...
-
-
-            // echo $file;
-
-            // die();
 
             $url = "static/php-chunked-xhtml/" . $file . ".html";
 
-
             $html = file_get_contents($url);
-
-            // echo $url;
-
-            // die;
 
 
             echo "开始采集" . "\n";
 
             // 每条链接都会应用上面设置好的采集规则
             $data = $ql->html($html)->query()->getData();
-
-            // dump($data[0]['catalog']);
-            // die();
-
             if (!empty($data[0]['catalog'])) {
 
 
@@ -1372,7 +1395,6 @@ class Index extends BaseController
         $id = $id + 1;
 
         // 继续递归查询
-
         if ($id <= 15037) {
 
             $this->qlfast($id, $ql);
@@ -1380,24 +1402,13 @@ class Index extends BaseController
 
     }
 
-    public function bigdata()
-    {
 
-        echo $this->qldate("about");
-
-        Manual::chunk(10, function ($manual) {
-            foreach ($manual as $value) {
-                //
-                // echo  json_decode($value,true);
-                // echo $value->file;
-                $this->qldate($value->file);
-            }
-        });
-
-
-    }
-
-    //封装一个querylist采集php文件的核心的功能
+    /**
+     * 封装一个querylist采集php文件的核心的功能
+     *
+     * @param $file
+     * @return array|false|string
+     */
     public function qlworking($file)
     {
 
@@ -1433,69 +1444,14 @@ class Index extends BaseController
 
     }
 
-    public function cli()
-    {
-        echo 228;
-    }
 
-    public function indexold()
-    {
-
-        echo 123;
-
-        $a = new Catalog();
-        echo $a->one();
-
-        for ($i = 0; $i < 1; $i++) {
-            # code...
-            echo "" . $i . "\n";
-            sleep(2);
-        }
-
-        die();
-
-        // 根据主键获取多个数据
-        $list = Manual::select(["598", "597", "599"]);
-
-        // dump($list);
-        // 对数据集进行遍历操作
-        foreach ($list as $key => $value) {
-            echo $key . "<br>";
-            $file = $value->file;
-            // echo $file;
-            //获取1.html文档的内容（包括html代码）
-            // $ql  = file_get_contents('./static/php-chunked-xhtml/about.html');
-            // echo $file;die();
-
-            $filepath = "/static/php-chunked-xhtml/" . trim($file) . ".html";
-            // echo $filepath;die();
-
-            $url = Request::root(true) . $filepath;
-            $ql  = QueryList::get($url);
-
-
-            $rt = [];
-            // 采集文章标题
-            // $rt['title'] = $ql->find('title')->text();
-            // 第二个li里面的a链接的href属性值
-            $rt['content'] = $ql->find('.breadcrumbs-container>li:nth-child(2)>a')->attr("href");
-            // 过滤掉末尾的.html后缀
-            $rt['content'] = substr($rt['content'], 0, -5);
-
-            // 通过模型修改的入库操作
-            Manual::update(['catalog' => $rt['content']], ['id' => $value->id]);
-            print_r($rt);
-
-        }
-        // return '<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px;} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:) </h1><p> ThinkPHP V6<br/><span style="font-size:30px">13载初心不改 - 你值得信赖的PHP框架</span></p></div><script type="text/javascript" src="https://tajs.qq.com/stats?sId=64890268" charset="UTF-8"></script><script type="text/javascript" src="https://e.topthink.com/Public/static/client.js"></script><think id="eab4b9f840753f8e7"></think>';
-    }
-
-    public function hello($name = 'ThinkPHP6')
-    {
-        return 'hello,' . $name;
-    }
-
-    //截取指定两个字符之间的字符串
+    /**
+     * 截取指定两个字符之间的字符串
+     * @param $begin
+     * @param $end
+     * @param $str
+     * @return false|string
+     */
     public function cut($begin, $end, $str)
     {
         $b = mb_strpos($str, $begin) + mb_strlen($begin);

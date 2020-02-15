@@ -13,6 +13,8 @@ use think\facade\Db;
 class Index extends BaseController
 {
     // 全局变量 用于递归传值
+
+
     public $catalog = '';
     public $i = 0;
 
@@ -21,7 +23,24 @@ class Index extends BaseController
      */
     public function index()
     {
+        // $t = Test::run();
+        // $walk = new Test();
+        // echo $walk->walk();
+        // echo $t->walk();
 
+        // $test= new Test;
+
+
+
+        $t =  Test::run();
+        dump($t);
+        $t =  Test::run();
+        dump($t);
+
+        // Test::run()->walk(3);
+        // Test::run()->walk(5);
+        // Test::run()->walk(6);
+        die();
         // $classname = Manual::where('classname', '<>', '')->order('classname')->group('classname')->select();
         // dump($classname->toarray());
 

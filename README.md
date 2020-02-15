@@ -6,6 +6,8 @@ PHP Manual Analysis 一份PHP手册的分析
 - 函数：4598个
 - 类：584个包括了6643个方法
 - 目录：796个
+- 每个版本发布的新函数可以在附录栏目查看
+ 
 
 
 
@@ -20,7 +22,7 @@ PHP Manual Analysis 一份PHP手册的分析
 
 > 已同步发布此项目实战开发视频教程
 
-# 核心基础统计分析结果： 
+## 基础统计分析结果
  
 [查看在线演示](http://rinuo.gitee.io/phpmanual/public/tree/index.html)
 

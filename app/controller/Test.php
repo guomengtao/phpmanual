@@ -16,9 +16,11 @@ class Test
     static function run()
     {
         if (self::$r) {
+            echo "不再次实例化";
             return self::$r;
         } else {
-            self::$r = new self();
+            echo "第一次，创建实例化";
+            self::$r = new Test();
             return self::$r;
         }
     }

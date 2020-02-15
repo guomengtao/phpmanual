@@ -31,10 +31,11 @@ class Index extends BaseController
         // $test= new Test;
 
 
-
-        $t =  Test::run();
+        $t = Test::run();
         dump($t);
-        $t =  Test::run();
+        $t = Test::run();
+        dump($t);
+        $t = Test::run();
         dump($t);
 
         // Test::run()->walk(3);

@@ -4,7 +4,6 @@
 namespace app\controller;
 
 
-use function Composer\Autoload\includeFile;
 
 class Test
 {

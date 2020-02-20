@@ -31,12 +31,18 @@ class Index extends BaseController
         // $test= new Test;
 
 
+        $tom = 6;
+        $t   = Test::run();
+        dump($t);
+
+
         $t = Test::run();
         dump($t);
         $t = Test::run();
-        dump($t);
-        $t = Test::run();
-        dump($t);
+        if () {
+            dump($t);
+        } else {
+        }
 
         // Test::run()->walk(3);
         // Test::run()->walk(5);
@@ -61,11 +67,11 @@ class Index extends BaseController
             // 'title' => array('.refname','text'),
             'methodsynopsis' => array('.methodsynopsis.dc-description strong', 'text'),
         );
+        $ql    = QueryList::rules($rules);
 
-        $ql = QueryList::rules($rules);
 
         $this->qlsearch(1, $ql);
-
+        switch ()
         // $rules = array(
         //    'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
         //    'title' => array('title','text'),

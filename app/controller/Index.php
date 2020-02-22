@@ -3,10 +3,12 @@
 namespace app\controller;
 
 use app\BaseController;
+use app\model\Quword;
 use QL\QueryList;
 use think\facade\Request;
 use app\model\Manual;
 use think\facade\Db;
+use app\model\Word;
 
 // use app\controller\Catalog;
 
@@ -23,55 +25,32 @@ class Index extends BaseController
      */
     public function index()
     {
-        // $t = Test::run();
-        // $walk = new Test();
-        // echo $walk->walk();
-        // echo $t->walk();
 
-        // $test= new Test;
-
-
-        $tom = 6;
-        $t   = Test::run();
-        dump($t);
-
-
-        $t = Test::run();
-        dump($t);
-        $t = Test::run();
-        if () {
-            dump($t);
-        } else {
-        }
-
-        // Test::run()->walk(3);
-        // Test::run()->walk(5);
-        // Test::run()->walk(6);
-        die();
-        // $classname = Manual::where('classname', '<>', '')->order('classname')->group('classname')->select();
-        // dump($classname->toarray());
-
-        $classname = Db::table('think_manual')
-            ->where('classname', '<>', 'null')
-            ->where('classname', '<>', '')
-            ->field('classname,count(classname) as num')
-            ->group('classname')
-            ->select();
-
-        dump($classname);
-        die();
+        // $data = QueryList::get('https://www.quword.com/archives/index.php?p=472')
+        //     // 设置采集规则
+        //     ->rules([
+        //         'title' => array('h3d', 'text'),
+        //         'link'  => array('.yd-tags>a', 'href')
+        //     ])
+        //     ->query()->getData();
+        //
+        // print_r($data->all());
+        //
+        // die();
         // 设置采集规则
-        //采集规则
+        // 采集规则
         $rules = array(
             // 'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
-            // 'title' => array('.refname','text'),
-            'methodsynopsis' => array('.methodsynopsis.dc-description strong', 'text'),
+            'word' => array('.panel-body>.yd-tags>a', 'text'),
+            'url'  => array('.panel-body>.yd-tags>a', 'href'),
+
         );
-        $ql    = QueryList::rules($rules);
+
+        $ql = QueryList::rules($rules);
 
 
-        $this->qlsearch(1, $ql);
-        switch ()
+        $this->qlWeb(0, $ql);
+
         // $rules = array(
         //    'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
         //    'title' => array('title','text'),
@@ -337,6 +316,7 @@ class Index extends BaseController
         } else {
             // echo $id .$file[0].",没采集到<br>\n";
             // die();
+            return;
         }
 
 
@@ -350,6 +330,68 @@ class Index extends BaseController
         if ($id < 15038) {
 
             $this->qlsearch($id, $ql);
+        }
+
+    }
+
+    /**
+     * 采集外部的网址
+     * @param $id
+     * @param $ql
+     *
+     */
+    public function qlWeb($page, $ql)
+    {
+        // 采集quWord示例
+
+
+        // 从本地目录读取方式，解决文件名带.php无法正确访问问题
+        $url = "https://www.quword.com/archives/index.php?p=" . $page;
+        // $url = get($url);
+
+
+        // 开始采集
+        $data    = $ql->get($url)->query()->getData();
+        $dataall = $data->all();
+
+
+        echo $page . '-' . count($dataall) . "\ng";
+
+        $user = new Word;
+        $list = [
+            ['name' => 'thinkphp', 'email' => 'thinkphp@qq.com'],
+            ['name' => 'onethink', 'email' => 'onethink@qq.com']
+        ];
+
+        foreach ($dataall as $key => $item) {
+
+            $word = $item['word'];
+            $url  = substr($item['url'], 23);
+
+            $dataall[$key] = [
+                'sort' => $key,
+                'word' => $word,
+                'url'  => $url,
+                'page' => $page
+            ];
+
+
+        }
+
+
+        $user->saveAll($dataall);
+
+
+        // 释放Document内存占用
+        $ql->destruct();
+
+        $page = $page + 1;
+
+        // 继续递归查询
+
+        if ($page < 489) {
+
+            $this->qlWeb($page, $ql);
         }
 
     }

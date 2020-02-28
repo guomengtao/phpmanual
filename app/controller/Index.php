@@ -25,9 +25,8 @@ class Index extends BaseController
      */
     public function index()
     {
-    // 输出运行中的 php/httpd 进程的创建者用户名
-// （在可以执行 "whoami" 命令的系统上）
-echo exec('git add');
+        // 输出运行中的 php/httpd 进程的创建者用户名
+        echo exec('git add');
         echo "666";
 
         echo shell_exec('ls -la');

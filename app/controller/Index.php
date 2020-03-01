@@ -9,6 +9,7 @@ use think\facade\Request;
 use app\model\Manual;
 use think\facade\Db;
 use app\model\Word;
+use app\controllerl\Api;
 
 // use app\controller\Catalog;
 
@@ -25,16 +26,21 @@ class Index extends BaseController
      */
     public function index()
     {
+
+
+        $t = \app\controller\Api::php();
+        echo $t;
+        die();
         // 输出运行中的 php/httpd 进程的创建者用户名
-        echo exec('git add');
-        echo "666";
-
-        echo shell_exec('ls -la');
-        echo shell_exec('ll');
-
-        dump(shell_exec('ll'));
-
-        die;
+        // echo exec('git add');
+        // echo "666";
+        //
+        // echo shell_exec('ls -la');
+        // echo shell_exec('ll');
+        //
+        // dump(shell_exec('ll'));
+        //
+        // die;
         // $data = QueryList::get('https://www.quword.com/archives/index.php?p=472')
         //     // 设置采集规则
         //     ->rules([
@@ -48,17 +54,17 @@ class Index extends BaseController
         // die();
         // 设置采集规则
         // 采集规则
-        // $rules = array(
-        //     // 'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
-        //     'word' => array('.panel-body>.yd-tags>a', 'text'),
-        //     'url'  => array('.panel-body>.yd-tags>a', 'href'),
-        //
-        // );
-        //
-        // $ql = QueryList::rules($rules);
-        //
-        //
-        // $this->qlWeb(0, $ql);
+        $rules = array(
+            // 'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
+            'word' => array('.panel-body>.yd-tags>a', 'text'),
+            'url'  => array('.panel-body>.yd-tags>a', 'href'),
+
+        );
+
+        $ql = QueryList::rules($rules);
+
+
+        $this->qlWeb(0, $ql);
 
         // $rules = array(
         //    'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),

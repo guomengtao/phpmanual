@@ -1,0 +1,36 @@
+<script>
+    init({
+        title: 'Table Method',
+        desc: 'Use `method` option to the method type to request remote data, for example `method: \'post\'.`',
+        links: ['bootstrap-table.min.css'],
+        scripts: ['bootstrap-table.min.js']
+    })
+</script>
+
+<table
+        id="table"
+        data-toggle="table"
+        data-height="460"
+        data-search="true"
+        data-show-refresh="true"
+        data-method="post"
+        data-pagination="true"
+        data-side-pagination="server"
+        data-url="json/phpall.json">
+    <thead>
+    <tr>
+        <th data-field="id">ID</th>
+        <th data-field="file">文件名</th>
+        <th data-field="catalog">分类</th>
+        <th data-field="title">标题</th>
+        <th data-field="level">级别</th>
+        <th data-field="sort">所属目录级别</th>
+        <th data-field="child">下级目录数</th>
+        <th data-field="son">子目录</th>
+        <th data-field="status">状态</th>
+        <th data-field="path">路径</th>
+        <th data-field="classname">类型</th>
+        <th data-field="note">记录</th>
+    </tr>
+    </thead>
+</table>

@@ -1,0 +1,22 @@
+<script>
+  init({
+    title: 'Flat Json',
+    desc: 'Support flat json, for example: <br>`field: \'github.count.stargazers\'`.',
+    links: ['bootstrap-table.min.css'],
+    scripts: ['bootstrap-table.min.js']
+  })
+</script>
+
+<table
+  id="table"
+  data-toggle="table"
+  data-flat="true"
+  data-search="true"
+  data-url="json/php.json">
+  <thead>
+    <tr>
+      <th data-field="title" data-sortable="true">Name</th>
+
+    </tr>
+  </thead>
+</table>

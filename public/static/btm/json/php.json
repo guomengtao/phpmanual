@@ -1,0 +1,46 @@
+[
+  {
+    "file": "about.formats",
+    "catalog": "about",
+    "pid": 4,
+    "title": "手册的格式",
+    "level": 3,
+    "sort": 1,
+    "child": 0,
+    "son": 0,
+    "status": 9,
+    "path": "appendices\/about\/about.formats",
+    "classname": null,
+    "note": null
+  },
+  {
+    "id": 2,
+    "file": "about.generate",
+    "catalog": "about",
+    "pid": 4,
+    "title": "如何生成手册的各种格式",
+    "level": 3,
+    "sort": 7,
+    "child": 0,
+    "son": 0,
+    "status": 9,
+    "path": "appendices\/about\/about.generate",
+    "classname": null,
+    "note": null
+  },
+  {
+    "id": 3,
+    "file": "about.howtohelp",
+    "catalog": "about",
+    "pid": 4,
+    "title": "如何帮助改进本文档",
+    "level": 3,
+    "sort": 6,
+    "child": 0,
+    "son": 0,
+    "status": 9,
+    "path": "appendices\/about\/about.howtohelp",
+    "classname": null,
+    "note": null
+  }
+]

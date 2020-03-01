@@ -69,8 +69,15 @@ Note： s=子目录 c=包含文件 %=手册比例
  - 随机抽查发现是目录页
  - 那么剩余的是15037-796=14241个
  
+## 最新更新纪要
++ 实现了使用bootstrap-table显示php手册表
++ 实现了其中的跨页搜索，这个重点
++ 方法，通过下载bootstrap-table的demo挑选了一个进行的json对接
++ 同时测试了其中的导出 筛选等功能
++ 已经上线在访问目录 public/static/btm/#options/table-locale.html
 
-
+ [搜索](http://rinuo.gitee.io/phpmanual/public/static/btm/#options/table-locale.html)
+ 
 ##  函数和方法 以及类的第一次统计结果出炉
 
 
@@ -97,7 +104,7 @@ method 方法  6643个
 * 待完成全部折叠和展开的功能对接
 * 待完成栏目的快速搜索功能
 * 计划用Thinkphp6模型关联会进一步增加开发效率
-戴帽子 裁缝
+ 
 ## 统计分析
 
 * 采用`ThinkPHP 6.0`框架分析,运行环境要求PHP7.1+
@@ -138,53 +145,4 @@ composer create-project guomengtao/phpmanual
 
 MIT
  
- 
- ## 更换编辑器为phpstorm原因分析
- 
- 使用sublime很多年了，为什么今天尝试换成phpstorm呢？
- 
- 首先为什么用了sublime很多年？
- - 我电脑配置低，打开sublime速度快
- - 代码配色比较喜欢
- - sublime里面界面简单
- 
- 以上这三点对于基本的一些快速编程调试工作还是很高效的
- 
- 昨天还有人问phpstorm设置背景图的问题，
- 以及qq群里最近一个月大量的phpstorm注册码失效
- 我一直想我怎么就没有发现用phpstorm好用呢
- 断断续续我用过phpstorm，只是偶尔用一下
- phpstorm的优点：
- - 最近因为用函数追踪，再次上手用了phpstorm
- - 代码追踪我也不经常用，我以前用过phpstorm追踪过
- - 自动代码对齐，这个功能之前是发现phpstorm默认实现了
- - 而sublime代码对齐需要安装第三方插件，而且大文件报错
- - 而且sublime代码对齐插件设置不灵活，比如use里没有用的会自动删除
- - 代码对齐工整，目前已经是必须做好了的一件事情了
- - 所以这是弃用sublime的第一大理由
- - 接着是代码配色，我超适应sublime代码配色
- - 或者说之前超级不适应phpstorm里的代码配色
- - 在一个不适应的代码显示配色里敲代码的思路都乱了的
- - 但是因为自动对齐的硬伤，我仔细对比了phpstorm里有没有一个比较接近的
- - 我手工一一对比后发现了一个比较相似的
- - 最后发现这个皮肤的名字是monokai，原来sublime默认就是用的这个
- - monokai也有一些细小的版本，但大的显示风格上是一直的
- - monokai是波兰的一个设计师做的 mono代码一个人 kai是觉得酷炫随便起的
- - 所以代码配色风格的问题也解决了。
- - 再说phpstorm界面感觉比sublime臃肿的问题
- - 第一应该是很多栏目是可以关闭的
- - 第二我发现有个git 提交commit功能
- - 本来我手工在git命令行提交的，这里自动也可以用
- - 这个还挺快捷，也有一些代码对比等小界面的功能
- - 所有今天我先用phpstorm格式化了一遍我之前sublime里的代码
- - 包括设置了变量=对齐和 数组=> 对齐，其它的没开
- - 最后 phpstorm收费的问题了。
- - 最后用phpstorm的push功能提交到了git
- - 复杂的git操作还是可以回到git命令行操作的
- 
-再补充一下一个理由：
-比如git和代码追踪，以前php类看不懂，git不会用
-所以phpstorm带着的这些功能对我来说是无用和臃肿的
-现在随着慢慢的会用了
- 
- 
+  

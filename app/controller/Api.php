@@ -10,7 +10,8 @@ class Api extends BaseController
 {
     public static function php()
     {
-        $list = Manual::order('id', 'asc')->select();
+        $list = Manual::order('id', 'asc')
+            ->select();
         echo $list->toJson();
     }
 

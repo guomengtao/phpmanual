@@ -4,13 +4,14 @@
 namespace app\controller;
 
 
-
 class Test
 {
     private static $r;
+
     private function __construct()
     {
     }
+
     // 工厂模式+单例模式
     static function run()
     {

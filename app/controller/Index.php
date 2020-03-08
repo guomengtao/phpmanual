@@ -27,6 +27,7 @@ class Index extends BaseController
     public function index()
     {
 
+        echo "V2.6.6版本";
 
         $t = \app\controller\Api::php();
         echo $t;

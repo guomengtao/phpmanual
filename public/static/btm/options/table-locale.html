@@ -36,11 +36,11 @@
         data-show-export="true"
         data-pagination="true"
         data-multiple-select-row="true"
-        data-url="json/phpall.json">
+        data-url="json/phpall_link.json">
     <thead>
     <tr>
         <th data-field="id" data-sortable="true">ID</th>
-        <th data-field="file" data-sortable="true">文件名</th>
+        <th data-field="file" data-sortable="true" onclick="link(this.value)">文件名</th>
         <th data-field="catalog" data-sortable="true">分类</th>
         <th data-field="title" data-sortable="true">标题</th>
         <th data-field="level" data-sortable="true">级别</th>
@@ -57,6 +57,16 @@
     </thead>
 </table>
 
+    <script type="text/javascript">
+
+        function link(id)
+        {
+            console.log(id);
+            // window.location.replace("http://www.weibo.com" +"?Id="+id);
+        }
+
+
+</script>
 <script>
     var $table = $('#table')
 
